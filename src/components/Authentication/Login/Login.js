@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import Modal from "react-modal";
 import google from "../../../images/google.png";
 import fb from "../../../images/fb.png";
