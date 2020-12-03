@@ -67,7 +67,7 @@ const Header = () => {
             }}
           >
             Are you ready to meet <br />
-            your perfect one?
+            your perfect one????
           </h1>
         </div>
         <div class="col-sm-5">
