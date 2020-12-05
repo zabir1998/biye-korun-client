@@ -70,6 +70,7 @@ const Header = () => {
             your perfect one????
           </h1>
         </div>
+
         <div class="col-sm-5">
           <img
             style={{ paddingTop: 30, marginTop: 50, paddingLeft: 70 }}
