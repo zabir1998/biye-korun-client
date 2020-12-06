@@ -18,7 +18,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <div>
@@ -139,13 +139,16 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
             <input
               className="main-btn"
               type="submit"
-              value="About My Profile"
+              value="Add to My Profile"
             />
           </div>
           <div className="col-md-6 ">
-            <p style={{ color: "#8e8be6", paddingTop: 10 }}>
+            <a
+              style={{ color: "#8e8be6", paddingTop: 15 }}
+              href="https://google.com"
+            >
               I will add this later
-            </p>
+            </a>
           </div>
         </div>
       </form>

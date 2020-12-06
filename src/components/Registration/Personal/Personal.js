@@ -19,7 +19,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
           <div>

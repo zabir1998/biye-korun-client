@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
+import Age from "../Age/Age";
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
 
-const Career = ({ countries, fetchCountries, addUserDetail }) => {
+const Basic = ({ countries, fetchCountries, addUserDetail }) => {
   const { register, handleSubmit, watch, errors } = useForm();
   const history = useHistory();
 
@@ -18,22 +19,20 @@ const Career = ({ countries, fetchCountries, addUserDetail }) => {
   };
 
   return (
-    <div className="container form-container">
+    <div className="container">
       <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="form-group">
+        <div className="form-group row">
           <div>
-            <label className="brand-text" htmlFor="">
-              Country/Region
-            </label>
-            <select
-              ref={register({ required: true })}
-              name="country"
-              className="form-control"
+            <label
+              className="brand-text col-md-6"
+              style={{ paddingTop: 28 }}
+              htmlFor=""
             >
-              {/* {
-                  countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
-              }                              */}
-            </select>
+              Age
+            </label>
+          </div>
+          <div>
+            <Age></Age>
           </div>
         </div>
         <div className="form-group">
@@ -128,4 +127,4 @@ const Career = ({ countries, fetchCountries, addUserDetail }) => {
   );
 };
 
-export default Career;
+export default Basic;

@@ -7,12 +7,10 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
-import Personal from "../Personal/Personal";
 import Header from "../../Home/Header/Header";
 import NavBar from "../../Home/NavBar/NavBar";
-import Career from "../Career/Career";
-import Lifestyle from "../Lifestyle/Lifestyle";
-import "./Registration.css";
+import Basic from "../Basic/Basic";
+import Advance from "../Advance/Advance";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -26,7 +24,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={3}>
+        <Box p={2}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -49,14 +47,14 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: "aliceblue",
+    backgroundColor: theme.palette.background.paper,
     width: 600,
     marginTop: 30,
     marginLeft: 230,
   },
 }));
 
-const Registration = () => {
+const Search = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -86,18 +84,13 @@ const Registration = () => {
           >
             <Tab
               className="brand-text"
-              label="Personal Details"
+              label="Basic Search"
               {...a11yProps(0)}
             />
             <Tab
               className="brand-text"
-              label="Career Details"
+              label="Advance Search"
               {...a11yProps(1)}
-            />
-            <Tab
-              className="brand-text"
-              label="Lifestyle & Family"
-              {...a11yProps(2)}
             />
           </Tabs>
         </AppBar>
@@ -107,13 +100,10 @@ const Registration = () => {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <Personal></Personal>
+            <Basic></Basic>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <Career></Career>
-          </TabPanel>
-          <TabPanel value={value} index={2} dir={theme.direction}>
-            <Lifestyle></Lifestyle>
+            <Advance></Advance>
           </TabPanel>
         </SwipeableViews>
       </div>
@@ -121,4 +111,4 @@ const Registration = () => {
   );
 };
 
-export default Registration;
+export default Search;
