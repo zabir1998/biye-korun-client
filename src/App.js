@@ -4,14 +4,18 @@ import "./App.css";
 import Home from "./components/Home/Home/Home";
 import Personal from "./components/Registration/Personal/Personal";
 import Registration from "./components/Registration/Registration/Registration";
+
 import UserProfile from "./components/User/UserProfile/UserProfile";
 
 export const UserContext = createContext();
+
+
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
 
   return (
+
     <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
       <Router>
         <Switch>
@@ -30,6 +34,7 @@ function App() {
         </Switch>
       </Router>
     </UserContext.Provider>
+
   );
 }
 
