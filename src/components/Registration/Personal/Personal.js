@@ -6,7 +6,8 @@ const Personal = () => {
   const { register, handleSubmit, watch, errors } = useForm();
   const onSubmit = (data) => console.log(data);
   return (
-    <div className="container">
+
+    <div className="container form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <h5>Bride Name</h5>
 
