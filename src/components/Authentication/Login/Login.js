@@ -37,6 +37,8 @@ const Login = ({ modalIsOpen, closeModal }) => {
   const onSuccess = (res) => {
     console.log("Login Success: currentUser:", res.profileObj);
     console.log("ACCESS TOKEN:", res.accessToken);
+    console.log("Response", res);
+    console.log("Token", res.tokenId);
 
     refreshTokenSetup(res);
     const signedInUser = {
@@ -79,7 +81,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
   //   fetch("https://biyekorun-staging.techserve4u.com/google", {
   //     method: "GET",
   //     headers: {
-  //       Authorizarion: "{Bearer Token}",
+  //       Authorization: "{Bearer Token}",
   //     },
   //   }) //token without '{}'
   //     .then((response) => console.log(response.access_token));

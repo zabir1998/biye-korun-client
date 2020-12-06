@@ -41,14 +41,14 @@ const NavBar = () => {
 
   return (
     <Navbar className="shadow" bg="light" variant="light">
-      <Navbar.Brand href="#home">BiyeKorun</Navbar.Brand>
+      <Navbar.Brand href="/home">BiyeKorun</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto ">
           <Nav.Link
             style={{ color: "#8e8be6" }}
             className="brand-text ml-3"
-            href="#"
+            href="/home"
           >
             Home
           </Nav.Link>
