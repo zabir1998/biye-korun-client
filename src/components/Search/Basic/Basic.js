@@ -19,15 +19,11 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
   };
 
   return (
-    <div className="container">
+    <div className="container form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group row">
           <div>
-            <label
-              className="brand-text col-md-6"
-              style={{ paddingTop: 28 }}
-              htmlFor=""
-            >
+            <label className="col-md-6" style={{ paddingTop: 28 }} htmlFor="">
               Age
             </label>
           </div>
@@ -35,91 +31,275 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
             <Age></Age>
           </div>
         </div>
-        <div className="form-group">
-          <div>
-            <label className="brand-text" htmlFor="">
-              Highest Degrees
+        <div className="form-group row">
+          <div className="col-md-2">
+            <label className="" htmlFor="">
+              Height
             </label>
+          </div>
+          <div className="col-md-10">
             <input
               ref={register({ required: true })}
-              type="text"
-              name="highestDegree"
+              type="range"
+              name="height"
               className="form-control"
             />
             {errors.firstName && (
-              <span className="text-danger">Highest Degrees is required</span>
+              <span className="text-danger">Height is required</span>
             )}
           </div>
         </div>
         <div className="form-group">
-          <div>
-            <label className="brand-text" htmlFor="">
-              Employed In
-            </label>
-            <input
-              ref={register({ required: true })}
-              type="text"
-              name="employedIn"
-              className="form-control"
-            />
-            {errors.firstName && (
-              <span className="text-danger">Employed In is required</span>
+          <label className="" htmlFor="">
+            Marital Status
+          </label>
+          <select
+            ref={register({ required: true })}
+            name="maritalStatus"
+            className="form-control"
+          >
+            {errors.maritalStatus && (
+              <span className="text-danger">Marital Status is required</span>
             )}
-          </div>
+            <option value="Unmarried">Unmarried</option>
+            <option value="Married">Married</option>
+          </select>
+        </div>
+        <div className="form-group">
+          <label className="" htmlFor="">
+            Religion
+          </label>
+          <select
+            ref={register({ required: true })}
+            name="religion"
+            className="form-control"
+          >
+            {errors.religion && (
+              <span className="text-danger">Religion is required</span>
+            )}
+            <option value="Islam">Islam</option>
+            <option value="Others">Others</option>
+          </select>
         </div>
 
         <div className="form-group">
-          <div>
-            <label className="brand-text" htmlFor="">
-              Annual Income
-            </label>
-            <input
-              ref={register({ required: true })}
-              type="number"
-              name="annualIncome"
-              className="form-control"
-            />
-            {errors.address && (
-              <span className="text-danger">Annual Income is required</span>
+          <label className="" htmlFor="">
+            Community
+          </label>
+          <select
+            ref={register({ required: true })}
+            name="community"
+            className="form-control"
+          >
+            {errors.religion && (
+              <span className="text-danger">Community is required</span>
             )}
-          </div>
+            <option value="Islam">Islam</option>
+            <option value="Others">Others</option>
+          </select>
         </div>
-        <br />
-        <br />
-        <hr />
-        <br />
-        <br />
-        <div>
-          <h5 className="brand-text" style={{ marginLeft: 15 }}>
-            Here is your Chance to make your profile standout
-          </h5>
-          <br />
-        </div>
-        <div className="text-left" style={{ marginLeft: 325 }}>
-          <p>Need Help Writing?</p>
+        <div className="form-group">
+          <label className="" htmlFor="">
+            Mother tongue
+          </label>
+          <select
+            ref={register({ required: true })}
+            name="motherTongue"
+            className="form-control"
+          >
+            {errors.religion && (
+              <span className="text-danger">Mother tongue is required</span>
+            )}
+            <option value="Bengali">Bengali</option>
+            <option value="Others">Others</option>
+          </select>
         </div>
         <div className="form-group">
           <div>
+            <label className="" htmlFor="">
+              Country Living In
+            </label>
+            <select
+              ref={register({ required: true })}
+              name="countryLiving"
+              className="form-control"
+            >
+              {/* {
+                  countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
+              }                              */}
+            </select>
+          </div>
+        </div>
+        <div className="form-group">
+          <div>
+            <label className="" htmlFor="">
+              State Living In
+            </label>
+            <select
+              ref={register({ required: true })}
+              name="state"
+              className="form-control"
+            >
+              {/* {
+                  countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
+              }                              */}
+            </select>
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col-md-4">
+            <label className="" htmlFor="">
+              Photo Settings
+            </label>
+          </div>
+          <div className="col-md-2">
+            <input
+              ref={register({ required: true })}
+              type="checkbox"
+              name="brideName"
+              className="form-control"
+              label="Visible to All"
+            />
+          </div>
+          <div className="col-md-2">
+            <label className="" htmlFor="">
+              Visible to All
+            </label>
+          </div>
+          <div className="col-md-2">
+            <input
+              ref={register({ required: true })}
+              type="checkbox"
+              name="brideName"
+              className="form-control"
+              label="Visible to All"
+            />
+          </div>
+          <div className="col-md-2">
+            <label className="" htmlFor="">
+              Visible to none
+            </label>
+          </div>
+        </div>
+        <div className="form-group row">
+          <div className="col-md-4">
+            <label className="" htmlFor="">
+              Do not show
+            </label>
+          </div>
+          <div className="row col-md-4">
+            <div className="col-md-4">
+              <input
+                ref={register({ required: true })}
+                type="checkbox"
+                name="brideName"
+                className="form-control"
+                label="Visible to All"
+              />
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Profile's That've filtered me out</label>
+            </div>
+          </div>
+          <div className="row col-md-4">
+            <div className="col-md-4">
+              <input
+                ref={register({ required: true })}
+                type="checkbox"
+                name="brideName"
+                className="form-control"
+                label="Visible to All"
+              />
+            </div>
+            <div className="col-md-4">
+              <label htmlFor="">Profile's that I have viewed</label>
+            </div>
+          </div>
+        </div>
+        <div className="form-group row">
+          <div>
+            <h4 className="brand-text" htmlFor="">
+              Save upto 5 searches
+            </h4>
+          </div>
+        </div>
+        <div className="form-group">
+          <div>
+            <label className="" htmlFor="">
+              Save search as
+            </label>
             <input
               ref={register({ required: true })}
               type="text"
-              name="explain"
+              name="brideName"
               className="form-control"
-              placeholder="Express Yourself"
-              style={{
-                width: 500,
-                paddingBottom: 200,
-                paddingTop: 10,
-                marginBottom: 30,
-                boxShadow: 40,
-                borderRadius: 5,
-              }}
+              placeholder="eg, Paris, 20-22"
             />
           </div>
         </div>
+        <div className="form-group row">
+          <div className="col-md-4">
+            <label className="" htmlFor="">
+              Email me new results
+            </label>
+          </div>
+          <div className="col-md-2">
+            <input
+              ref={register({ required: true })}
+              type="radio"
+              id="daily"
+              className="form-control"
+              name="email time"
+              value="daily"
+            />
+            <p style={{ marginLeft: 15 }} for="male">
+              Daily
+            </p>
+          </div>
+          <div className="col-md-2">
+            <input
+              ref={register({ required: true })}
+              type="radio"
+              id="once-a-week"
+              className="form-control"
+              name="email time"
+              value="once a week"
+            />
+            <p style={{ marginLeft: 15 }} for="male">
+              Once a week
+            </p>
+          </div>
+          <div className="col-md-2">
+            <input
+              ref={register({ required: true })}
+              type="radio"
+              id="twice a week"
+              className="form-control"
+              name="email time"
+              value="twice a week"
+            />
+            <p style={{ marginLeft: 15 }} for="male">
+              Twice a week
+            </p>
+          </div>
+          <div className="col-md-2">
+            <input
+              ref={register({ required: true })}
+              type="radio"
+              id="never"
+              className="form-control"
+              name="email time"
+              value="never"
+            />
+            <p style={{ marginLeft: 15 }} for="male">
+              Never
+            </p>
+          </div>
+        </div>
+
         <div className="form-group row text-left">
           <div>
-            <input className="main-btn" type="submit" value="Continue" />
+            <input className="main-btn" type="submit" value="Search Profiles" />
           </div>
         </div>
       </form>

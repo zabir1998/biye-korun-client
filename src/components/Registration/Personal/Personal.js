@@ -22,7 +22,6 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   return (
     <div className="container form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-            <h5>Bride Name</h5>
         <div className="form-group">
           <div>
             <label className="brand-text" htmlFor="">
@@ -54,8 +53,8 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
               <span className="text-danger">Date of Birth is required</span>
             )}
           </div>
-          <div className="form-group"></div>
-          <div>
+
+          <div className="form-group">
             <label className="brand-text" htmlFor="">
               Religion
             </label>
@@ -88,6 +87,23 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             <option value="Married">Married</option>
           </select>
         </div>
+        <div className="form-group">
+          <label className="brand-text" htmlFor="">
+            Mother tongue
+          </label>
+          <select
+            ref={register({ required: true })}
+            name="mothertongue"
+            className="form-control"
+          >
+            {errors.religion && (
+              <span className="text-danger">Mother tongue is required</span>
+            )}
+            <option value="Bengali">Bengali</option>
+            <option value="Others">Others</option>
+          </select>
+        </div>
+
         <div className="form-group">
           <div>
             <label className="brand-text" htmlFor="">
