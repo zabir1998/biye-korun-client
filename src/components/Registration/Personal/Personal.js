@@ -22,7 +22,6 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   return (
     <div className="container form-container">
       <form onSubmit={handleSubmit(onSubmit)}>
-            <h5>Bride Name</h5>
         <div className="form-group">
           <div>
             <label className="brand-text" htmlFor="">
