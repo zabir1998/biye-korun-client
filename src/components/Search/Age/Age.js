@@ -23,7 +23,7 @@ const Age = () => {
 
   return (
     <div className={classes.root}>
-      <Typography id="range-slider" gutterBottom>
+      <Typography className="text-center" id="range-slider" gutterBottom>
         Age Range
       </Typography>
       <Slider

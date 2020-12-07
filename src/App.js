@@ -9,7 +9,6 @@ import UserProfile from "./components/User/UserProfile/UserProfile";
 
 export const UserContext = createContext();
 
-
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
 
@@ -25,6 +24,9 @@ function App() {
           </Route>
           <Route path="/registration">
             <Registration></Registration>
+          </Route>
+          <Route path="/search">
+            <Search></Search>
           </Route>
           <Route path="/user">
             <UserProfile></UserProfile>

@@ -7,10 +7,12 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import Box from "@material-ui/core/Box";
+import Personal from "../Personal/Personal";
 import Header from "../../Home/Header/Header";
 import NavBar from "../../Home/NavBar/NavBar";
-import Basic from "../Basic/Basic";
-import Advance from "../Advance/Advance";
+import Career from "../Career/Career";
+import Lifestyle from "../Lifestyle/Lifestyle";
+import "./Registration.css";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -24,7 +26,7 @@ function TabPanel(props) {
       {...other}
     >
       {value === index && (
-        <Box p={2}>
+        <Box p={3}>
           <Typography>{children}</Typography>
         </Box>
       )}
@@ -54,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Search = () => {
+const Registration = () => {
   const classes = useStyles();
   const theme = useTheme();
   const [value, setValue] = React.useState(0);
@@ -68,8 +70,8 @@ const Search = () => {
   };
 
   return (
-    <div className="container ">
-      <div className="headerBg ">
+    <div className="container">
+      <div className="headerBg">
         <NavBar></NavBar>
       </div>
       <div className={classes.root}>
@@ -84,13 +86,18 @@ const Search = () => {
           >
             <Tab
               className="brand-text"
-              label="Basic Search"
+              label="Personal Details"
               {...a11yProps(0)}
             />
             <Tab
               className="brand-text"
-              label="Advance Search"
+              label="Career Details"
               {...a11yProps(1)}
+            />
+            <Tab
+              className="brand-text"
+              label="Lifestyle & Family"
+              {...a11yProps(2)}
             />
           </Tabs>
         </AppBar>
@@ -100,10 +107,13 @@ const Search = () => {
           onChangeIndex={handleChangeIndex}
         >
           <TabPanel value={value} index={0} dir={theme.direction}>
-            <Basic></Basic>
+            <Personal></Personal>
           </TabPanel>
           <TabPanel value={value} index={1} dir={theme.direction}>
-            <Advance></Advance>
+            <Career></Career>
+          </TabPanel>
+          <TabPanel value={value} index={2} dir={theme.direction}>
+            <Lifestyle></Lifestyle>
           </TabPanel>
         </SwipeableViews>
       </div>
@@ -111,4 +121,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default Registration;
