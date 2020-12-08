@@ -1,27 +1,26 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import "./ProfileCard.css";
 
 const ProfileCard = () => {
   return (
-    <div>
-      <div class="card" style={{ width: "18rem" }}>
+    <>
+      <div className="card shadow profile-card" style={{ width: "22rem" }}>
         <img
-          className="card-img-top"
+          className="card-img-top profile-img rounded-circle"
           src="https://zc64xuggxl-flywheel.netdna-ssl.com/wp-content/uploads/2019/04/team.png"
           alt="Card image cap"
-          style={{ borderRadius: 200, padding: 30 }}
         ></img>
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
-          </p>
-          <a href="#" class="btn btn-primary">
-            Go somewhere
-          </a>
+        <div className="card-body text-center">
+          <h5 className="card-title">Kamal Jamal</h5>
+          <h6 className="card-subtitle mb-2 text-muted">KJ124i68</h6>
+          <p className="card-text mt-3">21 Years Old || Paris France</p>
+          <Link to="/user" className="btn premium-btn mt-3">
+            Get Premium
+          </Link>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 

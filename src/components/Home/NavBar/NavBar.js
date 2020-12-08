@@ -47,21 +47,21 @@ const NavBar = () => {
         <Nav className="ml-auto ">
           <Nav.Link
             style={{ color: "#8e8be6" }}
-            className="brand-text ml-3"
+            className="brand-text ml-3 main-nav-link"
             href="/home"
           >
             Home
           </Nav.Link>
           <Nav.Link
             style={{ color: "#8e8be6" }}
-            className="brand-text ml-3"
+            className="brand-text ml-3 main-nav-link"
             href="#"
           >
             Membership
           </Nav.Link>
           <Nav.Link
             style={{ color: "#8e8be6" }}
-            className="brand-text ml-3"
+            className="brand-text ml-3 main-nav-link"
             href="#"
           >
             Help
@@ -74,7 +74,7 @@ const NavBar = () => {
               <Nav.Link
                 onClick={signOut}
                 style={{ color: "#8e8be6" }}
-                className="brand-text ml-3"
+                className="brand-text ml-3 main-nav-link"
                 href="#"
               >
                 Logout
@@ -86,7 +86,7 @@ const NavBar = () => {
               <Nav.Link
                 onClick={openModal}
                 style={{ color: "#8e8be6" }}
-                className="brand-text ml-3"
+                className="brand-text ml-3 main-nav-link"
                 href="#"
               >
                 Login
@@ -102,11 +102,11 @@ const NavBar = () => {
                   paddingBottom: "16px",
                 }}
                 // style={{ color: "#8e8be6" }}
-                className="ml-3 "
+                className="ml-3 main-nav-link "
                 href="#"
               >
                 Register
-              </Nav.Link>{" "}
+              </Nav.Link>
             </>
           )}
           <Login modalIsOpen={modalIsOpen} closeModal={closeModal}></Login>
