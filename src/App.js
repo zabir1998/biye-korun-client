@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import Home from "./components/Home/Home/Home";
 import PeopleNear from "./components/PeopleNear/PeopleNear/PeopleNear";
+import Preference from "./components/Preference/Preference/Preference";
 import ProfileVisitors from "./components/ProfileVisitors/ProfileVisitors/ProfileVisitors";
 import Personal from "./components/Registration/Personal/Personal";
 import Registration from "./components/Registration/Registration/Registration";
@@ -37,7 +38,10 @@ function App() {
           <Route path="/nearPeople">
             <PeopleNear></PeopleNear>
           </Route>
-         <Route exact path="/user">
+          <Route path="/preference">
+            <Preference></Preference>
+          </Route>
+          <Route exact path="/user">
             <UserProfile></UserProfile>
           </Route>
           <Route path="/user/dashboard">
