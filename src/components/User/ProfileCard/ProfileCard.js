@@ -2,14 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "./ProfileCard.css";
 
-const ProfileCard = () => {
+const ProfileCard = ({ style }) => {
   return (
     <>
-      <div className="card shadow profile-card" style={{ width: "22rem" }}>
+      <div
+        className="card shadow profile-card"
+        style={style}
+        // style={{ width: "22rem" }}
+      >
         <img
           className="card-img-top profile-img rounded-circle"
           src="https://zc64xuggxl-flywheel.netdna-ssl.com/wp-content/uploads/2019/04/team.png"
-          alt="Card image cap"
+          alt=""
         ></img>
         <div className="card-body text-center">
           <h5 className="card-title">Kamal Jamal</h5>

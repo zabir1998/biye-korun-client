@@ -6,6 +6,7 @@ import Personal from "./components/Registration/Personal/Personal";
 import Registration from "./components/Registration/Registration/Registration";
 import Search from "./components/Search/Search/Search";
 import UserProfile from "./components/User/UserProfile/UserProfile";
+import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
 
 export const UserContext = createContext();
 
@@ -28,8 +29,11 @@ function App() {
           <Route path="/search">
             <Search></Search>
           </Route>
-          <Route path="/user">
+          <Route exact path="/user">
             <UserProfile></UserProfile>
+          </Route>
+          <Route path="/user/dashboard">
+            <Dashboard></Dashboard>
           </Route>
         </Switch>
       </Router>

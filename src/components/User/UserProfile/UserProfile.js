@@ -13,12 +13,12 @@ import PersonalDetailsTable from "../PersonalDetailsTable/PersonalDetailsTable";
 import PhotoGallery from "../PhotoGallery/PhotoGallery";
 import PhysicalTable from "../PhysicalTable/PhysicalTable";
 import ProfileCard from "../ProfileCard/ProfileCard";
+import RecentVisitors from "../RecentVisitors/RecentVisitiors";
 import UserNavBar from "../UserNavBar/UserNavBar";
+import YouMayLike from "../YouMayLike/YouMayLike";
 
 const UserProfile = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-
-  useEffect(() => {}, []);
 
   return (
     <Container>
@@ -30,13 +30,15 @@ const UserProfile = () => {
           <PhotoGallery></PhotoGallery>
         </div>
         <div className="col-md-5">
-          <UserNavBar></UserNavBar>
+          <UserNavBar className="user-nav-link"></UserNavBar>
           <PersonalDetailsTable></PersonalDetailsTable>
           <AboutMyselfTable></AboutMyselfTable>
           <BasicLifeStyleTable></BasicLifeStyleTable>
         </div>
         <div className="col-md-3">
           <IdSearchBar></IdSearchBar>
+          <YouMayLike></YouMayLike>
+          <RecentVisitors></RecentVisitors>
         </div>
       </div>
       <div className="row mt-5">
