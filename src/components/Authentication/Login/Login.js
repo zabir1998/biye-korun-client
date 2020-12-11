@@ -28,29 +28,67 @@ const customStyles = {
 Modal.setAppElement("#root");
 
 const Login = ({ modalIsOpen, closeModal }) => {
-  const history = useHistory();
-  const location = useLocation();
-  const { from } = location.state || { from: { pathname: "/" } };
+  const [accessToken, setAccessToken] = useContext(UserContext);
+
+  // const history = useHistory();
+  // const location = useLocation();
+  // const { from } = location.state || { from: { pathname: "/" } };
   // const { loggedInUser, setLoggedInUser } = useState([]);
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   const onSuccess = (res) => {
-    console.log("Login Success: currentUser:", res.profileObj);
-    console.log("ACCESS TOKEN:", res.accessToken);
-    console.log("Response", res);
-    console.log("Token", res.tokenId);
+    // console.log("Login Success: currentUser:", res.profileObj);
+    // console.log(
+    //   "Login Success: currentUser:",
+    //   res.profileObj.familyName,
+    //   res.profileObj.givenName,
+    //   res.profileObj.email
+    // );
+    const familyName = res.profileObj.familyName;
+    const givenName = res.profileObj.givenName.concat(" ");
+    const name = givenName.concat(familyName);
+    const email = res.profileObj.email;
 
-    refreshTokenSetup(res);
+    // console.log("ACCESS TOKEN:", res.accessToken);
+    // console.log("Response", res);
+    const keys = Object.keys(res.profileObj);
+    const platformId = keys[0];
+    const platform = platformId.slice(0, 6);
+    // console.log(platform);
+    console.log(name, email, platform);
+
+    const userDetails = {
+      platfrom: platform,
+      name: name,
+      email: email,
+    };
+
+    fetch("https://biyekorun-staging.techserve4u.com/auth/social-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(userDetails),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data) {
+          alert("New User Added Successfully");
+        }
+        console.log(data);
+        console.log("Token", data.access_token);
+        setAccessToken(data.access_token);
+      });
+
     const signedInUser = {
-      name: res.profileObj.name,
-      email: res.profileObj.name,
-      accessToken: res.accessToken,
+      name: name,
+      email: email,
+      accessToken: accessToken,
     };
     setLoggedInUser(signedInUser);
     storeAuthToken();
     closeModal();
 
-    history.replace(from);
+    // history.push("/registration");
+    // history.replace(from);
   };
 
   const onFailure = (res) => {
@@ -59,9 +97,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
   };
 
   const storeAuthToken = () => {
-    // console.log(loggedInUser.accessToken);
-    // console.log(loggedInUser.email);
-    localStorage.setItem("token", loggedInUser.accessToken);
+    sessionStorage.setItem("token", loggedInUser.accessToken);
   };
 
   const { signIn } = useGoogleLogin({
