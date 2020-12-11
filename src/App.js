@@ -11,6 +11,7 @@ import Search from "./components/Search/Search/Search";
 import UserProfile from "./components/User/UserProfile/UserProfile";
 import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
 import MatchProfileList from "./components/UserDashboard/MatchProfileList/MatchProfileList";
+import TopMatchesList from "./components/UserDashboard/TopMatchesList/TopMatchesList";
 
 export const UserContext = createContext();
 
@@ -53,6 +54,9 @@ function App() {
           </Route>
           <Route path="/user/profileMatch">
             <MatchProfileList></MatchProfileList>
+          </Route>
+          <Route path="/user/topMatches">
+            <TopMatchesList></TopMatchesList>
           </Route>
         </Switch>
       </Router>
