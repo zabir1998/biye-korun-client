@@ -10,14 +10,18 @@ import Registration from "./components/Registration/Registration/Registration";
 import Search from "./components/Search/Search/Search";
 import UserProfile from "./components/User/UserProfile/UserProfile";
 import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
+import MatchProfileList from "./components/UserDashboard/MatchProfileList/MatchProfileList";
 
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
+  const [accessToken, setAccessToken] = useState("");
 
   return (
-    <UserContext.Provider value={[loggedInUser, setLoggedInUser]}>
+    <UserContext.Provider
+      value={[loggedInUser, setLoggedInUser, accessToken, setAccessToken]}
+    >
       <Router>
         <Switch>
           <Route exact path="/">
@@ -46,6 +50,9 @@ function App() {
           </Route>
           <Route path="/user/dashboard">
             <Dashboard></Dashboard>
+          </Route>
+          <Route path="/user/profileMatch">
+            <MatchProfileList></MatchProfileList>
           </Route>
         </Switch>
       </Router>

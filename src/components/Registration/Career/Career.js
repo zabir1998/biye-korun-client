@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
 
-const Career = ({ countries, fetchCountries, addUserDetail }) => {
+const Career = () => {
   const { register, handleSubmit, watch, errors } = useForm();
   const history = useHistory();
 
@@ -12,9 +12,28 @@ const Career = ({ countries, fetchCountries, addUserDetail }) => {
   //     fetchCountries();
   // }, []);
 
-  const onSubmit = (data) => {
-    addUserDetail(data);
-    history.push(`/registration/lifestyle`);
+  const onSubmit = (values) => {
+    console.log(values);
+    // const careerDetails = {
+    //   highest_degree: values.highestDegree,
+    //   working_company: values.workingCompany,
+    //   yearly_income: values.yearlyIncome,
+    //   professional_area: values.professionalArea,
+    //   bio: values.bio,
+    // };
+    // fetch("https://biyekorun-staging.techserve4u.com/user/user-career", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify(careerDetails),
+    // })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     if (data) {
+    //       alert("New Career Details  Successfully");
+    //     }
+    //     console.log(data);
+    //   });
+    // history.push(`/registration/lifestyle`);
   };
 
   return (
@@ -30,6 +49,10 @@ const Career = ({ countries, fetchCountries, addUserDetail }) => {
               name="country"
               className="form-control"
             >
+              <option>BD</option>
+              <option>India</option>
+              <option>Germany</option>
+
               {/* {
                   countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
               }                              */}

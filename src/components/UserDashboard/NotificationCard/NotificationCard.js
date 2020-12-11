@@ -6,7 +6,7 @@ const NotificationCard = () => {
       style={{ backgroundColor: "#f8f8f8", border: "1px solid #cfcfdb" }}
       className="row d-flex justify-content-between px-2 pt-1"
     >
-      <div className="col-md-3 img-fluid rounded circle">
+      <div className="col-md-3 img-fluid ">
         <img
           style={{ width: 50, borderRadius: 40 }}
           className="img-fluid mr-1"

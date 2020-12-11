@@ -25,8 +25,6 @@ const NotificationList = () => {
         <NotificationCard></NotificationCard>
         <NotificationCard></NotificationCard>
         <NotificationCard></NotificationCard>
-        <NotificationCard></NotificationCard>
-        <NotificationCard></NotificationCard>
       </div>
       <Link className="text-center" style={{ color: "#8e8be6" }} to="/">
         <p>

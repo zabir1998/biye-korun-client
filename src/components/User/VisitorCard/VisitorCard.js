@@ -7,7 +7,7 @@ const VisitorCard = () => {
         <div className="col-md-4">
           <img
             style={{ padding: 7, border: "1px solid #cd3cd5" }}
-            className="img-fluid rounded-circle"
+            className="img-fluid "
             src="https://i.imgur.com/mtxJUHB.jpg"
             alt=""
           ></img>
