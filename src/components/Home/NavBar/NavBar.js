@@ -5,6 +5,7 @@ import Login from "../../Authentication/Login/Login";
 import Register from "../../Authentication/Register/Register";
 import { useGoogleLogout } from "react-google-login";
 import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 const clientId =
   "39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com";
@@ -17,7 +18,7 @@ const NavBar = () => {
   const onLogoutSuccess = (res) => {
     console.log("Logged out Success");
     alert("Logged out Successfully ✌");
-    localStorage.clear("token");
+    sessionStorage.clear("token");
     setLoggedInUser(false);
   };
 
@@ -66,7 +67,7 @@ const NavBar = () => {
           >
             Help
           </Nav.Link>
-          {loggedInUser ? (
+          {/* {loggedInUser ? (
             <>
               <Nav.Link className="brand-text ml-3">
                 Welcome, {loggedInUser.name}
@@ -78,6 +79,52 @@ const NavBar = () => {
                 href="#"
               >
                 Logout
+              </Nav.Link>
+            </>
+          ) : (
+            <>
+              {" "}
+              <Nav.Link
+                onClick={openModal}
+                style={{ color: "#8e8be6" }}
+                className="brand-text ml-3 main-nav-link"
+                href="#"
+              >
+                Login
+              </Nav.Link>
+              <Nav.Link
+                onClick={openModal}
+                style={{
+                  backgroundColor: "#cf6ac6",
+                  color: "white",
+                  marginTop: "-8px",
+                  paddingTop: "16px",
+                  marginBottom: "-8px",
+                  paddingBottom: "16px",
+                }}
+                // style={{ color: "#8e8be6" }}
+                className="ml-3 main-nav-link "
+                href="#"
+              >
+                Register
+              </Nav.Link>
+            </>
+          )} */}
+          {loggedInUser ? (
+            <>
+              <Nav.Link
+                onClick={openModal}
+                style={{ color: "#8e8be6" }}
+                className="brand-text ml-3 main-nav-link"
+                href="#"
+              >
+                Login
+              </Nav.Link>
+              <Nav.Link href="/user/dashboard" className="brand-text ml-3">
+                Dashboard
+              </Nav.Link>
+              <Nav.Link href="/user" className="brand-text ml-3">
+                Profile
               </Nav.Link>
             </>
           ) : (

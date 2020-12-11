@@ -6,7 +6,7 @@ const NewMatchListCard = () => {
       style={{ backgroundColor: "#f8f8f8" }}
       className="row d-flex justify-content-between m-2 px-2 pt-1"
     >
-      <div className="col-md-3 img-fluid rounded circle">
+      <div className="col-md-3 img-fluid ">
         <img
           style={{ width: 50, borderRadius: 40 }}
           className="img-fluid mr-1"
