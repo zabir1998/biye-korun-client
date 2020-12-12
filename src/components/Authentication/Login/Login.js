@@ -1,13 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Modal from "react-modal";
 import google from "../../../images/google.png";
 import fb from "../../../images/fb.png";
 import apple from "../../../images/apple.png";
-import { useGoogleLogin } from "react-google-login";
-
+import { GoogleLogin, useGoogleLogin } from "react-google-login";
+import jwt_decode from "jwt-decode";
 import "./Login.css";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { refreshTokenSetup } from "../../../utils/refreshTokenSetup";
 import { UserContext } from "../../../App";
 
 const clientId =
@@ -35,8 +34,14 @@ const Login = ({ modalIsOpen, closeModal }) => {
   // const { from } = location.state || { from: { pathname: "/" } };
   // const { loggedInUser, setLoggedInUser } = useState([]);
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
+  const [token, setToken] = useState(null);
 
-  const onSuccess = (res) => {
+  // useEffect(() => {
+  //   setToken(sessionStorage.getItem('Token'));
+
+  // }, [token])
+
+  const onSuccess = async (res) => {
     // console.log("Login Success: currentUser:", res.profileObj);
     // console.log(
     //   "Login Success: currentUser:",
@@ -63,19 +68,43 @@ const Login = ({ modalIsOpen, closeModal }) => {
       email: email,
     };
 
-    fetch("https://biyekorun-staging.techserve4u.com/auth/social-login", {
+    await fetch("https://biyekorun-staging.techserve4u.com/auth/social-login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userDetails),
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data) {
-          alert("New User Added Successfully");
-        }
-        console.log(data);
-        console.log("Token", data.access_token);
-        setAccessToken(data.access_token);
+        // if (data) {
+        //   alert('New User Added Successfully');
+        // }
+        //console.log(data);
+        //console.log('Token', data.access_token);
+        fetch(
+          "https://biyekorun-staging.techserve4u.com/auth/autorization/token",
+          {
+            method: "GET",
+            headers: {
+              Authorization: `Bearer ${data.access_token}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((data) => {
+            //console.log(data)
+            sessionStorage.setItem("Token", data.token);
+            setAccessToken(data.token);
+
+            var decoded = jwt_decode(data.token);
+            const { registration_completion_status } = decoded.user;
+            console.log(registration_completion_status);
+
+            if (registration_completion_status === false) {
+              return (window.location.href = "/personal");
+            } else {
+              return (window.location.href = "/user/dashboard");
+            }
+          });
       });
 
     const signedInUser = {
@@ -100,15 +129,15 @@ const Login = ({ modalIsOpen, closeModal }) => {
     sessionStorage.setItem("token", loggedInUser.accessToken);
   };
 
-  const { signIn } = useGoogleLogin({
-    onSuccess,
-    onFailure,
-    clientId,
-    isSignedIn: true,
-    accessType: "offline",
-    // responseType: 'code',
-    // prompt: 'consent',
-  });
+  // const { signIn } = useGoogleLogin({
+  //   onSuccess,
+  //   onFailure,
+  //   clientId,
+  //   isSignedIn: true,
+  //   accessType: 'offline',
+  //   // responseType: 'code',
+  //   // prompt: 'consent',
+  // });
 
   // const handleGoogleSignIn = () => {
   //     fetch("https://biyekorun-staging.techserve4u.com/google")
@@ -140,15 +169,24 @@ const Login = ({ modalIsOpen, closeModal }) => {
         <p className="text-center brand-text mb-3">
           Log in to Your Biye Korun Account
         </p>
+        <GoogleLogin
+          clientId={clientId}
+          buttonText="Login"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={"single_host_origin"}
+          isSignedIn={true}
+          accessType="offline"
+        />
 
-        <Link onClick={signIn} className="social-link">
+        {/* <button onClick={signIn} className="social-link">
           <div className="row social-row mb-3 shadow d-flex justify-content-center align-items-center">
             <div className="flex-left mr-3 ">
               <img className="social-icon" src={google} alt="google"></img>
             </div>
             <div>Continue with Google</div>
           </div>
-        </Link>
+        </button> */}
         <Link className="social-link" to="/">
           <div className="row social-row mb-3 shadow d-flex justify-content-center align-items-center">
             <div className="flex-left mr-3">

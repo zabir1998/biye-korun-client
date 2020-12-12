@@ -3,7 +3,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import SummaryCard from "../SummaryCard/SummaryCard";
 
-const ActivitySummary = () => {
+const ActivitySummary = ({ activitySummary }) => {
+  // const [
+  //   pendingRequest,
+  //   acceptedRequest,
+  //   contactViewers,
+  //   recentVisitor,
+  //   chatInitiated,
+  // ] = activitySummary;
+  console.log(activitySummary);
+
   return (
     <div className="shadow">
       <div className="row d-flex justify-content-between mt-3 pt-3 mx-4 px-3 pb-2 table-header-row">
