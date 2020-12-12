@@ -6,8 +6,12 @@ import PeopleNear from "./components/PeopleNear/PeopleNear/PeopleNear";
 import Preference from "./components/Preference/Preference/Preference";
 import ProfileVisitors from "./components/ProfileVisitors/ProfileVisitors/ProfileVisitors";
 import Personal from "./components/Registration/Personal/Personal";
-import Registration from "./components/Registration/Registration/Registration";
-import Search from "./components/Search/Search/Search";
+import Career from "./components/Registration/Career/Career";
+import Lifestyle from "./components/Registration/Lifestyle/Lifestyle";
+import Advance from "./components/Search/Advance/Advance";
+import Basic from "./components/Search/Basic/Basic";
+import Settings from "./components/Settings/Settings/Settings";
+
 import UserProfile from "./components/User/UserProfile/UserProfile";
 import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
 import MatchProfileList from "./components/UserDashboard/MatchProfileList/MatchProfileList";
@@ -31,11 +35,20 @@ function App() {
           <Route path="/home">
             <Home></Home>
           </Route>
-          <Route path="/registration">
-            <Registration></Registration>
+          <Route path="/search/basic">
+            <Basic></Basic>
           </Route>
-          <Route path="/search">
-            <Search></Search>
+          <Route path="/search/advance">
+            <Advance></Advance>
+          </Route>
+          <Route path="/personal">
+            <Personal></Personal>
+          </Route>
+          <Route path="/career">
+            <Career></Career>
+          </Route>
+          <Route path="/lifestyle">
+            <Lifestyle></Lifestyle>
           </Route>
           <Route path="/visitor">
             <ProfileVisitors></ProfileVisitors>
@@ -45,6 +58,9 @@ function App() {
           </Route>
           <Route path="/preference">
             <Preference></Preference>
+          </Route>
+          <Route path="/settings">
+            <Settings></Settings>
           </Route>
           <Route exact path="/user">
             <UserProfile></UserProfile>
