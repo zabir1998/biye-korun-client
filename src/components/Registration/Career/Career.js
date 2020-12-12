@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useHistory } from "react-router-dom";
 import NavBar from "../../Home/NavBar/NavBar";
@@ -6,15 +6,33 @@ import NavReg from "../NavReg/NavReg";
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
 
-const Career = ({ countries, fetchCountries, addUserDetail }) => {
+const Career = ({ fetchCountries, addUserDetail }) => {
   const { register, handleSubmit, watch, errors } = useForm();
+  const [token, setToken] = useState(null);
+  const [countries, setCountries] = useState([]);
   const history = useHistory();
 
   // useEffect(() => {
   //     fetchCountries();
   // }, []);
 
+  useEffect(() => {
+    setToken(sessionStorage.getItem("Token"));
+    fetch(
+      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setCountries(data.data));
+  }, [token]);
+
   const onSubmit = (data) => {
+    console.log(data);
     history.push(`/lifestyle`);
   };
 
@@ -39,9 +57,12 @@ const Career = ({ countries, fetchCountries, addUserDetail }) => {
                     name="country"
                     className="form-control"
                   >
-                    {/* {
-                  countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
-              }                              */}
+                    {countries?.length >= 1 &&
+                      countries.map((country) => (
+                        <option key={country.id} value={country.id}>
+                          {country.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
               </div>
