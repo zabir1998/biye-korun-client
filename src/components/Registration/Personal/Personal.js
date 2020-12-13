@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import NavReg from '../NavReg/NavReg';
 import NavBar from '../../../components/Home/NavBar/NavBar';
+import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
 import './Personal.css';
 
@@ -95,6 +96,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
         })
           .then((response) => response.json())
           .then((json) => {
+
             console.log(json);
             if (json.statusCode === 201) {
               console.log(typeof json.statusCode);
@@ -106,6 +108,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
               alert(json.message);
               return;
             }
+
             alert(json.message);
           });
       });
@@ -260,6 +263,11 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             <div className="form-group row text-right">
               <div>
                 <input className="main-btn" type="submit" value="Continue" />
+              </div>
+              <div className="my-3">
+                <Link to="/career" className="main-btn">
+                  Go to next
+                </Link>
               </div>
             </div>
           </form>
