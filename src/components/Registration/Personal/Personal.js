@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import NavReg from '../NavReg/NavReg';
 import NavBar from '../../../components/Home/NavBar/NavBar';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './Personal.css';
 
 const Personal = ({ countries, fetchCountries, addUserDetail }) => {
@@ -95,6 +96,19 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
         })
           .then((response) => response.json())
           .then((json) => {
+
+            console.log(json);
+            if (json.statusCode === 201) {
+              console.log(typeof json.statusCode);
+              window.location.replace('/career');
+              alert(json.message);
+              return;
+            } else if (json.statusCode === 409) {
+              window.location.replace('/career');
+              alert(json.message);
+              return;
+            }
+
             alert(json.message);
           });
       });
