@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+
+
 import NavReg from '../NavReg/NavReg';
 import NavBar from '../../../components/Home/NavBar/NavBar';
 import { Link } from 'react-router-dom';
@@ -11,7 +14,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   const [religions, setReligions] = useState([]);
   const [diets, setDiets] = useState([]);
   const [token, setToken] = useState(null);
-  const { register, handleSubmit, errors } = useForm();
+  const { register, handleSubmit, watch, errors } = useForm();
+  const [messages, setErrorMessages] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
@@ -96,20 +101,28 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
         })
           .then((response) => response.json())
           .then((json) => {
-
             console.log(json);
             if (json.statusCode === 201) {
-              console.log(typeof json.statusCode);
-              window.location.replace('/career');
               alert(json.message);
-              return;
             } else if (json.statusCode === 409) {
-              window.location.replace('/career');
               alert(json.message);
-              return;
+            } else if (json.statusCode === 400) {
+              setErrorMessages(json.message);
             }
 
-            alert(json.message);
+//             console.log(json);
+//             if (json.statusCode === 201) {
+//               console.log(typeof json.statusCode);
+//               window.location.replace('/career');
+//               alert(json.message);
+//               return;
+//             } else if (json.statusCode === 409) {
+//               window.location.replace('/career');
+//               alert(json.message);
+//               return;
+//             }
+
+//             alert(json.message);
           });
       });
   };
@@ -119,7 +132,10 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
       <div>
         <NavBar></NavBar>
       </div>
-
+      {messages.length >= 1 &&
+        messages.map((message) => (
+          <p className="text-danger">{JSON.stringify(message.constraints)}</p>
+        ))}
       <div className="row ">
         <div className="col-md-3"></div>
         <div className="col-md-6 form-container">

@@ -16,7 +16,11 @@ const Career = ({ fetchCountries, addUserDetail }) => {
   const [occupationType, setOccupationType] = useState([]);
   const [selectOccupation, setSelectOccupation] = useState(1);
   const [currencies, setCurrencies] = useState([]);
+
+  const [messages, setErrorMessages] = useState([]);
+
   const history = useHistory();
+
 
   // useEffect(() => {
   //     fetchCountries();
@@ -118,6 +122,16 @@ const Career = ({ fetchCountries, addUserDetail }) => {
 
         console.log(json);
         if (json.statusCode === 201) {
+          alert(json.message);
+        } else if (json.statusCode === 409) {
+          alert(json.message);
+        } else if (json.statusCode === 400) {
+          setErrorMessages(json.message);
+        }
+
+
+        console.log(json);
+        if (json.statusCode === 201) {
           console.log(typeof json.statusCode);
           window.location.replace('/lifestyle');
           alert(json.message);
@@ -129,6 +143,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         }
 
         alert(json.message);
+
       });
   };
 
@@ -137,6 +152,10 @@ const Career = ({ fetchCountries, addUserDetail }) => {
       <div>
         <NavBar></NavBar>
       </div>
+      {messages.length >= 1 &&
+        messages.map((message) => (
+          <p className="text-danger">{JSON.stringify(message.constraints)}</p>
+        ))}
       <div className="row">
         <div className="col-md-3"></div>
         <div className="col-md-6 form-container">
@@ -190,6 +209,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                     ) : (
                       <option value="">Please reload the page again</option>
                     )}
+
                   </select>
                 </div>
               </div>
@@ -197,6 +217,36 @@ const Career = ({ fetchCountries, addUserDetail }) => {
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
+                    Occupation Type
+                  </label>
+                  <select
+                    required
+                    ref={register({ required: true })}
+                    name="occupation_type_id"
+                    className="form-control"
+                  >
+                    <option value="">-- select occupation first --</option>
+                    {occupationType?.length >= 1 ? (
+                      occupationType.map((occuType) => (
+                        <option key={occuType?.id} value={occuType?.id}>
+                          {occuType?.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">
+                        Please select the "valid" occupation first
+                      </option>
+                    )}
+
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+
+
                     Occupation Type
                   </label>
                   <select
@@ -250,6 +300,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
+
                     Currency
                   </label>
                   <select
@@ -295,7 +346,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                   </label>
                   <input
                     required
-
                     ref={register({ required: true })}
                     type="text"
                     name="working_company"
@@ -317,6 +367,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                     className="form-control"
                     placeholder="Ex: Software Developer"
                   />
+
 
                 </div>
               </div>
