@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
+
+
 import NavReg from '../NavReg/NavReg';
 import NavBar from '../../../components/Home/NavBar/NavBar';
-
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import './Personal.css';
 
 const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   const [languages, setLanguages] = useState([]);
   const [religions, setReligions] = useState([]);
   const [diets, setDiets] = useState([]);
-  const [communityId, setCommunityId] = useState(null);
   const [token, setToken] = useState(null);
   const { register, handleSubmit, watch, errors } = useForm();
   const [messages, setErrorMessages] = useState([]);
@@ -107,6 +109,20 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             } else if (json.statusCode === 400) {
               setErrorMessages(json.message);
             }
+
+//             console.log(json);
+//             if (json.statusCode === 201) {
+//               console.log(typeof json.statusCode);
+//               window.location.replace('/career');
+//               alert(json.message);
+//               return;
+//             } else if (json.statusCode === 409) {
+//               window.location.replace('/career');
+//               alert(json.message);
+//               return;
+//             }
+
+//             alert(json.message);
           });
       });
   };
@@ -263,6 +279,11 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             <div className="form-group row text-right">
               <div>
                 <input className="main-btn" type="submit" value="Continue" />
+              </div>
+              <div className="my-3">
+                <Link to="/career" className="main-btn">
+                  Go to next
+                </Link>
               </div>
             </div>
           </form>
