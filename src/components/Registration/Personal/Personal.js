@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import NavReg from "../NavReg/NavReg";
-import NavBar from "../../../components/Home/NavBar/NavBar";
-
-import "./Personal.css";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import NavReg from '../NavReg/NavReg';
+import NavBar from '../../../components/Home/NavBar/NavBar';
+import { Link } from 'react-router-dom';
+import './Personal.css';
 
 const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   const [languages, setLanguages] = useState([]);
   const [religions, setReligions] = useState([]);
   const [diets, setDiets] = useState([]);
-  const [communityId, setCommunityId] = useState(null);
   const [token, setToken] = useState(null);
-  const { register, handleSubmit, watch, errors } = useForm();
-  const [message, setMessage] = useState("");
-  const history = useHistory();
+  const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem("Token"));
+    setToken(sessionStorage.getItem('Token'));
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/language/language-list",
+      'https://biyekorun-staging.techserve4u.com/category/language/language-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -31,9 +27,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
       .then((data) => setLanguages(data.data));
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
+      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,8 +38,8 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
       .then((res) => res.json())
       .then((data) => setReligions(data.data));
 
-    fetch("https://biyekorun-staging.techserve4u.com/category/diet/diet-list", {
-      method: "GET",
+    fetch('https://biyekorun-staging.techserve4u.com/category/diet/diet-list', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -58,7 +54,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
     await fetch(
       `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${data.religion_id}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,9 +76,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
         // https://biyekorun-staging.techserve4u.com/user/user-profile
 
         fetch(`https://biyekorun-staging.techserve4u.com/user/user-profile`, {
-          method: "POST",
+          method: 'POST',
           headers: {
-            "Content-Type": "application/json",
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${token}`,
           },
 
@@ -99,7 +95,6 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
         })
           .then((response) => response.json())
           .then((json) => {
-            setMessage(json.message);
             alert(json.message);
           });
       });
@@ -254,6 +249,11 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             <div className="form-group row text-right">
               <div>
                 <input className="main-btn" type="submit" value="Continue" />
+              </div>
+              <div className="my-3">
+                <Link to="/career" className="main-btn">
+                  Go to next
+                </Link>
               </div>
             </div>
           </form>
