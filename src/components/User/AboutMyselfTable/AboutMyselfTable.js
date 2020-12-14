@@ -1,9 +1,12 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
-
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
 const AboutMyselfTable = () => {
+  const profileData = useSelector((state) => state.profile);
+
   return (
     <div className="shadow px-3 pb-3 mt-5">
       <div className="row d-flex justify-content-between mt-3 pt-3 mx-2 pb-3 table-header-row">
@@ -24,11 +27,11 @@ const AboutMyselfTable = () => {
       </div>
       <div className="row  my-3 mx-2 table-row">
         <p>
-          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Consequatur,
-          commodi sunt repellendus nostrum excepturi quisquam, architecto
-          ducimus, explicabo error cum quasi. Veritatis, odit. Eius recusandae
-          excepturi tempora! Commodi reprehenderit provident sapiente eveniet
-          perspiciatis recusandae.
+          {profileData.loading ? (
+            <CircularProgress />
+          ) : (
+            profileData?.profile?.user_career[0]?.bio
+          )}
         </p>
       </div>
     </div>

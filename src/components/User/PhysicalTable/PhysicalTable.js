@@ -1,9 +1,11 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PhysicalTable = () => {
+  const profileData = useSelector((state) => state.profile);
   return (
     <div>
       <div className="shadow px-3 pb-3 mt-3">
@@ -25,7 +27,13 @@ const PhysicalTable = () => {
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Height</p>
-          <p>176 cm</p>
+          <p>{`${profileData?.profile?.user_profile[0]?.height?.slice(
+            0,
+            1
+          )}'${profileData?.profile?.user_profile[0]?.height?.slice(
+            2,
+            3
+          )}" `}</p>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Weight</p>
@@ -41,7 +49,7 @@ const PhysicalTable = () => {
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Diet</p>
-          <p>Veg</p>
+          <p>{profileData?.profile?.user_profile[0]?.diet_id.name}</p>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Sun Sign</p>

@@ -3,14 +3,15 @@ import { Link } from 'react-router-dom';
 import './ProfileCard.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { getProfile } from '../../../actions';
-var getAge = require('get-age');
+import CircularProgress from '@material-ui/core/CircularProgress';
+import getAge from 'get-age';
 
 const ProfileCard = ({ style }) => {
   const [token, setToken] = useState(null);
 
   const dispatch = useDispatch();
   const profileData = useSelector((state) => state.profile);
-  console.log(profileData);
+  //console.log(profileData);
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
     fetch('https://biyekorun-staging.techserve4u.com/user/user-info', {
@@ -38,7 +39,7 @@ const ProfileCard = ({ style }) => {
         ></img>
         <div className="card-body text-center">
           {profileData.loading ? (
-            <p>Loading....</p>
+            <CircularProgress />
           ) : (
             <div>
               <h5 className="card-title">
