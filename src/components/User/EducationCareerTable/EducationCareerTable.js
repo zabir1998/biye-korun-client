@@ -1,9 +1,13 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { useSelector } from 'react-redux';
+import HRNumbers from 'human-readable-numbers';
 
 const EducationCareerTable = () => {
+  const profileData = useSelector((state) => state.profile);
   return (
     <div>
       <div className="shadow px-3 pb-3">
@@ -23,30 +27,37 @@ const EducationCareerTable = () => {
             </p>
           </Link>
         </div>
-        <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
-          <p>Highest Qualification</p>
-          <p>B. Sc. in Software Engineering</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
-          <p>College</p>
-          <p>AUST</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-2 mx-2 table-row">
-          <p>Working With</p>
-          <p>Private Company</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
-          <p>Grew Up in</p>
-          <p>Bangladesh</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
-          <p>Working As</p>
-          <p>Senior Software Engineer</p>
-        </div>
-        <div className="row d-flex justify-content-between mb-4 mt-2 mx-2 table-row">
-          <p>Annual Income</p>
-          <p>Upto USD 90k</p>
-        </div>
+        {profileData.loading ? (
+          <CircularProgress />
+        ) : (
+          <div>
+            <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
+              <p>Highest Qualification</p>
+              <p>{profileData?.profile?.user_career[0]?.highest_degree}</p>
+            </div>
+            <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
+              <p>College</p>
+              <p>AUST</p>
+            </div>
+            <div className="row d-flex justify-content-between mt-2 mx-2 table-row">
+              <p>Working With</p>
+              <p>{profileData?.profile?.user_career[0]?.working_company}</p>
+            </div>
+
+            <div className="row d-flex justify-content-between mt-3 mx-2 table-row">
+              <p>Working As</p>
+              <p>{profileData?.profile?.user_career[0]?.professional_area}</p>
+            </div>
+            <div className="row d-flex justify-content-between mb-4 mt-2 mx-2 table-row">
+              <p>Annual Income</p>
+              <p>
+                {HRNumbers.toHumanString(
+                  profileData?.profile?.user_career[0]?.yearly_income
+                )}
+              </p>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
