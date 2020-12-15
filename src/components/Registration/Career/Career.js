@@ -84,19 +84,19 @@ const Career = ({ fetchCountries, addUserDetail }) => {
   }, [token, selectOccupation]);
 
   const onSubmit = (data) => {
-    console.log(
-      JSON.stringify({
-        country_id: parseInt(data.country_id),
-        occupation_id: parseInt(data.occupation_id),
-        occupation_type_id: parseInt(data.occupation_type_id),
-        currency_id: parseInt(data.currency_id),
-        highest_degree: data.highest_degree,
-        working_company: data.working_company,
-        yearly_income: data.yearly_income,
-        professional_area: data.professional_area,
-        bio: data.bio,
-      })
-    );
+    // console.log(
+    //   JSON.stringify({
+    //     country_id: parseInt(data.country_id),
+    //     occupation_id: parseInt(data.occupation_id),
+    //     occupation_type_id: parseInt(data.occupation_type_id),
+    //     currency_id: parseInt(data.currency_id),
+    //     highest_degree: data.highest_degree,
+    //     working_company: data.working_company,
+    //     yearly_income: data.yearly_income,
+    //     professional_area: data.professional_area,
+    //     bio: data.bio,
+    //   })
+    // );
 
     fetch(`https://biyekorun-staging.techserve4u.com/user/user-career`, {
       method: 'POST',
@@ -120,7 +120,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
       .then((res) => res.json())
       .then((json) => {
 
-        console.log(json);
+        //console.log(json);
         if (json.statusCode === 201) {
           alert(json.message);
         } else if (json.statusCode === 409) {
@@ -130,9 +130,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         }
 
 
-        console.log(json);
+        //console.log(json);
         if (json.statusCode === 201) {
-          console.log(typeof json.statusCode);
+          //console.log(typeof json.statusCode);
           window.location.replace('/lifestyle');
           alert(json.message);
           return;

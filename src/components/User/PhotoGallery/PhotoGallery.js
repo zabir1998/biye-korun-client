@@ -6,11 +6,10 @@ import { Button } from '@material-ui/core';
 import FileReader from 'filereader';
 
 const PhotoGallery = () => {
-  const [image, setImage] = useState('');
+  const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
   const [token, setToken] = useState(null);
 
-  console.log(image);
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
     fetch('https://biyekorun-staging.techserve4u.com/user/image/gallery', {
@@ -21,27 +20,32 @@ const PhotoGallery = () => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data);
         setImages(json.data);
       });
   }, [token]);
 
-  const handleUpload = () => {
-    const formData = new FormData();
-    formData.append('file', image.name);
-    fetch(
-      'https://biyekorun-staging.techserve4u.com/user/image/gallery/upload',
+  const handleUpload = async () => {
+    let imageFile = image;
+    let formData = new FormData();
+    await formData.append('file', imageFile);
+
+    await fetch(
+      'https://biyekorun-staging.techserve4u.com/user/image/gallery/upload/',
       {
         method: 'POST',
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${token}`,
         },
         body: formData,
       }
     )
       .then((res) => res.json())
-      .then((json) => console.log(json.data));
+      .then((json) => {
+        alert(json.message);
+      });
+
+    setImage(null);
+    window.location.reload();
   };
   return (
     <div className="shadow mt-5">
