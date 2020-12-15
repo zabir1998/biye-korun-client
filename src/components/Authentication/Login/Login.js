@@ -71,18 +71,36 @@ const Login = ({ modalIsOpen, closeModal }) => {
         )
           .then((res) => res.json())
           .then((data) => {
-            //console.log(data)
+            // console.log(data);
             sessionStorage.setItem('Token', data.token);
             setAccessToken(data.token);
 
             var decoded = jwt_decode(data.token);
+            console.log(decoded.user);
             const { registration_completion_status } = decoded.user;
             console.log(registration_completion_status);
 
             if (registration_completion_status === false) {
-              return (window.location.href = '/personal');
+              fetch(
+                'https://biyekorun-staging.techserve4u.com/user/user-registration-status',
+                {
+                  method: 'GET',
+                  headers: {
+                    Authorization: `Bearer ${data.token}`,
+                  },
+                }
+              )
+                .then((res) => res.json())
+                .then((json) => {
+                  const route = json.message.toLowerCase();
+                  let finalRoute = route.slice(5, 11);
+                  if (finalRoute === 'carrer') {
+                    finalRoute = 'career';
+                    window.location.replace(`/${finalRoute}`);
+                  }
+                });
             } else {
-              return (window.location.href = '/user/dashboard');
+              return (window.location.replace = '/user/dashboard');
             }
           });
       });

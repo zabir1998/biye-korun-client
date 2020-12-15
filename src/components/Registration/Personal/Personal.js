@@ -56,7 +56,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
 
   const onSubmit = async (data) => {
     const ISODate = new Date(data.dateOfBirth).toISOString();
-    console.log(ISODate);
+    //console.log(ISODate);
     await fetch(
       `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${data.religion_id}`,
       {
@@ -68,16 +68,16 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
     )
       .then((res) => res.json())
       .then((returnData) => {
-        console.log({
-          profile_name: data.profile_name,
-          religion_id: parseInt(data.religion_id),
-          community_id: parseInt(returnData.data[0].id),
-          diet_id: parseInt(data.diet_id),
-          dateOfBirth: ISODate,
-          language_id: parseInt(data.language_id),
-          maritial_status: data.marital_status,
-          height: data.height,
-        });
+        // console.log({
+        //   profile_name: data.profile_name,
+        //   religion_id: parseInt(data.religion_id),
+        //   community_id: parseInt(returnData.data[0].id),
+        //   diet_id: parseInt(data.diet_id),
+        //   dateOfBirth: ISODate,
+        //   language_id: parseInt(data.language_id),
+        //   maritial_status: data.marital_status,
+        //   height: data.height,
+        // });
 
         // https://biyekorun-staging.techserve4u.com/user/user-profile
 

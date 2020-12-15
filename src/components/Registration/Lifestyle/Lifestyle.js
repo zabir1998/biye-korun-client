@@ -28,18 +28,18 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(
-      JSON.stringify({
-        family_type: data.family_type,
-        fathers_occupation: data.fathers_occupation,
-        mothers_occupation: data.mothers_occupation,
-        family_living_place: data.family_living_place,
-        family_bio: data.family_bio,
-        contact_address: data.contact_address,
-        brother_count: parseInt(data.brother_count),
-        sister_count: parseInt(data.sister_count),
-      })
-    );
+    // console.log(
+    //   JSON.stringify({
+    //     family_type: data.family_type,
+    //     fathers_occupation: data.fathers_occupation,
+    //     mothers_occupation: data.mothers_occupation,
+    //     family_living_place: data.family_living_place,
+    //     family_bio: data.family_bio,
+    //     contact_address: data.contact_address,
+    //     brother_count: parseInt(data.brother_count),
+    //     sister_count: parseInt(data.sister_count),
+    //   })
+    // );
 
     // https://biyekorun-staging.techserve4u.com/user/user-family
 
@@ -63,7 +63,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
+        //console.log(json);
         if (json.statusCode === 201) {
           alert(json.message);
         } else if (json.statusCode === 409) {

@@ -12,8 +12,7 @@ const PersonalDetailsTable = () => {
   const [token, setToken] = useState(null);
 
   const profileData = useSelector((state) => state.profile);
-  console.log(profileData);
-  console.log(countries);
+ 
 
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
@@ -28,7 +27,7 @@ const PersonalDetailsTable = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        console.log(data.data);
+        
         const country_id = profileData?.profile?.user_career[0]?.country_id;
         const countryData = data.data?.find(
           (country) => country.id === country_id
