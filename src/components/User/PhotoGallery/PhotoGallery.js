@@ -61,7 +61,12 @@ const PhotoGallery = () => {
         <div className="col-md-6 p-4">
           {images?.length >= 1 &&
             images?.map((image) => (
-              <img style={{ width: '9rem' }} src={image?.url} alt="" />
+              <img
+                key={image.id}
+                style={{ width: '9rem' }}
+                src={image?.url}
+                alt=""
+              />
             ))}
         </div>
       </div>

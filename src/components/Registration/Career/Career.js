@@ -21,7 +21,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
 
   const history = useHistory();
 
-
   // useEffect(() => {
   //     fetchCountries();
   // }, []);
@@ -119,7 +118,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-
         //console.log(json);
         if (json.statusCode === 201) {
           alert(json.message);
@@ -128,7 +126,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         } else if (json.statusCode === 400) {
           setErrorMessages(json.message);
         }
-
 
         //console.log(json);
         if (json.statusCode === 201) {
@@ -143,7 +140,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         }
 
         alert(json.message);
-
       });
   };
 
@@ -209,7 +205,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                     ) : (
                       <option value="">Please reload the page again</option>
                     )}
-
                   </select>
                 </div>
               </div>
@@ -237,7 +232,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                         Please select the "valid" occupation first
                       </option>
                     )}
-
                   </select>
                 </div>
               </div>
@@ -245,8 +239,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
-
-
                     Occupation Type
                   </label>
                   <select
@@ -296,11 +288,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                 </div>
               </div>
 
-
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
-
                     Currency
                   </label>
                   <select
@@ -322,7 +312,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                   </select>
                 </div>
               </div>
-
 
               <div className="form-group">
                 <div>
@@ -367,25 +356,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                     className="form-control"
                     placeholder="Ex: Software Developer"
                   />
-
-
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div>
-                  <label className="brand-text" htmlFor="">
-                    Professional Area
-                  </label>
-                  <input
-                    required
-                    ref={register({ required: true })}
-                    type="text"
-                    name="professional_area"
-                    className="form-control"
-                    placeholder="Ex: Software Developer"
-                  />
-
                 </div>
               </div>
 

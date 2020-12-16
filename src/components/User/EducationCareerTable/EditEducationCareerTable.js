@@ -1,27 +1,70 @@
-import React from "react";
-import Modal from "react-modal";
-import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { useSelector } from 'react-redux';
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    height: "70%",
+    top: '50%',
+    left: '50%',
+    height: '70%',
     // right: "auto",
     // bottom: "auto",
     // marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
+    transform: 'translate(-50%, -50%)',
   },
 };
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
-  const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (values) => {
-    // form is valid
-    console.log(values);
+  const { register, handleSubmit } = useForm();
+
+  const [degree, setDegree] = useState('');
+  //const [college, setCollege] = useState('');
+  const [companyName, setCompanyName] = useState('');
+  const [professionalArea, setProfessionalArea] = useState('');
+  const [income, setIncome] = useState('');
+  const [token, setToken] = useState(null);
+
+  const profileData = useSelector((state) => state.profile);
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+    setDegree(profileData?.profile?.user_career[0]?.highest_degree);
+    setCompanyName(profileData?.profile?.user_career[0]?.working_company);
+    setProfessionalArea(
+      profileData?.profile?.user_career[0]?.professional_area
+    );
+    setIncome(profileData?.profile?.user_career[0]?.yearly_income);
+  }, [profileData]);
+
+  const onSubmit = (data) => {
+    console.log(data);
+    fetch('https://biyekorun-staging.techserve4u.com/user/user-career/update', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        highest_degree: data.highest_degree,
+        working_company: data.working_company,
+        yearly_income: data.yearly_income,
+        professional_area: data.professional_area,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        if (json.statusCode === 200) {
+          alert(json.message);
+          window.location.reload();
+        } else {
+          alert(json?.message[0]?.constraints?.minLength);
+        }
+      });
   };
   return (
     <div>
@@ -44,66 +87,81 @@ const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label htmlFor="highestQualification">
-                Highest Qualification
+              <label className="brand-text" htmlFor="">
+                Highest Degrees
               </label>
               <input
-                name="highestQualification"
-                placeholder="Put your name"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
+                value={degree}
+                onChange={(e) => setDegree(e.target.value)}
+                required
+                ref={register({ required: true })}
+                type="text"
+                name="highest_degree"
+                className="form-control"
               />
             </div>
-            <div className="form-group">
-              <label htmlFor="college">College</label>
+            {/* <div>
+              <label className="brand-text" htmlFor="">
+                College / Institute
+              </label>
               <input
+                value={college}
+                onChange={(e) => setCollege(e.target.value)}
+                required
+                ref={register({ required: true })}
+                type="text"
                 name="college"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
+                className="form-control"
               />
+            </div> */}
+            <div className="form-group">
+              <div>
+                <label className="brand-text" htmlFor="">
+                  Employed In
+                </label>
+                <input
+                  value={companyName}
+                  onChange={(e) => setCompanyName(e.target.value)}
+                  required
+                  ref={register({ required: true })}
+                  type="text"
+                  name="working_company"
+                  className="form-control"
+                />
+              </div>
             </div>
             <div className="form-group">
-              <label htmlFor="workingWith">Working With</label>
-              <input
-                name="workingWith"
-                placeholder="your gender"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
-              />
+              <div>
+                <label className="brand-text" htmlFor="">
+                  Professional Area
+                </label>
+                <input
+                  value={professionalArea}
+                  onChange={(e) => setProfessionalArea(e.target.value)}
+                  required
+                  ref={register({ required: true })}
+                  type="text"
+                  name="professional_area"
+                  className="form-control"
+                  placeholder="Ex: Software Developer"
+                />
+              </div>
             </div>
             <div className="form-group">
-              <label htmlFor="workingAs">Working As</label>
-              <input
-                name="workingAs"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="annualIncome">Annual Income</label>
-              <input
-                name="annualIncome"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
-              />
+              <div>
+                <label className="brand-text" htmlFor="">
+                  Annual Income
+                </label>
+                <input
+                  value={income}
+                  onChange={(e) => setIncome(e.target.value)}
+                  required
+                  ref={register({ required: true })}
+                  type="number"
+                  name="yearly_income"
+                  className="form-control"
+                />
+              </div>
             </div>
 
             <button className="btn premium-btn btn-block" type="submit">
