@@ -1,17 +1,28 @@
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import EditPhysicalTable from "./EditPhysicalTable";
 
 const PhysicalTable = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const profileData = useSelector((state) => state.profile);
   return (
     <div>
       <div className="shadow px-3 pb-3 mt-3">
         <div className="row d-flex justify-content-between mt-3 pt-3 mx-2 pb-3 table-header-row">
           <h3>Physical</h3>
-          <Link>
+          <Link onClick={openModal}>
             <p>
               <small>
                 <span>
@@ -68,6 +79,10 @@ const PhysicalTable = () => {
           <p>None</p>
         </div>
       </div>
+      <EditPhysicalTable
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+      ></EditPhysicalTable>
     </div>
   );
 };

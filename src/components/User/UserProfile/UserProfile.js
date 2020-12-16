@@ -21,7 +21,7 @@ const UserProfile = () => {
   const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   return (
-    <Container>
+    <div style={{ paddingLeft: 120, paddingRight: 120 }}>
       <InnerNavBar></InnerNavBar>
       <div className="row mt-5">
         <div className="col-md-4">
@@ -59,7 +59,7 @@ const UserProfile = () => {
           <PartnerPreferenceTable></PartnerPreferenceTable>
         </div>
       </div>
-    </Container>
+    </div>
   );
 };
 

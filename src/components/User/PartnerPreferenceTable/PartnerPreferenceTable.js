@@ -1,14 +1,25 @@
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
+import EditPartnerPreferenceTable from "./EditPartnerPreferenceTable";
 
 const PartnerPreferenceTable = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <div className="shadow px-3 pb-3">
       <div className="row d-flex justify-content-between mt-3 pt-4 mx-2 pb-3 table-header-row">
         <h3>Partner Preference</h3>
-        <Link>
+        <Link onClick={openModal}>
           <p>
             <small>
               <span>
@@ -104,6 +115,10 @@ const PartnerPreferenceTable = () => {
           </div>
         </div>
       </div>
+      <EditPartnerPreferenceTable
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+      ></EditPartnerPreferenceTable>
     </div>
   );
 };

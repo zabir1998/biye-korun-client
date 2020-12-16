@@ -1,17 +1,28 @@
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import EditBasicLifeStyleTable from "./EditBasicLifeStyleTable";
 
 const BasicLifeStyleTable = () => {
   const profileData = useSelector((state) => state.profile);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   return (
     <div>
       <div className="shadow px-3 pb-3 mt-5">
         <div className="row d-flex justify-content-between mt-3 pt-3 mx-2 pb-3 table-header-row">
           <h3>Basic & LifeStyle</h3>
-          <Link>
+          <Link onClick={openModal}>
             <p>
               <small>
                 <span>
@@ -46,6 +57,11 @@ const BasicLifeStyleTable = () => {
           <p>{profileData?.profile?.user_profile[0]?.profile_name}</p>
         </div>
       </div>
+      <EditBasicLifeStyleTable
+        bio={profileData?.profile?.user_profile[0]}
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+      ></EditBasicLifeStyleTable>
     </div>
   );
 };

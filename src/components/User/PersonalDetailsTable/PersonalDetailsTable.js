@@ -1,25 +1,35 @@
-import React, { useEffect, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
-import './PersonalDetailsTable.css';
-import { useSelector } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
+import "./PersonalDetailsTable.css";
+import { useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import EditPersonalDetailsTable from "./EditPersonalDetailsTable";
 
 const PersonalDetailsTable = () => {
   const [countries, setCountries] = useState([]);
   const [country, setCountry] = useState({});
   const [token, setToken] = useState(null);
 
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
   const profileData = useSelector((state) => state.profile);
- 
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
+      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -27,7 +37,6 @@ const PersonalDetailsTable = () => {
     )
       .then((res) => res.json())
       .then((data) => {
-        
         const country_id = profileData?.profile?.user_career[0]?.country_id;
         const countryData = data.data?.find(
           (country) => country.id === country_id
@@ -40,7 +49,7 @@ const PersonalDetailsTable = () => {
     <div className="shadow px-3 pb-3 mt-3">
       <div className="row d-flex justify-content-between mt-3 pt-3 mx-2 pb-3 table-header-row">
         <h3>Personal Details</h3>
-        <Link>
+        <Link onClick={openModal}>
           <p>
             <small>
               <span>
@@ -98,6 +107,11 @@ const PersonalDetailsTable = () => {
           </div>
         </div>
       )}
+      <EditPersonalDetailsTable
+        bio={profileData?.profile?.user_career[0]?.bio}
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+      ></EditPersonalDetailsTable>
     </div>
   );
 };
