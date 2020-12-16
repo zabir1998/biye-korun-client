@@ -1,4 +1,5 @@
 import React from "react";
+import CopyRight from "../../CopyRight/CopyRight/CopyRight";
 import VisitorCard from "../../ProfileVisitors/VisitorCard/VisitorCard";
 import InnerNavBar from "../../shared/InnerNavBar/InnerNavBar";
 import IdSearchBar from "../../User/IdSearchBar/IdSearchBar";
@@ -47,6 +48,9 @@ const SearchResult = () => {
             </div>
           </div>
         </div>
+      </div>
+      <div>
+        <CopyRight></CopyRight>
       </div>
     </div>
   );
