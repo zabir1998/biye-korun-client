@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 
-
 import NavReg from '../NavReg/NavReg';
 import NavBar from '../../../components/Home/NavBar/NavBar';
 import { Link } from 'react-router-dom';
@@ -110,19 +109,19 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
               setErrorMessages(json.message);
             }
 
-//             console.log(json);
-//             if (json.statusCode === 201) {
-//               console.log(typeof json.statusCode);
-//               window.location.replace('/career');
-//               alert(json.message);
-//               return;
-//             } else if (json.statusCode === 409) {
-//               window.location.replace('/career');
-//               alert(json.message);
-//               return;
-//             }
+            //             console.log(json);
+            //             if (json.statusCode === 201) {
+            //               console.log(typeof json.statusCode);
+            //               window.location.replace('/career');
+            //               alert(json.message);
+            //               return;
+            //             } else if (json.statusCode === 409) {
+            //               window.location.replace('/career');
+            //               alert(json.message);
+            //               return;
+            //             }
 
-//             alert(json.message);
+            //             alert(json.message);
           });
       });
   };
@@ -157,6 +156,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 )}
               </div>
             </div>
+
             <div className="form-group">
               <div>
                 <label className="brand-text" htmlFor="">

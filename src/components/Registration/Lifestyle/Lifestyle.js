@@ -25,7 +25,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
       .then((json) => {
         setOccupations(json.data);
       });
-  });
+  }, [token]);
 
   const onSubmit = (data) => {
     // console.log(

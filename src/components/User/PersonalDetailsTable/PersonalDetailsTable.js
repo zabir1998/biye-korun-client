@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { Link } from "react-router-dom";
-import "./PersonalDetailsTable.css";
-import { useSelector } from "react-redux";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import EditPersonalDetailsTable from "./EditPersonalDetailsTable";
+import React, { useEffect, useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { Link } from 'react-router-dom';
+import './PersonalDetailsTable.css';
+import { useSelector } from 'react-redux';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import EditPersonalDetailsTable from './EditPersonalDetailsTable';
 
 const PersonalDetailsTable = () => {
   const [countries, setCountries] = useState([]);
@@ -25,11 +25,11 @@ const PersonalDetailsTable = () => {
   const profileData = useSelector((state) => state.profile);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem("Token"));
+    setToken(sessionStorage.getItem('Token'));
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
+      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -103,7 +103,7 @@ const PersonalDetailsTable = () => {
           </div>
           <div className="row d-flex justify-content-between mt-2 mx-2 table-row mb-2">
             <p>Phone</p>
-            <p>+8801756112656</p>
+            <p>{profileData?.profile?.user?.phone_number}</p>
           </div>
         </div>
       )}

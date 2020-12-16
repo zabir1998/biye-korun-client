@@ -1,11 +1,11 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
-import "./FamilyDetails.css";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import EditFamilyDetails from "./EditFamilyDetails";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './FamilyDetails.css';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import EditFamilyDetails from './EditFamilyDetails';
 
 const FamilyDetails = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -79,11 +79,11 @@ const FamilyDetails = () => {
           <div className="row d-flex justify-content-between mt-2 mx-2 ">
             <p>
               <Link to="/">
-                <span style={{ color: "#8e8be6" }}>
-                  Add more family details{" "}
+                <span style={{ color: '#8e8be6' }}>
+                  Add more family details{' '}
                 </span>
               </Link>
-              and get visible to our Selected & VIP Members{" "}
+              and get visible to our Selected & VIP Members{' '}
             </p>
           </div>
         </div>

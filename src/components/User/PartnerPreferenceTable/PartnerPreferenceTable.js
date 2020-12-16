@@ -1,9 +1,8 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import EditPartnerPreferenceTable from "./EditPartnerPreferenceTable";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import EditPartnerPreferenceTable from './EditPartnerPreferenceTable';
 
 const PartnerPreferenceTable = () => {
   const [modalIsOpen, setIsOpen] = useState(false);

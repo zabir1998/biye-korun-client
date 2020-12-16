@@ -100,7 +100,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
                   }
                 });
             } else {
-              return (window.location.replace = '/user/dashboard');
+              return window.location.replace('/user/dashboard');
             }
           });
       });
