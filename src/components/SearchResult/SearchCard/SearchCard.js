@@ -3,49 +3,32 @@ import visitor from "../../../images/visitor.jpg";
 
 const SearchCard = () => {
   return (
-    <div class="card mb-3" style={{ maxWidth: 550, width: 800 }}>
-      <div class="row g-0">
-        <div class="col-md-2">
-          <img
-            src={visitor}
-            style={{ height: 250, width: 160, padding: 5, borderRadius: 10 }}
-            alt=""
-          />
-        </div>
-        <div class="col-md-8">
-          <div class="card-body" style={{ marginLeft: 50 }}>
-            <h5 class="card-title">Kamali Begum</h5>
-            <h6>KJ1QC89</h6>
-            <hr />
-            <p class="card-text row">
-              <div className="col-md-6">
-                <h6>25 Years 5'5"</h6>
-                <h6>Paris,France</h6>
-                <h6>Muslim</h6>
-              </div>
-              <div className="col-md-6">
-                <h6>B.E.</h6>
-                <h6>Software Engineer</h6>
-                <h6>Never Married</h6>
-              </div>
-            </p>
+    <div className="row p-4">
+      <div className="col-md-3">
+        <img className="img-fluid" src={visitor} alt="" />
+      </div>
+      <div className="col-md-6">
+        <div className="row">
+          <div className="col">
+            <h4>Sufia Begum</h4>
+            <p>SF123456</p>
           </div>
         </div>
-        <div
-          className="col-md-2"
-          style={{ backgroundColor: "lightgrey", padding: 20 }}
-        >
-          <button
-            style={{
-              backgroundColor: " #8e8be6",
-              color: "white",
-              fontSize: 12,
-              marginTop: 90,
-            }}
-          >
-            Send Request
-          </button>
+        <div className="row d-flex justify-content-start">
+          <div className="col-md-6">
+            <p className="small">21 Years , 5'5"</p>
+            <p className="small">Muslim</p>
+            <p className="small">Paris,France</p>
+          </div>
+          <div className="col-md-6">
+            <p className="small">B.E./B.Tech</p>
+            <p className="small">Software Engineer</p>
+            <p className="small">Never Married</p>
+          </div>
         </div>
+      </div>
+      <div className="col-md-3 d-flex align-items-center">
+        <button className="btn premium-btn">Send Request</button>
       </div>
     </div>
   );

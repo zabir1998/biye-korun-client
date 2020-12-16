@@ -11,7 +11,7 @@ import SearchResultBody from "../SearchResultBody/SearchResultBody";
 
 const SearchResult = () => {
   return (
-    <div className="container">
+    <div style={{ paddingLeft: 100, paddingRight: 100 }}>
       <div style={{ marginBottom: 10 }}>
         <InnerNavBar></InnerNavBar>
       </div>
@@ -21,27 +21,32 @@ const SearchResult = () => {
           <NewMatchList></NewMatchList>
           <NewMatchList></NewMatchList>
         </div>
-
-        <div className="col-md-6">
-          <UserNavBar></UserNavBar>
+        <div className="col-md-9">
           <div className="row">
-            <div className="col-md-5">
+            <div className="col-md-8">
+              <UserNavBar></UserNavBar>
+            </div>
+            <div className="col-md-4">
+              <IdSearchBar></IdSearchBar>
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-md-4">
               <PaidMembersAccess></PaidMembersAccess>
             </div>
-            <div className="col-md-7">
-              <SearchCard></SearchCard>
-              <SearchCard></SearchCard>
-              <SearchCard></SearchCard>
+            <div className="col-md-8">
+              <div className="row shadow">
+                <SearchCard></SearchCard>
+              </div>
+              <div className="row shadow">
+                <SearchCard></SearchCard>
+              </div>
+              <div className="row shadow">
+                <SearchCard></SearchCard>
+              </div>
             </div>
           </div>
         </div>
-        <div className="col-md-3">
-          <IdSearchBar></IdSearchBar>
-        </div>
-      </div>
-      <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6"></div>
       </div>
     </div>
   );
