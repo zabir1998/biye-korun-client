@@ -1,17 +1,28 @@
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './FamilyDetails.css';
-import { useSelector } from 'react-redux';
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Link } from "react-router-dom";
+import "./FamilyDetails.css";
+import { useSelector } from "react-redux";
+import { useState } from "react";
+import EditFamilyDetails from "./EditFamilyDetails";
 
 const FamilyDetails = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const profileData = useSelector((state) => state.profile);
   return (
     <div className="shadow px-3 pb-3">
       <div className="row d-flex justify-content-between mt-3 pt-4 mx-2 pb-3 table-header-row">
         <h3>Family Details</h3>
-        <Link>
+        <Link onClick={openModal}>
           <p>
             <small>
               <span>
@@ -68,15 +79,19 @@ const FamilyDetails = () => {
           <div className="row d-flex justify-content-between mt-2 mx-2 ">
             <p>
               <Link to="/">
-                <span style={{ color: '#8e8be6' }}>
-                  Add more family details{' '}
+                <span style={{ color: "#8e8be6" }}>
+                  Add more family details{" "}
                 </span>
               </Link>
-              and get visible to our Selected & VIP Members{' '}
+              and get visible to our Selected & VIP Members{" "}
             </p>
           </div>
         </div>
       </div>
+      <EditFamilyDetails
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+      ></EditFamilyDetails>
     </div>
   );
 };

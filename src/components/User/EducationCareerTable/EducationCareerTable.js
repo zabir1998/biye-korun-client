@@ -1,19 +1,29 @@
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import { Link } from 'react-router-dom';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { useSelector } from 'react-redux';
-import HRNumbers from 'human-readable-numbers';
+import { faEdit } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from "react";
+import { Link } from "react-router-dom";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { useSelector } from "react-redux";
+import HRNumbers from "human-readable-numbers";
+import { useState } from "react";
+import EditEducationCareerTable from "./EditEducationCareerTable";
 
 const EducationCareerTable = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const profileData = useSelector((state) => state.profile);
   return (
     <div>
       <div className="shadow px-3 pb-3">
         <div className="row d-flex justify-content-between mt-3 pt-5 mx-2 pb-5 table-header-row">
           <h3>Education and Career</h3>
-          <Link>
+          <Link onClick={openModal}>
             <p>
               <small>
                 <span>
@@ -59,6 +69,10 @@ const EducationCareerTable = () => {
           </div>
         )}
       </div>
+      <EditEducationCareerTable
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+      ></EditEducationCareerTable>
     </div>
   );
 };
