@@ -3,7 +3,7 @@ import "./VisitorCount.css";
 const VisitorCount = () => {
   return (
     <>
-      <div className="card shadow profile-card" style={{ width: "22rem" }}>
+      <div className="card shadow profile-card">
         <h4
           className="brand-text text-center"
           style={{ paddingBottom: 10, paddingTop: 10 }}

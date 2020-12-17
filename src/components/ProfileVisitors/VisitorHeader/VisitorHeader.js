@@ -10,7 +10,7 @@ import VisitorNav from "../VisitorNav/VisitorNav";
 const VisitorHeader = () => {
   return (
     <div
-      className="row d-flex justify-content-between mt-5"
+      className="row d-flex justify-content-between mt-5 "
       style={{ marginTop: 10 }}
     >
       <div className="col-md-3">
@@ -18,18 +18,28 @@ const VisitorHeader = () => {
         <br />
         <VisitorCount></VisitorCount>
       </div>
-      <div className=" col-md-8">
-        <div className="row">
-          <div className=" col-md-8">
+      <div className=" col-md-9">
+        <div className="row ">
+          <div className="  col-md-8">
             <UserNavBar></UserNavBar>
           </div>
-          <div className="col-md-4">
+          <div className="col-md-4 ">
             <IdSearchBar></IdSearchBar>
+          </div>
+        </div>
+        <div className="row ">
+          <div className="col">
+            <VisitorNav></VisitorNav>
           </div>
         </div>
         <div className="row">
           <div className="col">
-            <VisitorNav></VisitorNav>
+            <VisitorCard></VisitorCard>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col">
+            <VisitorCard></VisitorCard>
           </div>
         </div>
         <div className="row">
