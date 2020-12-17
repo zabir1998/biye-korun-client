@@ -1,27 +1,60 @@
-import React from "react";
-import Modal from "react-modal";
-import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { useSelector } from 'react-redux';
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    height: "70%",
+    top: '50%',
+    left: '50%',
+    height: '70%',
     // right: "auto",
     // bottom: "auto",
     // marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
+    transform: 'translate(-50%, -50%)',
   },
 };
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 const EditPhysicalTable = ({ modalIsOpen, closeModal, bio }) => {
   const { register, errors, handleSubmit } = useForm();
-  const onSubmit = (values) => {
-    // form is valid
-    console.log(values);
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+  }, [token]);
+
+  const onSubmit = async (data) => {
+    console.log(
+      JSON.stringify({
+        sun_sign: data.sun_sign,
+        blood_group: data.blood_group,
+        health_status: data.health_status,
+        disability_status: data.disability_status,
+        weight: parseInt(data.weight),
+      })
+    );
+    await fetch(
+      'https://biyekorun-staging.techserve4u.com/user/user-physical-lifestyle',
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          sun_sign: data.sun_sign,
+          blood_group: data.blood_group,
+          health_status: data.health_status,
+          disability_status: data.disability_status,
+          weight: parseInt(data.weight),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then((json) => console.log(json));
   };
   return (
     <div>
@@ -44,30 +77,18 @@ const EditPhysicalTable = ({ modalIsOpen, closeModal, bio }) => {
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
-              <label htmlFor="height">Height</label>
-              <input
-                name="height"
-                placeholder="Put your Height"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
-              />
-            </div>
-            <div className="form-group">
               <label htmlFor="weight">weight</label>
               <input
                 name="weight"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
+                type="number"
+                maxLength="3"
                 className={`form-control `}
                 ref={register({
-                  required: "Please Tell something about yourself",
+                  required: 'Please Tell something about your weight',
                 })}
               />
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <label htmlFor="hairColor">Hair Color</label>
               <input
                 name="hairColor"
@@ -78,8 +99,8 @@ const EditPhysicalTable = ({ modalIsOpen, closeModal, bio }) => {
                   required: "Please Tell something about yourself",
                 })}
               />
-            </div>
-            <div className="form-group">
+            </div> */}
+            {/* <div className="form-group">
               <label htmlFor="bodyType">Body Type</label>
               <input
                 name="bodyType"
@@ -90,64 +111,45 @@ const EditPhysicalTable = ({ modalIsOpen, closeModal, bio }) => {
                   required: "Please Tell something about yourself",
                 })}
               />
-            </div>
-            <div className="form-group">
-              <label htmlFor="diet">Diet</label>
-              <input
-                name="diet"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
-                className={`form-control `}
-                ref={register({
-                  required: "Please Tell something about yourself",
-                })}
-              />
-            </div>
+            </div> */}
+
             <div className="form-group">
               <label htmlFor="sunSign">Sun Sign</label>
               <input
-                name="sunSign"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
+                name="sun_sign"
                 className={`form-control `}
                 ref={register({
-                  required: "Please Tell something about yourself",
+                  required: 'Please Tell something about yourself',
                 })}
               />
             </div>
             <div className="form-group">
               <label htmlFor="bloodGroup">Blood Group</label>
               <input
-                name="bloodGroup"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
+                name="blood_group"
                 className={`form-control `}
                 ref={register({
-                  required: "Please Tell something about yourself",
+                  required: 'Please Tell something about your blood group',
                 })}
               />
             </div>
             <div className="form-group">
               <label htmlFor="healthInfo">Health Info</label>
               <input
-                name="healthInfo"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
+                name="health_status"
                 className={`form-control `}
                 ref={register({
-                  required: "Please Tell something about yourself",
+                  required: 'Please Tell something about your helo',
                 })}
               />
             </div>
             <div className="form-group">
               <label htmlFor="disability">Disability</label>
               <input
-                name="disability"
-                placeholder="Tell about yourself"
-                defaultValue="call from api"
+                name="disability_status"
                 className={`form-control `}
                 ref={register({
-                  required: "Please Tell something about yourself",
+                  required: 'Please Tell something about yourself',
                 })}
               />
             </div>
