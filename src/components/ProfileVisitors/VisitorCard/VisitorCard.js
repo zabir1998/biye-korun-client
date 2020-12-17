@@ -3,10 +3,7 @@ import visitor from "../../../images/visitor.jpg";
 
 const VisitorCard = () => {
   return (
-    <div
-      class="card mb-3"
-      style={{ maxWidth: 950, width: 800, marginLeft: 13 }}
-    >
+    <div class="card mb-3">
       <div class="row g-0">
         <div class="col-md-4">
           <img

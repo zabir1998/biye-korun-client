@@ -5,7 +5,7 @@ import VisitorHeader from "../VisitorHeader/VisitorHeader";
 
 const ProfileVisitors = () => {
   return (
-    <div className="container">
+    <div style={{ paddingLeft: 80, paddingRight: 80 }}>
       <InnerNavBar></InnerNavBar>
       <VisitorHeader></VisitorHeader>
     </div>

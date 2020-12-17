@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
-import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
-import { useSelector } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   },
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
   const [token, setToken] = useState(null);
   const { register, errors, handleSubmit } = useForm();
   const profileData = useSelector((state) => state.profile);
-  const [bio, setBio] = useState('');
+  const [bio, setBio] = useState("");
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     setBio(profileData?.profile?.user_career[0]?.bio);
   }, [profileData]);
   const onSubmit = (data) => {
     console.log(data);
 
-    fetch('https://biyekorun-staging.techserve4u.com/user/user-career/update', {
-      method: 'PUT',
+    fetch("https://biyekorun-staging.techserve4u.com/user/user-career/update", {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -47,7 +47,7 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
           alert(json.message);
           window.location.reload();
         } else {
-          alert(json.message[0].constraints.minLength);
+          alert(json?.message[0]?.constraints?.minLength);
         }
       });
   };
@@ -85,7 +85,7 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
                   onChange={(e) => setBio(e.target.value)}
                   className={`form-control`}
                   ref={register({
-                    required: 'Please Tell something about yourself',
+                    required: "Please Tell something about yourself",
                   })}
                 />
               )}

@@ -1,44 +1,44 @@
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
-import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    height: '70%',
+    top: "50%",
+    left: "50%",
+    height: "70%",
     // right: "auto",
     // bottom: "auto",
     // marginRight: "-50%",
-    transform: 'translate(-50%, -50%)',
+    transform: "translate(-50%, -50%)",
   },
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const EditFamilyDetails = ({ modalIsOpen, closeModal, bio }) => {
   const [token, setToken] = useState(null);
   const [occupations, setOccupations] = useState([]);
-  const [familyType, setFamilyType] = useState('');
-  const [fatherOccupation, setFatherOccupation] = useState('');
-  const [mothersOccupation, setMotherOccupation] = useState('');
-  const [familyLivingPlace, setFamilyLivingPlace] = useState('');
-  const [brotherCount, setBrotherCount] = useState('');
-  const [sisterCount, setSisterCount] = useState('');
+  const [familyType, setFamilyType] = useState("");
+  const [fatherOccupation, setFatherOccupation] = useState("");
+  const [mothersOccupation, setMotherOccupation] = useState("");
+  const [familyLivingPlace, setFamilyLivingPlace] = useState("");
+  const [brotherCount, setBrotherCount] = useState("");
+  const [sisterCount, setSisterCount] = useState("");
 
   const profileData = useSelector((state) => state.profile);
 
   const { register, handleSubmit } = useForm();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list',
+      "https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -66,9 +66,9 @@ const EditFamilyDetails = ({ modalIsOpen, closeModal, bio }) => {
     console.log(data);
 
     fetch(`https://biyekorun-staging.techserve4u.com/user/user-family/update`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
 
@@ -88,7 +88,7 @@ const EditFamilyDetails = ({ modalIsOpen, closeModal, bio }) => {
           alert(json.message);
           window.location.reload();
         } else {
-          alert(json.message[0]?.constraints?.minLength);
+          alert(json?.message[0]?.constraints?.minLength);
         }
       });
   };
