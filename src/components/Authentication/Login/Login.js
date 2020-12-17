@@ -1,29 +1,30 @@
-import React, { useContext, useState } from 'react';
-import Modal from 'react-modal';
-import fb from '../../../images/fb.png';
-import apple from '../../../images/apple.png';
-import { GoogleLogin } from 'react-google-login';
-import jwt_decode from 'jwt-decode';
-import './Login.css';
-import { Link } from 'react-router-dom';
-import { UserContext } from '../../../App';
+import React, { useContext, useState } from "react";
+import Modal from "react-modal";
+import googleIcon from "../../../images/google.png";
+import fb from "../../../images/fb.png";
+import apple from "../../../images/apple.png";
+import { GoogleLogin } from "react-google-login";
+import jwt_decode from "jwt-decode";
+import "./Login.css";
+import { Link } from "react-router-dom";
+import { UserContext } from "../../../App";
 
 const clientId =
-  '39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com';
+  "39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    right: 'auto',
-    bottom: 'auto',
-    marginRight: '-50%',
-    transform: 'translate(-50%, -50%)',
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
   },
-  borderRadius: '100px',
+  borderRadius: "100px",
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const Login = ({ modalIsOpen, closeModal }) => {
   const [accessToken, setAccessToken] = useContext(UserContext);
@@ -32,7 +33,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
 
   const onSuccess = async (res) => {
     const familyName = res.profileObj.familyName;
-    const givenName = res.profileObj.givenName.concat(' ');
+    const givenName = res.profileObj.givenName.concat(" ");
     const name = givenName.concat(familyName);
     const email = res.profileObj.email;
 
@@ -48,9 +49,9 @@ const Login = ({ modalIsOpen, closeModal }) => {
       email: email,
     };
 
-    await fetch('https://biyekorun-staging.techserve4u.com/auth/social-login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+    await fetch("https://biyekorun-staging.techserve4u.com/auth/social-login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userDetails),
     })
       .then((res) => res.json())
@@ -61,9 +62,9 @@ const Login = ({ modalIsOpen, closeModal }) => {
         //console.log(data);
         //console.log('Token', data.access_token);
         fetch(
-          'https://biyekorun-staging.techserve4u.com/auth/autorization/token',
+          "https://biyekorun-staging.techserve4u.com/auth/autorization/token",
           {
-            method: 'GET',
+            method: "GET",
             headers: {
               Authorization: `Bearer ${data.access_token}`,
             },
@@ -72,7 +73,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
           .then((res) => res.json())
           .then((data) => {
             // console.log(data);
-            sessionStorage.setItem('Token', data.token);
+            sessionStorage.setItem("Token", data.token);
             setAccessToken(data.token);
 
             var decoded = jwt_decode(data.token);
@@ -82,9 +83,9 @@ const Login = ({ modalIsOpen, closeModal }) => {
 
             if (registration_completion_status === false) {
               fetch(
-                'https://biyekorun-staging.techserve4u.com/user/user-registration-status',
+                "https://biyekorun-staging.techserve4u.com/user/user-registration-status",
                 {
-                  method: 'GET',
+                  method: "GET",
                   headers: {
                     Authorization: `Bearer ${data.token}`,
                   },
@@ -94,13 +95,13 @@ const Login = ({ modalIsOpen, closeModal }) => {
                 .then((json) => {
                   const route = json.message.toLowerCase();
                   let finalRoute = route.slice(5, 11);
-                  if (finalRoute === 'carrer') {
-                    finalRoute = 'career';
+                  if (finalRoute === "carrer") {
+                    finalRoute = "career";
                     window.location.replace(`/${finalRoute}`);
                   }
                 });
             } else {
-              return window.location.replace('/user/dashboard');
+              return window.location.replace("/user/dashboard");
             }
           });
       });
@@ -119,12 +120,12 @@ const Login = ({ modalIsOpen, closeModal }) => {
   };
 
   const onFailure = (res) => {
-    console.log('Login failed: res:', res);
+    console.log("Login failed: res:", res);
     alert(`Failed to login. 😢`);
   };
 
   const storeAuthToken = () => {
-    sessionStorage.setItem('token', loggedInUser.accessToken);
+    sessionStorage.setItem("token", loggedInUser.accessToken);
   };
 
   // const { signIn } = useGoogleLogin({
@@ -167,12 +168,47 @@ const Login = ({ modalIsOpen, closeModal }) => {
         <p className="text-center brand-text mb-3">
           Log in to Your Biye Korun Account
         </p>
+
+        {/* <GoogleLogin
+          style={{
+            border: "none",
+            background: "none",
+            padding: 0,
+            margin: 0,
+          }}
+          clientId={clientId}
+          buttonText="Continue with Google"
+          onSuccess={onSuccess}
+          onFailure={onFailure}
+          cookiePolicy={"single_host_origin"}
+          isSignedIn={true}
+          accessType="offline"
+        /> */}
+
         <GoogleLogin
           clientId={clientId}
+          render={(renderProps) => (
+            <Link
+              className="social-link"
+              onClick={renderProps.onClick}
+              disabled={renderProps.disabled}
+            >
+              <div className="row social-row mb-3 shadow d-flex justify-content-center align-items-center">
+                <div className="flex-left mr-3 ">
+                  <img
+                    className="social-icon"
+                    src={googleIcon}
+                    alt="google"
+                  ></img>
+                </div>
+                <div>Continue with Google</div>
+              </div>
+            </Link>
+          )}
           buttonText="Login"
           onSuccess={onSuccess}
           onFailure={onFailure}
-          cookiePolicy={'single_host_origin'}
+          cookiePolicy={"single_host_origin"}
           isSignedIn={true}
           accessType="offline"
         />
