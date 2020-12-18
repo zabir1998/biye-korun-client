@@ -1,28 +1,28 @@
-import React, { createContext, useState } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./App.css";
-import Home from "./components/Home/Home/Home";
-import PeopleNear from "./components/PeopleNear/PeopleNear/PeopleNear";
-import Preference from "./components/Preference/Preference/Preference";
-import ProfileVisitors from "./components/ProfileVisitors/ProfileVisitors/ProfileVisitors";
-import Personal from "./components/Registration/Personal/Personal";
-import Career from "./components/Registration/Career/Career";
-import Lifestyle from "./components/Registration/Lifestyle/Lifestyle";
-import Advance from "./components/Search/Advance/Advance";
-import Basic from "./components/Search/Basic/Basic";
-import Settings from "./components/Settings/Settings/Settings";
+import React, { createContext, useState } from 'react';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import './App.css';
+import Home from './components/Home/Home/Home';
+import PeopleNear from './components/PeopleNear/PeopleNear/PeopleNear';
+import Preference from './components/Preference/Preference/Preference';
+import ProfileVisitors from './components/ProfileVisitors/ProfileVisitors/ProfileVisitors';
+import Personal from './components/Registration/Personal/Personal';
+import Career from './components/Registration/Career/Career';
+import Lifestyle from './components/Registration/Lifestyle/Lifestyle';
+import Advance from './components/Search/Advance/Advance';
+import Basic from './components/Search/Basic/Basic';
+import Settings from './components/Settings/Settings/Settings';
 
-import UserProfile from "./components/User/UserProfile/UserProfile";
-import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
-import MatchProfileList from "./components/UserDashboard/MatchProfileList/MatchProfileList";
-import TopMatchesList from "./components/UserDashboard/TopMatchesList/TopMatchesList";
-import SearchResult from "./components/SearchResult/SearchResult/SearchResult";
+import UserProfile from './components/User/UserProfile/UserProfile';
+import Dashboard from './components/UserDashboard/Dashboard/Dashboard';
+import MatchProfileList from './components/UserDashboard/MatchProfileList/MatchProfileList';
+import TopMatchesList from './components/UserDashboard/TopMatchesList/TopMatchesList';
+import SearchResult from './components/SearchResult/SearchResult/SearchResult';
 
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
-  const [accessToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState('');
 
   return (
     <UserContext.Provider

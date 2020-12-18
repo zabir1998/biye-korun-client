@@ -41,7 +41,7 @@ const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
   }, [profileData]);
 
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
     fetch('https://biyekorun-staging.techserve4u.com/user/user-career/update', {
       method: 'PUT',
       headers: {
@@ -57,7 +57,7 @@ const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
+        //console.log(json);
         if (json.statusCode === 200) {
           alert(json.message);
           window.location.reload();

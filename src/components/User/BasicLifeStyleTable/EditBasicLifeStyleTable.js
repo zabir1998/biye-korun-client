@@ -20,7 +20,7 @@ const EditBasicLifeStyleTable = ({ modalIsOpen, closeModal, bio }) => {
   const { register, errors, handleSubmit } = useForm();
   const onSubmit = (values) => {
     // form is valid
-    console.log(values);
+    //console.log(values);
   };
   return (
     <div>

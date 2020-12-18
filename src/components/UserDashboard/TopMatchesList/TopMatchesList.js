@@ -1,16 +1,16 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faAngleRight, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faAngleRight, faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-import InnerNavBar from "../../shared/InnerNavBar/InnerNavBar";
-import IdSearchBar from "../../User/IdSearchBar/IdSearchBar";
-import ProfileCard from "../../User/ProfileCard/ProfileCard";
-import UserNavBar from "../../User/UserNavBar/UserNavBar";
-import MatchProfileCard from "../MatchProfileCard/MatchProfileCard";
-import NewMatchList from "../NewMatchList/NewMatchList";
-import DetailedMatch from "../DetailedMatch/DetailedMatch";
+import InnerNavBar from '../../shared/InnerNavBar/InnerNavBar';
+import IdSearchBar from '../../User/IdSearchBar/IdSearchBar';
+import ProfileCard from '../../User/ProfileCard/ProfileCard';
+import UserNavBar from '../../User/UserNavBar/UserNavBar';
+import MatchProfileCard from '../MatchProfileCard/MatchProfileCard';
+import NewMatchList from '../NewMatchList/NewMatchList';
+import DetailedMatch from '../DetailedMatch/DetailedMatch';
 
 const TopMatchesList = () => {
   return (
@@ -19,7 +19,6 @@ const TopMatchesList = () => {
       <div className="row mt-5">
         <div className="col-md-3">
           <ProfileCard></ProfileCard>
-          <NewMatchList></NewMatchList>
           <NewMatchList></NewMatchList>
         </div>
         <div className="col-md-9">
@@ -36,10 +35,10 @@ const TopMatchesList = () => {
               <div className="col">
                 <h4
                   style={{
-                    borderBottom: "1px solid #8e8be6",
-                    marginLeft: "300px",
-                    marginRight: "300px",
-                    paddingBottom: "5px",
+                    borderBottom: '1px solid #8e8be6',
+                    marginLeft: '300px',
+                    marginRight: '300px',
+                    paddingBottom: '5px',
                   }}
                   className="text-center mt-3 "
                 >
@@ -48,8 +47,8 @@ const TopMatchesList = () => {
                 <div className="row d-flex justify-content-between px-3">
                   <div className="col text-right">
                     <div>
-                      <Link style={{ color: "#8e8be6", fontSize: 25 }} to="/">
-                        Next{" "}
+                      <Link style={{ color: '#8e8be6', fontSize: 25 }} to="/">
+                        Next{' '}
                         <span>
                           <FontAwesomeIcon
                             icon={{ faArrowRight }}

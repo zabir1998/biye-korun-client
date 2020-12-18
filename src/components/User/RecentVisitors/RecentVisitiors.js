@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 const RecentVisitors = () => {
   const [profileVisitors, setProfileVisitors] = useState([]);
   const [token, setToken] = useState(null);
-  console.log(profileVisitors);
+  //console.log(profileVisitors);
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
     fetch(
@@ -26,7 +26,7 @@ const RecentVisitors = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.data);
+        //console.log(json.data);
         setProfileVisitors(json.data);
       });
   }, [token]);

@@ -28,7 +28,7 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
     setBio(profileData?.profile?.user_career[0]?.bio);
   }, [profileData]);
   const onSubmit = (data) => {
-    console.log(data);
+    //console.log(data);
 
     fetch('https://biyekorun-staging.techserve4u.com/user/user-career/update', {
       method: 'PUT',
@@ -42,7 +42,7 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
+        //console.log(json);
         if (json.statusCode === 200) {
           alert(json.message);
           window.location.reload();

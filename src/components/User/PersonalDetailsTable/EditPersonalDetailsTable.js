@@ -55,7 +55,7 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
   }, [token, profileData]);
 
   const onSubmit = async (data) => {
-    console.log(data);
+    //console.log(data);
     const ISODate = new Date(data.dateOfBirth).toISOString();
 
     await fetch('https://biyekorun-staging.techserve4u.com/user/update-phone', {
@@ -99,7 +99,7 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
         )
           .then((res) => res.json())
           .then((json) => {
-            console.log(json);
+            //console.log(json);
             if (json.statusCode === 201) {
               alert(json.message);
               window.location.reload();

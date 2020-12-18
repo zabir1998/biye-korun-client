@@ -63,7 +63,7 @@ const EditFamilyDetails = ({ modalIsOpen, closeModal, bio }) => {
 
   const onSubmit = (data) => {
     // form is valid
-    console.log(data);
+    //console.log(data);
 
     fetch(`https://biyekorun-staging.techserve4u.com/user/user-family/update`, {
       method: 'PUT',
@@ -83,7 +83,7 @@ const EditFamilyDetails = ({ modalIsOpen, closeModal, bio }) => {
     })
       .then((res) => res.json())
       .then((json) => {
-        console.log(json);
+        //console.log(json);
         if (json.statusCode === 200) {
           alert(json.message);
           window.location.reload();
