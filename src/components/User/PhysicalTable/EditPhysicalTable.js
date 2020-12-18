@@ -27,15 +27,15 @@ const EditPhysicalTable = ({ modalIsOpen, closeModal, bio }) => {
   }, [token]);
 
   const onSubmit = async (data) => {
-    console.log(
-      JSON.stringify({
-        sun_sign: data.sun_sign,
-        blood_group: data.blood_group,
-        health_status: data.health_status,
-        disability_status: data.disability_status,
-        weight: parseInt(data.weight),
-      })
-    );
+    // console.log(
+    //   JSON.stringify({
+    //     sun_sign: data.sun_sign,
+    //     blood_group: data.blood_group,
+    //     health_status: data.health_status,
+    //     disability_status: data.disability_status,
+    //     weight: parseInt(data.weight),
+    //   })
+    // );
     await fetch(
       'https://biyekorun-staging.techserve4u.com/user/user-physical-lifestyle',
       {

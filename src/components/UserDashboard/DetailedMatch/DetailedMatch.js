@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 import {
   faBookOpen,
   faCheck,
@@ -9,10 +9,15 @@ import {
   faPhone,
   faTasks,
   faUser,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./DetailedMatch.css";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './DetailedMatch.css';
+import { useSelector } from 'react-redux';
+import Moment from 'react-moment';
+
 const DetailedMatch = () => {
+  const matchData = useSelector((state) => state.matchLists);
+
   return (
     <div className="shadow mt-5 py-4">
       <div style={{ paddingLeft: 80 }}>
@@ -24,16 +29,15 @@ const DetailedMatch = () => {
             ></FontAwesomeIcon>
           </div>
           <div className="col-md-4">
-            <h5>About Kamali Begum</h5>
-            <small>KJ1QC89 || Profile Created by Self</small>
+            <h5>
+              {matchData?.partnerPreference?.user_profile[0]?.profile_name}
+            </h5>
+            <small>
+              {matchData?.partnerPreference?.user_profile[0]?.id} || Profile
+              Created by Self
+            </small>
             <br />
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ipsam
-              animi tenetur, corrupti ab excepturi provident eveniet reiciendis
-              eaque nobis ullam quisquam amet qui ipsa ad error eos vel non nam
-              delectus sunt quae totam fugiat? Nisi, eos accusamus quos
-              explicabo iusto sint harum veritatis ea?
-            </p>
+            <p>{matchData?.partnerPreference?.user_career[0]?.bio}</p>
           </div>
         </div>
         <div className="row d-flex justify-content-start detail-perk ">
@@ -47,11 +51,11 @@ const DetailedMatch = () => {
             <h5>Contact Details</h5>
             <br />
             <p>
-              Email Id: hr@gmail.com <br />
-              Phone: +880171929939230
+              Email Id: {matchData?.partnerPreference?.user?.email} <br />
+              Phone: {matchData?.partnerPreference?.user?.phone_number}
             </p>
           </div>
-        </div>{" "}
+        </div>{' '}
         <div className="row d-flex justify-content-start detail-perk">
           <div className="col-md-2">
             <FontAwesomeIcon
@@ -62,9 +66,11 @@ const DetailedMatch = () => {
           <div className="col-md-4">
             <h5>LifeStyle</h5>
             <br />
-            <p>Vegetarian</p>
+            <p>
+              {matchData?.partnerPreference?.user_profile[0]?.diet_id?.name}
+            </p>
           </div>
-        </div>{" "}
+        </div>{' '}
         <div className="row d-flex justify-content-start detail-perk ">
           <div className="col-md-2">
             <FontAwesomeIcon
@@ -76,11 +82,16 @@ const DetailedMatch = () => {
             <h5>Background</h5>
             <br />
             <p>
-              Muslim, Sunni <br />
-              Bengali
+              {matchData?.partnerPreference?.user_profile[0]?.religion_id?.name}
+              ,{' '}
+              {
+                matchData?.partnerPreference?.user_profile[0]?.community_id
+                  ?.name
+              }{' '}
+              <br />
             </p>
           </div>
-        </div>{" "}
+        </div>{' '}
         <div className="row d-flex justify-content-start detail-perk">
           <div className="col-md-2">
             <FontAwesomeIcon
@@ -91,12 +102,9 @@ const DetailedMatch = () => {
           <div className="col-md-4">
             <h5>Location Details</h5>
             <br />
-            <p>
-              France, Paris <br />
-              198/1 Jurich Road
-            </p>
+            <p>{matchData?.partnerPreference?.user_family?.contact_address}</p>
           </div>
-        </div>{" "}
+        </div>{' '}
         <div className="row d-flex justify-content-start detail-perk">
           <div className="col-md-2">
             <FontAwesomeIcon
@@ -108,12 +116,13 @@ const DetailedMatch = () => {
             <h5>Education & Career</h5>
             <br />
             <p>
-              BSc. in Software Engineer <br />
-              From ABCD Intl. University <br />
-              Not Employed
+              {`${matchData?.partnerPreference?.user_career[0]?.highest_degree} in ${matchData?.partnerPreference?.user_career[0]?.professional_area}`}
+
+              <br />
+              {matchData?.partnerPreference?.user_career[0]?.working_company}
             </p>
           </div>
-        </div>{" "}
+        </div>{' '}
         <div className="row d-flex justify-content-start detail-perk">
           <div className="col-md-2">
             <FontAwesomeIcon
@@ -130,14 +139,14 @@ const DetailedMatch = () => {
             <div className="col ">
               <img
                 className="img-fluid circle"
-                style={{ width: 200, border: "8px solid #8e8be6" }}
+                style={{ width: 200, border: '8px solid #8e8be6' }}
                 src="https://i.imgur.com/mtxJUHB.jpg"
                 alt=""
               />
             </div>
             <div className="col">
               <img
-                style={{ width: 200, border: "8px solid #8e8be6" }}
+                style={{ width: 200, border: '8px solid #8e8be6' }}
                 className="img-fluid circle"
                 src="https://i.imgur.com/47P7Q1e.jpg"
                 alt=""
@@ -156,14 +165,22 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Age</p>
-                <p>21-25</p>
+                <p>
+                  <Moment fromNow ago>
+                    {
+                      new Date(
+                        matchData?.partnerPreference?.user_profile[0]?.dateOfBirth
+                      )
+                    }
+                  </Moment>
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}
@@ -173,99 +190,118 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Height</p>
-                <p>5`5- 6`2</p>
+                <p>{matchData?.partnerPreference?.user_profile[0]?.height}</p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}
                 ></FontAwesomeIcon>
               </div>
-            </div>{" "}
+            </div>{' '}
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Marital Status</p>
-                <p>Never Married</p>
+                <p>
+                  {
+                    matchData?.partnerPreference?.user_profile[0]
+                      ?.maritial_status
+                  }
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}
                 ></FontAwesomeIcon>
               </div>
-            </div>{" "}
+            </div>{' '}
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Religion/ Community</p>
-                <p>Muslim</p>
+                <p>
+                  {
+                    matchData?.partnerPreference?.user_profile[0]?.religion_id
+                      .name
+                  }
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}
                 ></FontAwesomeIcon>
               </div>
-            </div>{" "}
+            </div>{' '}
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Mother Tongue</p>
-                <p>Bengali</p>
+                <p>
+                  {
+                    matchData?.partnerPreference?.user_profile[0]?.language_id
+                      .name
+                  }
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}
                 ></FontAwesomeIcon>
               </div>
-            </div>{" "}
+            </div>{' '}
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Country Living In</p>
-                <p>France, Paris</p>
+                <p>
+                  {matchData?.partnerPreference?.user_family?.contact_address}
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}
                 ></FontAwesomeIcon>
               </div>
-            </div>{" "}
+            </div>{' '}
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Annual Income</p>
-                <p>$40,000 - $60,000</p>
+                <p>
+                  {matchData?.partnerPreference?.user_career[0]?.yearly_income}
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
                   style={{
-                    fontSize: "2rem",
-                    backgroundColor: "white",
-                    color: "#0af662",
+                    fontSize: '2rem',
+                    backgroundColor: 'white',
+                    color: '#0af662',
                   }}
                   className="mt-3 "
                   icon={faCheckCircle}

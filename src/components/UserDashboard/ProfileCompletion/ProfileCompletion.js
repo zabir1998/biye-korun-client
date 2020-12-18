@@ -19,7 +19,7 @@ const ProfileCompletion = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(json.profileCompletionPercentage);
+        //console.log(json.profileCompletionPercentage);
         setCompletionStatus(json.profileCompletionPercentage);
       });
   }, [token]);

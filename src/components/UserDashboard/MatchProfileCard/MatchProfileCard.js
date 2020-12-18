@@ -1,11 +1,15 @@
-import { faCheckCircle, faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
+import { faCheckCircle, faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import Moment from 'react-moment';
 
 const MatchProfileCard = () => {
+  const matchData = useSelector((state) => state.matchLists);
+  console.log(matchData);
   return (
-    <div style={{ borderBottom: "1px solid #e4d9d9" }} className="row py-4">
+    <div style={{ borderBottom: '1px solid #e4d9d9' }} className="row py-4">
       <div className="col-md-3">
         <img
           className="img-fluid"
@@ -15,8 +19,8 @@ const MatchProfileCard = () => {
       </div>
       <div className="col-md-5">
         <div>
-          <h5>Kamali Begum</h5>
-          <h6>KJ1246i8</h6>
+          <h5>{matchData?.partnerPreference?.user_profile[0]?.profile_name}</h5>
+          <h6>{matchData?.partnerPreference?.user_profile[0]?.id}</h6>
           <p>
             <small>Active Now</small>
           </p>
@@ -26,34 +30,57 @@ const MatchProfileCard = () => {
           className="row d-flex justify-content-start"
         >
           <div
-            style={{ lineHeight: "50%", borderRight: "1px solid grey" }}
+            style={{ lineHeight: '50%', borderRight: '1px solid grey' }}
             className="col-md-4 pr-4"
           >
             <p>
-              <small>21 Years</small>
+              <small>
+                <Moment fromNow ago>
+                  {
+                    new Date(
+                      matchData?.partnerPreference?.user_profile[0]?.dateOfBirth
+                    )
+                  }
+                </Moment>
+              </small>
             </p>
             <p>
-              <small>Paris, France</small>
+              <small>
+                {matchData?.partnerPreference?.user_family?.contact_address}
+              </small>
             </p>
             <p>
-              <small>Muslim</small>
-            </p>
-            <p>
-              <small>Pakistani</small>
+              <small>
+                {
+                  matchData?.partnerPreference?.user_profile[0]?.religion_id
+                    .name
+                }
+              </small>
             </p>
           </div>
-          <div style={{ lineHeight: "50%" }} className="col-md-4 ml-4">
+          <div style={{ lineHeight: '50%' }} className="col-md-4 ml-4">
             <p>
-              <small>B.E./ B.Tech</small>
+              <small>
+                {matchData?.partnerPreference?.user_career[0]?.highest_degree}
+              </small>
             </p>
             <p>
-              <small>Software Engineer</small>
+              <small>
+                {
+                  matchData?.partnerPreference?.user_career[0]
+                    ?.professional_area
+                }
+              </small>
             </p>
             <p>
-              <small>$60,000 - 80,000</small>
+              <small>
+                {matchData?.partnerPreference?.user_career[0]?.yearly_income}
+              </small>
             </p>
             <p>
-              <small>Never Married</small>
+              <small>
+                {matchData?.partnerPreference?.user_profile[0]?.maritial_status}
+              </small>
             </p>
           </div>
         </div>
@@ -61,7 +88,7 @@ const MatchProfileCard = () => {
       <div className="col-md-3 text-center">
         <h5>Like This Profile?</h5>
         <FontAwesomeIcon
-          style={{ fontSize: "75", backgroundColor: "white", color: "#0af662" }}
+          style={{ fontSize: '75', backgroundColor: 'white', color: '#0af662' }}
           className="mt-3 "
           icon={faCheckCircle}
         ></FontAwesomeIcon>
@@ -72,7 +99,7 @@ const MatchProfileCard = () => {
                 className="mr-2"
                 icon={faUserPlus}
               ></FontAwesomeIcon>
-            </span>{" "}
+            </span>{' '}
             Connect Now
           </Link>
         </div>

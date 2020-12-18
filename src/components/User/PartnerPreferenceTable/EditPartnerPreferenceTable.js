@@ -2,6 +2,20 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
+import { useSelector } from 'react-redux';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
+
+const useStyles = makeStyles({
+  root: {
+    width: '100%',
+  },
+});
+
+function valuetext(value) {
+  return `${value}years`;
+}
 
 const customStyles = {
   content: {
@@ -23,6 +37,28 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
   const [religions, setReligions] = useState([]);
   const [diets, setDiets] = useState([]);
   const [countries, setCountries] = useState([]);
+
+  const classes = useStyles();
+  const [ageValue, setAgeValue] = React.useState([20, 48]);
+  const [heightValue, setHeightValue] = React.useState([20, 48]);
+  const [religionId, setReligionId] = useState(0);
+  const [countryId, setCountryId] = useState(0);
+  const [dietId, setDietId] = useState(0);
+  const [meritalStatus, setMeritalStatus] = useState('');
+  const [degree, setDegree] = useState('');
+  const [area, setArea] = useState('');
+  const [income, setIncome] = useState('');
+  const [companyName, setCompanyName] = useState('');
+
+  const handleAgeChange = (event, newValue) => {
+    setAgeValue(newValue);
+  };
+  const handleHeightChange = (event, newValue) => {
+    setHeightValue(newValue);
+  };
+
+  const partner = useSelector((state) => state.partner);
+  console.log(partner);
 
   useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
@@ -57,7 +93,18 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
     )
       .then((res) => res.json())
       .then((data) => setCountries(data.data));
-  }, [token]);
+
+    setReligionId(partner?.partnerPreference?.findPreference?.religion_id?.id);
+    setCountryId(partner?.partnerPreference?.findPreference?.country_id?.id);
+    setDietId(partner?.partnerPreference?.findPreference?.diet_id?.id);
+    setMeritalStatus(
+      partner?.partnerPreference?.findPreference?.maritial_status
+    );
+    setDegree(partner?.partnerPreference?.findPreference?.highest_degree);
+    setArea(partner?.partnerPreference?.findPreference?.professional_area);
+    setIncome(partner?.partnerPreference?.findPreference?.yearly_income);
+    setCompanyName(partner?.partnerPreference?.findPreference?.working_company);
+  }, [token, partner]);
 
   const onSubmit = async (data) => {
     //console.log(data);
@@ -76,21 +123,23 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
     )
       .then((res) => res.json())
       .then((json) => {
-        console.log(
-          JSON.stringify({
-            religion_id: parseInt(data.religion_id),
-            diet_id: parseInt(data.diet_id),
-            state_id: json.data.id,
-            country_id: parseInt(data.country_id),
-            highest_degree: data.highest_degree,
-            professional_area: data.professional_area,
-            working_company: data.working_company,
-            yearly_income: data.yearly_income,
-            age: parseInt(data.age),
-            maritial_status: data.marital_status,
-            height: data.height,
-          })
-        );
+        // console.log(
+        //   JSON.stringify({
+        //     religion_id: parseInt(data.religion_id),
+        //     diet_id: parseInt(data.diet_id),
+        //     state_id: json.data[0].id,
+        //     country_id: parseInt(data.country_id),
+        //     highest_degree: data.highest_degree,
+        //     professional_area: data.professional_area,
+        //     working_company: data.working_company,
+        //     yearly_income: data.yearly_income,
+        //     maritial_status: data.marital_status,
+        //     age_range_start: ageValue[0],
+        //     age_range_end: ageValue[1],
+        //     height_range_start: heightValue[0],
+        //     height_range_end: heightValue[1],
+        //   })
+        // );
 
         fetch(
           'https://biyekorun-staging.techserve4u.com/user/user-preference/update',
@@ -103,18 +152,26 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
             body: JSON.stringify({
               religion_id: parseInt(data.religion_id),
               diet_id: parseInt(data.diet_id),
-              state_id: json.data.id,
+              state_id: json.data[0].id,
               country_id: parseInt(data.country_id),
               highest_degree: data.highest_degree,
               professional_area: data.professional_area,
               working_company: data.working_company,
               yearly_income: data.yearly_income,
-              age: parseInt(data.age),
               maritial_status: data.marital_status,
-              height: data.height,
+              age_range_start: ageValue[0],
+              age_range_end: ageValue[1],
+              height_range_start: heightValue[0],
+              height_range_end: heightValue[1],
             }),
           }
-        );
+        )
+          .then((res) => res.json())
+          .then((json) => {
+            //console.log(json);
+            alert(json.message);
+            window.location.reload();
+          });
       });
   };
   return (
@@ -137,171 +194,212 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
             </div>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="form-group">
-              <label htmlFor="age">Age</label>
-              <input
-                name="age"
-                type="number"
-                className={`form-control `}
-                ref={register({ required: true })}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="height">Height</label>
-              <input
-                ref={register({ required: true })}
-                type="number"
-                step="0.1"
-                maxLength="2"
-                name="height"
-                className="form-control"
-              />
-            </div>
-            <div className="form-group">
-              <label className="brand-text" htmlFor="">
-                Religion
-              </label>
-              <select
-                ref={register({ required: true })}
-                name="religion_id"
-                className="form-control"
-              >
-                {errors.religion && (
-                  <span className="text-danger">Religion is required</span>
-                )}
-                {religions?.length >= 1 ? (
-                  religions.map((religion) => (
-                    <option key={religion.id} value={religion.id}>
-                      {religion.name}
-                    </option>
-                  ))
-                ) : (
-                  <option value="null">Please reload the page again</option>
-                )}
-              </select>
-            </div>
+            <div>
+              <div className={classes.root}>
+                <Typography
+                  className="text-center"
+                  id="range-slider"
+                  gutterBottom
+                >
+                  Age Range
+                </Typography>
+                <Slider
+                  value={ageValue}
+                  onChange={handleAgeChange}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                  getAriaValueText={valuetext}
+                />
+              </div>
 
-            <div className="form-group">
-              <label className="brand-text" htmlFor="">
-                Marital Status
-              </label>
-              <select
-                ref={register({ required: true })}
-                name="marital_status"
-                className="form-control"
-              >
-                {errors.maritalStatus && (
-                  <span className="text-danger">
-                    Marital Status is required
-                  </span>
-                )}
-                <option value="Unmarried">Unmarried</option>
-                <option value="Married">Married</option>
-              </select>
-            </div>
-            <div className="form-group">
-              <label className="brand-text" htmlFor="">
-                Diet List
-              </label>
-              <select
-                ref={register({ required: true })}
-                name="diet_id"
-                className="form-control"
-              >
-                {errors.religion && (
-                  <span className="text-danger">Diet id is required</span>
-                )}
-                {diets?.length >= 1 &&
-                  diets.map((diet) => (
-                    <option key={diet.id} value={diet.id}>
-                      {diet.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
+              <div className={classes.root}>
+                <Typography
+                  className="text-center"
+                  id="range-slider"
+                  gutterBottom
+                >
+                  Height Range
+                </Typography>
+                <Slider
+                  value={heightValue}
+                  onChange={handleHeightChange}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                  getAriaValueText={valuetext}
+                />
+              </div>
 
-            <div className="form-group">
-              <div>
+              <div className="form-group">
                 <label className="brand-text" htmlFor="">
-                  Country/Region
+                  Religion
                 </label>
                 <select
-                  required
+                  value={religionId}
+                  onChange={(e) => setReligionId(e.target.value)}
                   ref={register({ required: true })}
-                  name="country_id"
+                  name="religion_id"
                   className="form-control"
                 >
-                  <option value="">-- please select the country --</option>
-                  {countries?.length >= 1 ? (
-                    countries.map((country) => (
-                      <option key={country.id} value={country.id}>
-                        {country.name}
+                  {errors.religion && (
+                    <span className="text-danger">Religion is required</span>
+                  )}
+                  {religions?.length >= 1 ? (
+                    religions.map((religion) => (
+                      <option key={religion.id} value={religion.id}>
+                        {religion.name}
                       </option>
                     ))
                   ) : (
-                    <option value="">Please reload the page again</option>
+                    <option value="null">Please reload the page again</option>
                   )}
                 </select>
               </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="education">Highest Degree</label>
-              <input
-                name="highest_degree"
-                type="text"
-                className={`form-control `}
-                ref={register({ required: true })}
-              />
-            </div>
-            <div className="form-group">
-              <div>
+              <div className="form-group">
                 <label className="brand-text" htmlFor="">
-                  Employed In
+                  Diet List
                 </label>
-                <input
-                  required
+                <select
+                  value={dietId}
+                  onChange={(e) => setDietId(e.target.value)}
                   ref={register({ required: true })}
-                  type="text"
-                  name="working_company"
+                  name="diet_id"
                   className="form-control"
-                />
+                >
+                  {errors.religion && (
+                    <span className="text-danger">Diet id is required</span>
+                  )}
+                  {diets?.length >= 1 &&
+                    diets.map((diet) => (
+                      <option key={diet.id} value={diet.id}>
+                        {diet.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Country/Region
+                  </label>
+                  <select
+                    value={countryId}
+                    onChange={(e) => setCountryId(e.target.value)}
+                    ref={register({ required: true })}
+                    name="country_id"
+                    className="form-control"
+                  >
+                    <option value="">-- please select the country --</option>
+                    {countries?.length >= 1 ? (
+                      countries.map((country) => (
+                        <option key={country.id} value={country.id}>
+                          {country.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">Please reload the page again</option>
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Highest Degrees
+                  </label>
+                  <input
+                    value={degree}
+                    onChange={(e) => setDegree(e.target.value)}
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="highest_degree"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Professional Area
+                  </label>
+                  <input
+                    value={area}
+                    onChange={(e) => setArea(e.target.value)}
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="professional_area"
+                    className="form-control"
+                    placeholder="Ex: Software Developer"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Employed In
+                  </label>
+                  <input
+                    value={companyName}
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="working_company"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Annual Income
+                  </label>
+                  <input
+                    value={income}
+                    onChange={(e) => setIncome(e.target.value)}
+                    required
+                    ref={register({ required: true })}
+                    type="number"
+                    name="yearly_income"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="brand-text" htmlFor="">
+                  Marital Status
+                </label>
+                <select
+                  value={meritalStatus}
+                  onChange={(e) => setMeritalStatus(e.target.value)}
+                  ref={register({ required: true })}
+                  name="marital_status"
+                  className="form-control"
+                >
+                  {errors.maritalStatus && (
+                    <span className="text-danger">
+                      Marital Status is required
+                    </span>
+                  )}
+                  <option value="Unmarried">Unmarried</option>
+                  <option value="Married">Married</option>
+                </select>
               </div>
             </div>
-            <div className="form-group">
-              <div>
-                <label className="brand-text" htmlFor="">
-                  Professional Area
-                </label>
-                <input
-                  required
-                  ref={register({ required: true })}
-                  type="text"
-                  name="professional_area"
-                  className="form-control"
-                  placeholder="Ex: Software Developer"
-                />
-              </div>
-            </div>
+            <br />
 
-            <div className="form-group">
-              <div>
-                <label className="brand-text" htmlFor="">
-                  Annual Income
-                </label>
-                <input
-                  required
-                  ref={register({ required: true })}
-                  type="number"
-                  name="yearly_income"
-                  className="form-control"
-                />
-              </div>
-            </div>
+            <input
+              style={{ backgroundColor: 'rgb(142, 139, 230)', color: 'white' }}
+              className="form-control"
+              type="submit"
+              value="submit"
+            />
 
-            <button className="btn premium-btn btn-block" type="submit">
-              Submit
-            </button>
+            <br />
           </form>
         </div>
       </Modal>

@@ -1,7 +1,7 @@
-import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
-import Slider from "@material-ui/core/Slider";
+import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
+import Slider from '@material-ui/core/Slider';
 
 const useStyles = makeStyles({
   root: {
@@ -16,6 +16,8 @@ function valuetext(value) {
 const PreferenceAge = () => {
   const classes = useStyles();
   const [value, setValue] = React.useState([20, 48]);
+
+  //console.log(value);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
