@@ -11,8 +11,8 @@ import Lifestyle from './components/Registration/Lifestyle/Lifestyle';
 import Advance from './components/Search/Advance/Advance';
 import Basic from './components/Search/Basic/Basic';
 import Settings from './components/Settings/Settings/Settings';
-
 import UserProfile from './components/User/UserProfile/UserProfile';
+import SearchProfile from './components/User/SearchProfile/SearchProfile';
 import Dashboard from './components/UserDashboard/Dashboard/Dashboard';
 import MatchProfileList from './components/UserDashboard/MatchProfileList/MatchProfileList';
 import TopMatchesList from './components/UserDashboard/TopMatchesList/TopMatchesList';
@@ -77,6 +77,9 @@ function App() {
           </Route>
           <Route path="/searchResult">
             <SearchResult></SearchResult>
+          </Route>
+          <Route path="/user/:id">
+            <SearchProfile />
           </Route>
         </Switch>
       </Router>
