@@ -1,10 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './ProfileCard.css';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfile } from '../../../actions';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import getAge from 'get-age';
+
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./ProfileCard.css";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfile } from "../../../actions";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import getAge from "get-age";
+import { faCrown, faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 const ProfileCard = ({ style }) => {
   const [token, setToken] = useState(null);
@@ -21,8 +25,8 @@ const ProfileCard = ({ style }) => {
         // style={{ width: "22rem" }}
       >
         <img
-          className="card-img-top profile-img rounded-circle"
-          src="https://zc64xuggxl-flywheel.netdna-ssl.com/wp-content/uploads/2019/04/team.png"
+          className=" img-fluid profile-img rounded-circle"
+          src="https://i.imgur.com/8AIDC3f.png"
           alt=""
         ></img>
         <div className="card-body text-center">
@@ -45,6 +49,13 @@ const ProfileCard = ({ style }) => {
                 {profileData?.profile?.user_family?.family_living_place}
               </p>
               <Link to="/user" className="btn premium-btn mt-3">
+                <span>
+                  <FontAwesomeIcon
+                    style={{ color: "#ffcc00" }}
+                    className="mr-2"
+                    icon={faCrown}
+                  />
+                </span>
                 Get Premium
               </Link>
             </div>

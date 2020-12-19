@@ -7,7 +7,9 @@ import NavBar from "../../../components/Home/NavBar/NavBar";
 import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import "./Personal.css";
+
 import { toast } from "react-toastify";
+
 
 const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   const [languages, setLanguages] = useState([]);
@@ -97,6 +99,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             language_id: parseInt(data.language_id),
             maritial_status: data.marital_status,
             height: data.height,
+            gender: data.gender,
           }),
         })
           .then((response) => response.json())
@@ -136,15 +139,15 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
         messages.map((message) => (
           <p className="text-danger">{JSON.stringify(message.constraints)}</p>
         ))}
-      <div className="row ">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 form-container">
+      <div className="row mt-3">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 form-container">
           <NavReg></NavReg>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group">
               <div>
                 <label className="brand-text" htmlFor="">
-                  Bride's Name
+                  Full Name
                 </label>
                 <input
                   ref={register({ required: true })}
@@ -174,30 +177,64 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                   <span className="text-danger">Date of Birth is required</span>
                 )}
               </div>
+            </div>
 
-              <div className="form-group">
-                <label className="brand-text" htmlFor="">
-                  Religion
+            <div className="form-group">
+              <div>
+                <label className="brand-text mr-2" htmlFor="">
+                  Gender
                 </label>
-                <select
+                {/* <input
                   ref={register({ required: true })}
-                  name="religion_id"
+                  type=""
+                  name="dateOfBirth"
                   className="form-control"
-                >
-                  {errors.religion && (
-                    <span className="text-danger">Religion is required</span>
-                  )}
-                  {religions?.length >= 1 ? (
-                    religions.map((religion) => (
-                      <option key={religion.id} value={religion.id}>
-                        {religion.name}
-                      </option>
-                    ))
-                  ) : (
-                    <option value="null">Please reload the page again</option>
-                  )}
-                </select>
+                /> */}
+                <input
+                  ref={register({ required: true })}
+                  type="radio"
+                  id="male"
+                  name="gender"
+                  value="male"
+                />
+                <label className="ml-2 mr-2" for="male">
+                  Male
+                </label>
+                <input
+                  ref={register({ required: true })}
+                  type="radio"
+                  id="female"
+                  name="gender"
+                  value="female"
+                />
+                <label className="ml-2" for="female">
+                  Female
+                </label>
               </div>
+            </div>
+
+            <div className="form-group">
+              <label className="brand-text" htmlFor="">
+                Religion
+              </label>
+              <select
+                ref={register({ required: true })}
+                name="religion_id"
+                className="form-control"
+              >
+                {errors.religion && (
+                  <span className="text-danger">Religion is required</span>
+                )}
+                {religions?.length >= 1 ? (
+                  religions.map((religion) => (
+                    <option key={religion.id} value={religion.id}>
+                      {religion.name}
+                    </option>
+                  ))
+                ) : (
+                  <option value="null">Please reload the page again</option>
+                )}
+              </select>
             </div>
             <div className="form-group">
               <label className="brand-text" htmlFor="">
@@ -284,7 +321,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
               <div>
                 <input className="main-btn" type="submit" value="Continue" />
               </div>
-              <div className="my-3">
+              <div className="my-3 reg-nav-link">
                 <Link to="/career" className="main-btn">
                   Go to next
                 </Link>
@@ -292,7 +329,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
             </div>
           </form>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
       </div>
     </div>
   );

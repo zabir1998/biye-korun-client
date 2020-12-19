@@ -1,33 +1,33 @@
-import React, { useContext, useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
-import { getPartnerPreference } from '../../../actions';
-import { UserContext } from '../../../App';
-import InnerNavBar from '../../shared/InnerNavBar/InnerNavBar';
-import AboutMyselfTable from '../AboutMyselfTable/AboutMyselfTable';
-import BasicLifeStyleTable from '../BasicLifeStyleTable/BasicLifeStyleTable';
-import EducationCareerTable from '../EducationCareerTable/EducationCareerTable';
-import FamilyDetails from '../FamilyDetails/FamilyDetails';
-import IconBar from '../IconBar/IconBar';
-import IdSearchBar from '../IdSearchBar/IdSearchBar';
-import PartnerPreferenceTable from '../PartnerPreferenceTable/PartnerPreferenceTable';
-import PersonalDetailsTable from '../PersonalDetailsTable/PersonalDetailsTable';
-import PhotoGallery from '../PhotoGallery/PhotoGallery';
-import PhysicalTable from '../PhysicalTable/PhysicalTable';
-import ProfileCard from '../ProfileCard/ProfileCard';
-import RecentVisitors from '../RecentVisitors/RecentVisitiors';
-import UserNavBar from '../UserNavBar/UserNavBar';
-import YouMayLike from '../YouMayLike/YouMayLike';
-import { useDispatch } from 'react-redux';
+import React, { useContext, useState, useEffect } from "react";
+import { Container } from "react-bootstrap";
+import { getPartnerPreference } from "../../../actions";
+import { UserContext } from "../../../App";
+import InnerNavBar from "../../shared/InnerNavBar/InnerNavBar";
+import AboutMyselfTable from "../AboutMyselfTable/AboutMyselfTable";
+import BasicLifeStyleTable from "../BasicLifeStyleTable/BasicLifeStyleTable";
+import EducationCareerTable from "../EducationCareerTable/EducationCareerTable";
+import FamilyDetails from "../FamilyDetails/FamilyDetails";
+import IconBar from "../IconBar/IconBar";
+import IdSearchBar from "../IdSearchBar/IdSearchBar";
+import PartnerPreferenceTable from "../PartnerPreferenceTable/PartnerPreferenceTable";
+import PersonalDetailsTable from "../PersonalDetailsTable/PersonalDetailsTable";
+import PhotoGallery from "../PhotoGallery/PhotoGallery";
+import PhysicalTable from "../PhysicalTable/PhysicalTable";
+import ProfileCard from "../ProfileCard/ProfileCard";
+import RecentVisitors from "../RecentVisitors/RecentVisitiors";
+import UserNavBar from "../UserNavBar/UserNavBar";
+import YouMayLike from "../YouMayLike/YouMayLike";
+import { useDispatch } from "react-redux";
 const UserProfile = () => {
   const [token, setToken] = useState(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
 
-    fetch('https://biyekorun-staging.techserve4u.com/user/get-preference', {
-      method: 'GET',
+    fetch("https://biyekorun-staging.techserve4u.com/user/get-preference", {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -42,12 +42,12 @@ const UserProfile = () => {
     <div style={{ paddingLeft: 120, paddingRight: 120 }}>
       <InnerNavBar></InnerNavBar>
       <div className="row mt-5">
-        <div className="col-md-4">
-          <ProfileCard></ProfileCard>
+        <div className="col-md-3">
+          <ProfileCard style={{ width: "20rem" }}></ProfileCard>
           <IconBar></IconBar>
           <PhotoGallery></PhotoGallery>
         </div>
-        <div className="col-md-5">
+        <div className="col-md-6">
           <UserNavBar className="user-nav-link"></UserNavBar>
           <PersonalDetailsTable></PersonalDetailsTable>
           <AboutMyselfTable></AboutMyselfTable>
