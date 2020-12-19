@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import NavBar from "../../Home/NavBar/NavBar";
 import PreferenceBasic from "../PreferenceBasic/PreferenceBasic";
@@ -8,9 +9,11 @@ import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { toast } from "react-toastify";
 
+
+
 const useStyles = makeStyles({
   root: {
-    width: "100%",
+    width: '100%',
   },
 });
 
@@ -38,12 +41,12 @@ const Preference = () => {
   };
 
   useEffect(() => {
-    setToken(sessionStorage.getItem("Token"));
+    setToken(sessionStorage.getItem('Token'));
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
+      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -52,8 +55,8 @@ const Preference = () => {
       .then((res) => res.json())
       .then((data) => setReligions(data.data));
 
-    fetch("https://biyekorun-staging.techserve4u.com/category/diet/diet-list", {
-      method: "GET",
+    fetch('https://biyekorun-staging.techserve4u.com/category/diet/diet-list', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -62,9 +65,9 @@ const Preference = () => {
       .then((data) => setDiets(data.data));
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
+      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -80,7 +83,7 @@ const Preference = () => {
         data.country_id
       )}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -107,11 +110,11 @@ const Preference = () => {
         // );
 
         fetch(
-          "https://biyekorun-staging.techserve4u.com/user/user-preference",
+          'https://biyekorun-staging.techserve4u.com/user/user-preference',
           {
-            method: "POST",
+            method: 'POST',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
@@ -161,7 +164,7 @@ const Preference = () => {
         </div>
         <div
           className="text-center"
-          style={{ backgroundColor: "#8e8be6", color: "white", padding: 20 }}
+          style={{ backgroundColor: '#8e8be6', color: 'white', padding: 20 }}
         >
           <h4> No. of mutual with below criteria 974 </h4>
         </div>
@@ -342,7 +345,7 @@ const Preference = () => {
         <br />
 
         <input
-          style={{ backgroundColor: "rgb(142, 139, 230)", color: "white" }}
+          style={{ backgroundColor: 'rgb(142, 139, 230)', color: 'white' }}
           className="form-control"
           type="submit"
           value="submit"
