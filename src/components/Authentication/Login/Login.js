@@ -188,7 +188,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
         <GoogleLogin
           clientId={clientId}
           render={(renderProps) => (
-            <Link
+            <button
               className="social-link"
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
@@ -203,7 +203,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
                 </div>
                 <div>Continue with Google</div>
               </div>
-            </Link>
+            </button>
           )}
           buttonText="Login"
           onSuccess={onSuccess}

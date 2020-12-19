@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import NavBar from '../../Home/NavBar/NavBar';
-import NavReg from '../NavReg/NavReg';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import NavBar from "../../Home/NavBar/NavBar";
+import NavReg from "../NavReg/NavReg";
+import { Link } from "react-router-dom";
 
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
@@ -26,11 +26,11 @@ const Career = ({ fetchCountries, addUserDetail }) => {
   // }, []);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
+      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -42,9 +42,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     // https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list
 
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list',
+      "https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -58,7 +58,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     fetch(
       `https://biyekorun-staging.techserve4u.com/category/occupation-type/occupation-types-by-occupation/${selectOccupation}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -68,9 +68,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
       .then((data) => setOccupationType(data.data));
 
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/currency/currency-list',
+      "https://biyekorun-staging.techserve4u.com/category/currency/currency-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -98,9 +98,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     // );
 
     fetch(`https://biyekorun-staging.techserve4u.com/user/user-career`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
 
@@ -130,11 +130,11 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         //console.log(json);
         if (json.statusCode === 201) {
           //console.log(typeof json.statusCode);
-          window.location.replace('/lifestyle');
+          window.location.replace("/lifestyle");
           alert(json.message);
           return;
         } else if (json.statusCode === 409) {
-          window.location.replace('/lifestyle');
+          window.location.replace("/lifestyle");
           alert(json.message);
           return;
         }
@@ -152,9 +152,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         messages.map((message) => (
           <p className="text-danger">{JSON.stringify(message.constraints)}</p>
         ))}
-      <div className="row">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 form-container">
+      <div className="row d-flex mt-3 ">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 form-container">
           <NavReg></NavReg>
           <div>
             <form onSubmit={handleSubmit(onSubmit)}>
@@ -231,58 +231,6 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                       <option value="">
                         Please select the "valid" occupation first
                       </option>
-                    )}
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div>
-                  <label className="brand-text" htmlFor="">
-                    Occupation Type
-                  </label>
-                  <select
-                    required
-                    ref={register({ required: true })}
-                    name="occupation_type_id"
-                    className="form-control"
-                  >
-                    <option value="">-- select occupation first --</option>
-                    {occupationType?.length >= 1 ? (
-                      occupationType.map((occuType) => (
-                        <option key={occuType?.id} value={occuType?.id}>
-                          {occuType?.name}
-                        </option>
-                      ))
-                    ) : (
-                      <option value="">
-                        Please select the "valid" occupation first
-                      </option>
-                    )}
-                  </select>
-                </div>
-              </div>
-
-              <div className="form-group">
-                <div>
-                  <label className="brand-text" htmlFor="">
-                    Currency
-                  </label>
-                  <select
-                    required
-                    ref={register({ required: true })}
-                    name="currency_id"
-                    className="form-control"
-                  >
-                    <option value="">-- please select the currency --</option>
-                    {currencies?.length >= 1 ? (
-                      currencies.map((currency) => (
-                        <option key={currency.id} value={currency.id}>
-                          {currency.name}
-                        </option>
-                      ))
-                    ) : (
-                      <option value="">Please reload the page again</option>
                     )}
                   </select>
                 </div>
@@ -389,7 +337,17 @@ const Career = ({ fetchCountries, addUserDetail }) => {
               </div>
               <div className="form-group">
                 <div>
-                  <input
+                  <textarea
+                    rows="7"
+                    cols="5"
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="bio"
+                    className="form-control"
+                    placeholder="Express Yourself must be longer than 50 characters"
+                  ></textarea>
+                  {/* <input
                     required
                     ref={register({ required: true })}
                     type="text"
@@ -404,11 +362,11 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                       boxShadow: 40,
                       borderRadius: 5,
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="form-group row text-right">
-                <div className="my-3">
+                <div className="my-3 reg-nav-link">
                   <Link to="/personal" className="main-btn">
                     Go to pervious
                   </Link>
@@ -416,7 +374,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                 <div>
                   <input className="main-btn" type="submit" value="Continue" />
                 </div>
-                <div className="my-3">
+                <div className="my-3 reg-nav-link">
                   <Link to="/lifestyle" className="main-btn">
                     Go to next
                   </Link>
@@ -425,7 +383,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
             </form>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
       </div>
     </div>
   );

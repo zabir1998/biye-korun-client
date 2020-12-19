@@ -18,6 +18,7 @@ const UserRequestCard = () => {
           <h5 class="card-title">Kamali Begum</h5>
           <h6 class="card-subtitle mb-2 text-muted">(KAA12491E)</h6>
           <small class="card-text ">21 Years Old | 36 | Paris, France</small>
+          <br />
           <Link
             style={{ fontSize: 13 }}
             to="/"

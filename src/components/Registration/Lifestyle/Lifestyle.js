@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import NavBar from '../../Home/NavBar/NavBar';
-import NavReg from '../NavReg/NavReg';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import NavBar from "../../Home/NavBar/NavBar";
+import NavReg from "../NavReg/NavReg";
+import { Link } from "react-router-dom";
 
 const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
   const { register, handleSubmit, errors } = useForm();
@@ -11,11 +11,11 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
   const [messages, setErrorMessages] = useState([]);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list',
+      "https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -44,9 +44,9 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
     // https://biyekorun-staging.techserve4u.com/user/user-family
 
     fetch(`https://biyekorun-staging.techserve4u.com/user/user-family`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
 
@@ -79,9 +79,9 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
       <div>
         <NavBar></NavBar>
       </div>
-      <div className="row ">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 form-container">
+      <div className="row mt-3">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 form-container">
           <div>
             <NavReg></NavReg>
           </div>
@@ -248,7 +248,16 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
                   <label className="brand-text" htmlFor="">
                     About My Family
                   </label>
-                  <input
+                  <textarea
+                    rows="7"
+                    cols="5"
+                    ref={register({ required: true })}
+                    type="text"
+                    name="family_bio"
+                    className="form-control"
+                    placeholder="Family Bio must be longer than 50 characters"
+                  ></textarea>
+                  {/* <input
                     ref={register({ required: true })}
                     type="text"
                     name="family_bio"
@@ -262,12 +271,12 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
                       boxShadow: 40,
                       borderRadius: 5,
                     }}
-                  />
+                  /> */}
                 </div>
               </div>
               <div className="form-group">
                 <div className="d-flex justify-content-around align-items-center">
-                  <div>
+                  <div className="reg-nav-link">
                     <Link to="/career" className="main-btn">
                       Go to pervious
                     </Link>
@@ -284,7 +293,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
 
               <div className="col-md-12 text-center">
                 <a
-                  style={{ color: '#8e8be6', paddingTop: 15 }}
+                  style={{ color: "#8e8be6", paddingTop: 15 }}
                   href="https://google.com"
                 >
                   I will add this later
@@ -293,7 +302,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
             </form>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
       </div>
     </div>
   );

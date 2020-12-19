@@ -78,7 +78,8 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
               {profileData.loading ? (
                 <CircularProgress />
               ) : (
-                <input
+                <textarea
+                  rows="7"
                   name="bio"
                   placeholder="Tell about yourself"
                   value={bio}
@@ -87,7 +88,7 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
                   ref={register({
                     required: "Please Tell something about yourself",
                   })}
-                />
+                ></textarea>
               )}
 
               <ErrorMessage
