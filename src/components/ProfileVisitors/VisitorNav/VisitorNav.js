@@ -8,19 +8,19 @@ const VisitorNav = () => {
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="d-flex justify-content-between">
             <Nav.Link
-              href="#recentVisitors"
+              href="/visitor"
               style={{ fontWeight: 700, fontHeight: 80 }}
             >
               Recent Visitors
             </Nav.Link>
             <Nav.Link
-              href="#topMatch"
+              href="/user/topMatches"
               style={{ fontWeight: 700, fontHeight: 80 }}
             >
               Top Match
             </Nav.Link>
             <Nav.Link
-              href="#matchProfileList"
+              href="/user/profileMatch"
               style={{ fontWeight: 700, fontHeight: 80 }}
             >
               Match Profile List

@@ -1,33 +1,58 @@
-import React, { createContext, useState } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './App.css';
-import Home from './components/Home/Home/Home';
-import PeopleNear from './components/PeopleNear/PeopleNear/PeopleNear';
-import Preference from './components/Preference/Preference/Preference';
-import ProfileVisitors from './components/ProfileVisitors/ProfileVisitors/ProfileVisitors';
-import Personal from './components/Registration/Personal/Personal';
-import Career from './components/Registration/Career/Career';
-import Lifestyle from './components/Registration/Lifestyle/Lifestyle';
-import Advance from './components/Search/Advance/Advance';
-import Basic from './components/Search/Basic/Basic';
-import Settings from './components/Settings/Settings/Settings';
-import UserProfile from './components/User/UserProfile/UserProfile';
-import SearchProfile from './components/User/SearchProfile/SearchProfile';
-import Dashboard from './components/UserDashboard/Dashboard/Dashboard';
-import MatchProfileList from './components/UserDashboard/MatchProfileList/MatchProfileList';
-import TopMatchesList from './components/UserDashboard/TopMatchesList/TopMatchesList';
-import SearchResult from './components/SearchResult/SearchResult/SearchResult';
+import React, { createContext, useState } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./App.css";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, Slide } from "react-toastify";
+import Home from "./components/Home/Home/Home";
+import PeopleNear from "./components/PeopleNear/PeopleNear/PeopleNear";
+import Preference from "./components/Preference/Preference/Preference";
+import ProfileVisitors from "./components/ProfileVisitors/ProfileVisitors/ProfileVisitors";
+import Personal from "./components/Registration/Personal/Personal";
+import Career from "./components/Registration/Career/Career";
+import Lifestyle from "./components/Registration/Lifestyle/Lifestyle";
+import Advance from "./components/Search/Advance/Advance";
+import Basic from "./components/Search/Basic/Basic";
+import Settings from "./components/Settings/Settings/Settings";
+import UserProfile from "./components/User/UserProfile/UserProfile";
+import SearchProfile from "./components/User/SearchProfile/SearchProfile";
+import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
+import MatchProfileList from "./components/UserDashboard/MatchProfileList/MatchProfileList";
+import TopMatchesList from "./components/UserDashboard/TopMatchesList/TopMatchesList";
+import SearchResult from "./components/SearchResult/SearchResult/SearchResult";
+import { useDispatch } from 'react-redux';
+import { getProfile } from './actions';
+
 
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
+
   const [accessToken, setAccessToken] = useState('');
+  const [token, setToken] = useState(null);
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+    fetch('https://biyekorun-staging.techserve4u.com/user/user-info', {
+      headers: {
+        method: 'GET',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(getProfile(json.data));
+      });
+  }, [dispatch, token]);
+
 
   return (
     <UserContext.Provider
       value={[loggedInUser, setLoggedInUser, accessToken, setAccessToken]}
     >
+      <ToastContainer position="top-center" autoClose={5000} />
       <Router>
         <Switch>
           <Route exact path="/">

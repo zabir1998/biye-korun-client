@@ -5,7 +5,7 @@ import "./VisitorDistance.css";
 const VisitorDistance = () => {
   return (
     <>
-      <div className="card shadow profile-card" style={{ width: "22rem" }}>
+      <div className="card shadow profile-card">
         <h4
           className="brand-text text-center"
           style={{ paddingBottom: 10, paddingTop: 10 }}
@@ -14,7 +14,7 @@ const VisitorDistance = () => {
         </h4>
 
         <FontAwesomeIcon
-          style={{ color: "#8e8be6", width: 280, height: 200, paddingLeft: 70 }}
+          style={{ color: "#8e8be6", width: 260, height: 200 }}
           icon={faMapMarkerAlt}
         />
         <div className="card-body text-center">

@@ -8,6 +8,9 @@ import { Link } from "react-router-dom";
 import { Redirect } from "react-router-dom";
 import "./Personal.css";
 
+import { toast } from "react-toastify";
+
+
 const Personal = ({ countries, fetchCountries, addUserDetail }) => {
   const [languages, setLanguages] = useState([]);
   const [religions, setReligions] = useState([]);
@@ -103,9 +106,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
           .then((json) => {
             console.log(json);
             if (json.statusCode === 201) {
-              alert(json.message);
+              toast.success(json.message);
             } else if (json.statusCode === 409) {
-              alert(json.message);
+              toast.error(json.message);
             } else if (json.statusCode === 400) {
               setErrorMessages(json.message);
             }
@@ -167,6 +170,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                   ref={register({ required: true })}
                   type="date"
                   name="dateOfBirth"
+                  min="2000-01-01"
                   className="form-control"
                 />
                 {errors.dateOfBirth && (
@@ -301,7 +305,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 <input
                   ref={register({ required: true })}
                   type="number"
-                  step="0.1"
+                  placeholder="Please enter your height in cm format"
+                  min="100"
+                  max="250"
                   name="height"
                   className="form-control"
                 />

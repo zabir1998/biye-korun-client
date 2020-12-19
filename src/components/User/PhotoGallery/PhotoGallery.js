@@ -5,6 +5,9 @@ import { fakeUser } from "../../../fakeData/fakeUser";
 import { Button } from "@material-ui/core";
 import FileReader from "filereader";
 
+import { toast } from "react-toastify";
+
+
 const PhotoGallery = () => {
   const [image, setImage] = useState(null);
   const [images, setImages] = useState([]);
@@ -41,7 +44,7 @@ const PhotoGallery = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        alert(json.message);
+        toast.success(json.message);
       });
 
     setImage(null);

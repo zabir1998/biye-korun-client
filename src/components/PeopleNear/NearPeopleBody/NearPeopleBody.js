@@ -11,12 +11,12 @@ const NearPeopleBody = () => {
       className="row d-flex justify-content-between"
       style={{ marginTop: 10 }}
     >
-      <div className="col-md-4">
+      <div className="col-md-3">
         <ProfileCard></ProfileCard>
         <br />
         <VisitorDistance></VisitorDistance>
       </div>
-      <div className=" col-md-8">
+      <div className=" col-md-9">
         <div className="row">
           <div className="col-md-8">
             <UserNavBar></UserNavBar>
@@ -26,7 +26,19 @@ const NearPeopleBody = () => {
           </div>
         </div>
         <div className="row">
-          <VisitorCard></VisitorCard>
+          <div class="col">
+            <VisitorCard></VisitorCard>
+          </div>
+        </div>
+        <div className="row">
+          <div class="col">
+            <VisitorCard></VisitorCard>
+          </div>
+        </div>
+        <div className="row">
+          <div class="col">
+            <VisitorCard></VisitorCard>
+          </div>
         </div>
       </div>
     </div>

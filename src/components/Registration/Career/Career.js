@@ -4,6 +4,8 @@ import { useHistory } from "react-router-dom";
 import NavBar from "../../Home/NavBar/NavBar";
 import NavReg from "../NavReg/NavReg";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
 
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
@@ -120,9 +122,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
       .then((json) => {
         //console.log(json);
         if (json.statusCode === 201) {
-          alert(json.message);
+          toast.success(json.message);
         } else if (json.statusCode === 409) {
-          alert(json.message);
+          toast.error(json.message);
         } else if (json.statusCode === 400) {
           setErrorMessages(json.message);
         }
@@ -131,11 +133,11 @@ const Career = ({ fetchCountries, addUserDetail }) => {
         if (json.statusCode === 201) {
           //console.log(typeof json.statusCode);
           window.location.replace("/lifestyle");
-          alert(json.message);
+          toast.success(json.message);
           return;
         } else if (json.statusCode === 409) {
           window.location.replace("/lifestyle");
-          alert(json.message);
+          toast.error(json.message);
           return;
         }
 
