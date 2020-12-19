@@ -121,7 +121,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
   };
 
   const onFailure = (res) => {
-    toast.error("Login failed: res:", res);
+    // toast.error("Login failed", res);
     toast.error(`Failed to login. 😢`);
   };
 

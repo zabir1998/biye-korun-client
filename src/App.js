@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "./App.css";
 import "react-toastify/dist/ReactToastify.css";
@@ -19,25 +19,24 @@ import Dashboard from "./components/UserDashboard/Dashboard/Dashboard";
 import MatchProfileList from "./components/UserDashboard/MatchProfileList/MatchProfileList";
 import TopMatchesList from "./components/UserDashboard/TopMatchesList/TopMatchesList";
 import SearchResult from "./components/SearchResult/SearchResult/SearchResult";
-import { useDispatch } from 'react-redux';
-import { getProfile } from './actions';
-
+import { useDispatch } from "react-redux";
+import { getProfile } from "./actions";
 
 export const UserContext = createContext();
 
 function App() {
   const [loggedInUser, setLoggedInUser] = useState({});
 
-  const [accessToken, setAccessToken] = useState('');
+  const [accessToken, setAccessToken] = useState("");
   const [token, setToken] = useState(null);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
-    fetch('https://biyekorun-staging.techserve4u.com/user/user-info', {
+    setToken(sessionStorage.getItem("Token"));
+    fetch("https://biyekorun-staging.techserve4u.com/user/user-info", {
       headers: {
-        method: 'GET',
+        method: "GET",
         Authorization: `Bearer ${token}`,
       },
     })
@@ -46,7 +45,6 @@ function App() {
         dispatch(getProfile(json.data));
       });
   }, [dispatch, token]);
-
 
   return (
     <UserContext.Provider
