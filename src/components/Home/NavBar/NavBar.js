@@ -1,14 +1,14 @@
-import React, { useContext, useState } from 'react';
-import { Nav, Navbar } from 'react-bootstrap';
-import { UserContext } from '../../../App';
-import Login from '../../Authentication/Login/Login';
-import Register from '../../Authentication/Register/Register';
-import { useGoogleLogout } from 'react-google-login';
-import './NavBar.css';
-import { Link } from 'react-router-dom';
+import React, { useContext, useState } from "react";
+import { Nav, Navbar } from "react-bootstrap";
+import { UserContext } from "../../../App";
+import Login from "../../Authentication/Login/Login";
+import Register from "../../Authentication/Register/Register";
+import { useGoogleLogout } from "react-google-login";
+import "./NavBar.css";
+import { Link } from "react-router-dom";
 
 const clientId =
-  '39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com';
+  "39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com";
 
 const NavBar = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -17,13 +17,13 @@ const NavBar = () => {
 
   const onLogoutSuccess = (res) => {
     //console.log("Logged out Success");
-    alert('Logged out Successfully ✌');
-    sessionStorage.clear('token');
+    alert("Logged out Successfully ✌");
+    sessionStorage.clear("token");
     setLoggedInUser(false);
   };
 
   const onFailure = () => {
-    ('Handle failure cases');
+    ("Handle failure cases");
   };
 
   const { signOut } = useGoogleLogout({
@@ -47,21 +47,23 @@ const NavBar = () => {
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto ">
           <Nav.Link
-            style={{ color: '#8e8be6' }}
+            style={{ color: "#8e8be6" }}
             className="brand-text ml-3 main-nav-link"
             href="/home"
           >
             Home
           </Nav.Link>
+          <Link to="/registration">
+            <Nav.Link
+              style={{ color: "#8e8be6" }}
+              className="brand-text ml-3 main-nav-link"
+              href="#"
+            >
+              Membership
+            </Nav.Link>
+          </Link>
           <Nav.Link
-            style={{ color: '#8e8be6' }}
-            className="brand-text ml-3 main-nav-link"
-            href="#"
-          >
-            Membership
-          </Nav.Link>
-          <Nav.Link
-            style={{ color: '#8e8be6' }}
+            style={{ color: "#8e8be6" }}
             className="brand-text ml-3 main-nav-link"
             href="#"
           >
@@ -114,7 +116,7 @@ const NavBar = () => {
             <>
               <Nav.Link
                 onClick={openModal}
-                style={{ color: '#8e8be6' }}
+                style={{ color: "#8e8be6" }}
                 className="brand-text ml-3 main-nav-link"
                 href="#"
               >
@@ -129,10 +131,10 @@ const NavBar = () => {
             </>
           ) : (
             <>
-              {' '}
+              {" "}
               <Nav.Link
                 onClick={openModal}
-                style={{ color: '#8e8be6' }}
+                style={{ color: "#8e8be6" }}
                 className="brand-text ml-3 main-nav-link"
                 href="#"
               >
@@ -141,12 +143,12 @@ const NavBar = () => {
               <Nav.Link
                 onClick={openModal}
                 style={{
-                  backgroundColor: '#cf6ac6',
-                  color: 'white',
-                  marginTop: '-8px',
-                  paddingTop: '16px',
-                  marginBottom: '-8px',
-                  paddingBottom: '16px',
+                  backgroundColor: "#cf6ac6",
+                  color: "white",
+                  marginTop: "-8px",
+                  paddingTop: "16px",
+                  marginBottom: "-8px",
+                  paddingBottom: "16px",
                 }}
                 // style={{ color: "#8e8be6" }}
                 className="ml-3 main-nav-link "
