@@ -6,6 +6,7 @@ import Register from "../../Authentication/Register/Register";
 import { useGoogleLogout } from "react-google-login";
 import "./NavBar.css";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const clientId =
   "39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com";
@@ -17,7 +18,7 @@ const NavBar = () => {
 
   const onLogoutSuccess = (res) => {
     //console.log("Logged out Success");
-    alert("Logged out Successfully ✌");
+    toast.success("Logged out Successfully ✌");
     sessionStorage.clear("token");
     setLoggedInUser(false);
   };
@@ -53,15 +54,13 @@ const NavBar = () => {
           >
             Home
           </Nav.Link>
-          <Link to="/registration">
-            <Nav.Link
-              style={{ color: "#8e8be6" }}
-              className="brand-text ml-3 main-nav-link"
-              href="#"
-            >
-              Membership
-            </Nav.Link>
-          </Link>
+          <Nav.Link
+            style={{ color: "#8e8be6" }}
+            className="brand-text ml-3 main-nav-link"
+            href="#"
+          >
+            Membership
+          </Nav.Link>
           <Nav.Link
             style={{ color: "#8e8be6" }}
             className="brand-text ml-3 main-nav-link"

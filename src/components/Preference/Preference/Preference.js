@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   root: {
@@ -131,7 +132,7 @@ const Preference = () => {
           }
         )
           .then((res) => res.json())
-          .then((json) => alert(json.message));
+          .then((json) => toast.success(json.message));
       });
   };
 

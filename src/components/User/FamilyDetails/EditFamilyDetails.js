@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -85,10 +86,10 @@ const EditFamilyDetails = ({ modalIsOpen, closeModal, bio }) => {
       .then((json) => {
         //console.log(json);
         if (json.statusCode === 200) {
-          alert(json.message);
+          toast.success(json.message);
           window.location.reload();
         } else {
-          alert(json?.message[0]?.constraints?.minLength);
+          toast.error(json?.message[0]?.constraints?.minLength);
         }
       });
   };

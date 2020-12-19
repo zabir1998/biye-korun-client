@@ -1,17 +1,18 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
-import InnerNavBar from '../../shared/InnerNavBar/InnerNavBar';
-import AboutMyselfTable from './AboutMyselfTable/AboutMyselfTable';
-import BasicLifeStyleTable from './BasicLifeStyleTable/BasicLifeStyleTable';
-import EducationCareerTable from './EducationCareerTable/EducationCareerTable';
-import FamilyDetails from './FamilyDetails/FamilyDetails';
-import PersonalDetailsTable from './PersonalDetailsTable/PersonalDetailsTable';
-import PhysicalTable from './PhysicalTable/PhysicalTable';
-import ProfileCard from './ProfileCard/ProfileCard';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProfileById } from '../../../actions';
-import CircularProgress from '@material-ui/core/CircularProgress';
+import InnerNavBar from "../../shared/InnerNavBar/InnerNavBar";
+import AboutMyselfTable from "./AboutMyselfTable/AboutMyselfTable";
+import BasicLifeStyleTable from "./BasicLifeStyleTable/BasicLifeStyleTable";
+import EducationCareerTable from "./EducationCareerTable/EducationCareerTable";
+import FamilyDetails from "./FamilyDetails/FamilyDetails";
+import PersonalDetailsTable from "./PersonalDetailsTable/PersonalDetailsTable";
+import PhysicalTable from "./PhysicalTable/PhysicalTable";
+import ProfileCard from "./ProfileCard/ProfileCard";
+import { useDispatch, useSelector } from "react-redux";
+import { getProfileById } from "../../../actions";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import { toast } from "react-toastify";
 
 const SearchProfile = () => {
   const [token, setToken] = useState(null);
@@ -21,13 +22,13 @@ const SearchProfile = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/user/search-profile-by-uid',
+      "https://biyekorun-staging.techserve4u.com/user/search-profile-by-uid",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -38,8 +39,8 @@ const SearchProfile = () => {
       .then((res) => res.json())
       .then((json) => {
         if (json?.data?.length === 0) {
-          alert('User Profile not found!!');
-          window.location.replace('/user/dashboard');
+          toast.error("User Profile not found!!");
+          window.location.replace("/user/dashboard");
         }
         json?.data?.map((user) => {
           setUserId(user.id);
@@ -53,7 +54,7 @@ const SearchProfile = () => {
       fetch(
         `https://biyekorun-staging.techserve4u.com/user/user-info-by-id/${userId}`,
         {
-          method: 'GET',
+          method: "GET",
           headers: {
             Authorization: `Bearer ${token}`,
           },

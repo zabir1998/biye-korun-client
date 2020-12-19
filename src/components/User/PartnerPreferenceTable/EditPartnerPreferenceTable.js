@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import Modal from 'react-modal';
-import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
-import { useSelector } from 'react-redux';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Slider from '@material-ui/core/Slider';
+import React, { useEffect, useState } from "react";
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { useSelector } from "react-redux";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Slider from "@material-ui/core/Slider";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles({
   root: {
-    width: '100%',
+    width: "100%",
   },
 });
 
@@ -19,17 +20,17 @@ function valuetext(value) {
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    height: '70%',
+    top: "50%",
+    left: "50%",
+    height: "70%",
     // right: "auto",
     // bottom: "auto",
     // marginRight: "-50%",
-    transform: 'translate(-50%, -50%)',
+    transform: "translate(-50%, -50%)",
   },
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
   const { register, errors, handleSubmit } = useForm();
@@ -44,11 +45,11 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
   const [religionId, setReligionId] = useState(0);
   const [countryId, setCountryId] = useState(0);
   const [dietId, setDietId] = useState(0);
-  const [meritalStatus, setMeritalStatus] = useState('');
-  const [degree, setDegree] = useState('');
-  const [area, setArea] = useState('');
-  const [income, setIncome] = useState('');
-  const [companyName, setCompanyName] = useState('');
+  const [meritalStatus, setMeritalStatus] = useState("");
+  const [degree, setDegree] = useState("");
+  const [area, setArea] = useState("");
+  const [income, setIncome] = useState("");
+  const [companyName, setCompanyName] = useState("");
 
   const handleAgeChange = (event, newValue) => {
     setAgeValue(newValue);
@@ -61,11 +62,11 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
   console.log(partner);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
+      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -74,8 +75,8 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
       .then((res) => res.json())
       .then((data) => setReligions(data.data));
 
-    fetch('https://biyekorun-staging.techserve4u.com/category/diet/diet-list', {
-      method: 'GET',
+    fetch("https://biyekorun-staging.techserve4u.com/category/diet/diet-list", {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -83,9 +84,9 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
       .then((res) => res.json())
       .then((data) => setDiets(data.data));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
+      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -114,7 +115,7 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
         data.country_id
       )}`,
       {
-        method: 'GET',
+        method: "GET",
 
         headers: {
           Authorization: `Bearer ${token}`,
@@ -142,11 +143,11 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
         // );
 
         fetch(
-          'https://biyekorun-staging.techserve4u.com/user/user-preference/update',
+          "https://biyekorun-staging.techserve4u.com/user/user-preference/update",
           {
-            method: 'PUT',
+            method: "PUT",
             headers: {
-              'Content-Type': 'application/json',
+              "Content-Type": "application/json",
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
@@ -169,7 +170,7 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
           .then((res) => res.json())
           .then((json) => {
             //console.log(json);
-            alert(json.message);
+            toast.success(json.message);
             window.location.reload();
           });
       });
@@ -393,7 +394,7 @@ const EditPartnerPreferenceTable = ({ modalIsOpen, closeModal, bio }) => {
             <br />
 
             <input
-              style={{ backgroundColor: 'rgb(142, 139, 230)', color: 'white' }}
+              style={{ backgroundColor: "rgb(142, 139, 230)", color: "white" }}
               className="form-control"
               type="submit"
               value="submit"
