@@ -166,6 +166,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                   ref={register({ required: true })}
                   type="date"
                   name="dateOfBirth"
+                  min="2000-01-01"
                   className="form-control"
                 />
                 {errors.dateOfBirth && (
@@ -266,7 +267,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 <input
                   ref={register({ required: true })}
                   type="number"
-                  step="0.1"
+                  placeholder="Please enter your height in cm format"
+                  min="100"
+                  max="250"
                   name="height"
                   className="form-control"
                 />
