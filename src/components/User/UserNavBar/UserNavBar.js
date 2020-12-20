@@ -32,22 +32,22 @@ const UserNavBar = ({ className }) => {
         </Navbar.Collapse>
       </Navbar> */}
       <div className="row text-center d-flex align-items-center user-nav-link  justify-content-center mb-3 shadow">
-        <div className="col ">
+        <div className="px-3">
           <Link to="/user/dashboard">Dashboard</Link>
         </div>
-        <div className="col ">
+        <div className="px-3">
           <Link to="/user">Profile</Link>
         </div>
-        <div className="col ">
+        <div className="px-3">
           <Link to="/lifestyle">Inbox</Link>
         </div>
-        <div className="col ">
+        <div className="px-3">
           <Link to="/personal">Matches</Link>
         </div>
-        <div className="col">
+        <div className="px-3">
           <Link to="/searchResult">Saved Search</Link>
         </div>
-        <div className="col ">
+        <div className="px-3">
           <Link to="/nearPeople">Near Me</Link>
         </div>
       </div>

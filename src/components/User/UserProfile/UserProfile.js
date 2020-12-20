@@ -43,7 +43,7 @@ const UserProfile = () => {
       <InnerNavBar></InnerNavBar>
       <div className="row mt-5">
         <div className="col-md-3">
-          <ProfileCard style={{ width: "20rem" }}></ProfileCard>
+          <ProfileCard></ProfileCard>
           <IconBar></IconBar>
           <PhotoGallery></PhotoGallery>
         </div>

@@ -8,6 +8,7 @@ import "./NavBar.css";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import LogOut from "../../Authentication/LogOut/LogOut";
 
 const clientId =
   "39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com";
@@ -15,38 +16,38 @@ const clientId =
 const NavBar = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [registerModalIsOpen, RegisterSetIsOpen] = useState(false);
-  const [loggedInUser, setLoggedInUser] = useState(false);
+  const [loggedInUser, setLoggedInUser] = useContext(UserContext);
 
   const profileData = useSelector((state) => state.profile);
 
-  useEffect(() => {
-    const hasToken = sessionStorage.getItem("Token");
-    if (hasToken) {
-      setLoggedInUser(true);
-    } else {
-      setLoggedInUser(false);
-    }
-  }, [setLoggedInUser]);
+  // useEffect(() => {
+  //   const hasToken = sessionStorage.getItem("Token");
+  //   if (hasToken) {
+  //     setLoggedInUser(true);
+  //   } else {
+  //     setLoggedInUser(false);
+  //   }
+  // }, [setLoggedInUser]);
 
-  const onLogoutSuccess = (res) => {
-    //console.log("Logged out Success");
+  // const onLogoutSuccess = (res) => {
+  //   //console.log("Logged out Success");
 
-    toast.success("Logged out Successfully ✌");
-    sessionStorage.clear("token");
-    toast.success("Logged out Successfully ✌");
-    sessionStorage.clear("token");
-    setLoggedInUser(false);
-  };
+  //   // toast.success("Logged out Successfully ✌");
+  //   // sessionStorage.clear("token");
+  //   sessionStorage.clear("token");
+  //   toast.success("Logged out Successfully ✌");
+  //   setLoggedInUser(false);
+  // };
 
-  const onFailure = () => {
-    ("Handle failure cases");
-  };
+  // const onFailure = () => {
+  //   ("Handle failure cases");
+  // };
 
-  const { signOut } = useGoogleLogout({
-    clientId,
-    onLogoutSuccess,
-    onFailure,
-  });
+  // const { signOut } = useGoogleLogout({
+  //   clientId,
+  //   onLogoutSuccess,
+  //   onFailure,
+  // });
 
   function openModal() {
     setIsOpen(true);
@@ -105,14 +106,15 @@ const NavBar = () => {
                 Profile
               </Nav.Link>
 
-              <button
+              {/* <button
                 onClick={signOut}
                 style={{ color: "#8e8be6" }}
                 className="btn"
                 href="#"
               >
                 Logout
-              </button>
+              </button> */}
+              <LogOut></LogOut>
             </>
           ) : (
             <>
