@@ -77,10 +77,10 @@ const SearchProfile = () => {
         <div style={{ paddingLeft: 120, paddingRight: 120 }}>
           <InnerNavBar></InnerNavBar>
           <div className="row mt-5">
-            <div className="col-md-4">
+            <div className="col-md-3">
               <ProfileCard></ProfileCard>
             </div>
-            <div className="col-md-8">
+            <div className="col-md-9">
               <PersonalDetailsTable></PersonalDetailsTable>
             </div>
           </div>

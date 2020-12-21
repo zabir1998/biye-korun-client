@@ -276,11 +276,11 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
               </div>
               <div className="form-group">
                 <div className="d-flex justify-content-around align-items-center">
-                  <div className="reg-nav-link">
+                  {/* <div className="reg-nav-link">
                     <Link to="/career" className="main-btn">
                       Go to pervious
                     </Link>
-                  </div>
+                  </div> */}
                   <div>
                     <input
                       className="main-btn"
@@ -291,14 +291,14 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
                 </div>
               </div>
 
-              <div className="col-md-12 text-center">
+              {/* <div className="col-md-12 text-center">
                 <a
                   style={{ color: "#8e8be6", paddingTop: 15 }}
                   href="https://google.com"
                 >
                   I will add this later
                 </a>
-              </div>
+              </div> */}
             </form>
           </div>
         </div>

@@ -4,9 +4,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { fakeUser } from "../../../fakeData/fakeUser";
 import { Button } from "@material-ui/core";
 import FileReader from "filereader";
+import "./PhotoGallery.css";
 
 import { toast } from "react-toastify";
-
 
 const PhotoGallery = () => {
   const [image, setImage] = useState(null);
@@ -61,18 +61,16 @@ const PhotoGallery = () => {
         </h3>
       </div>
       <div className="text-center row d-flex justify-content-center  ">
-        <div className="col m-4">
-          <div>
-            {images?.length >= 1 &&
-              images?.map((image) => (
-                <img
-                  key={image.id}
-                  style={{ width: "150px", height: "150px" }}
-                  src={image?.url}
-                  alt=""
-                />
-              ))}
-          </div>
+        <div className="col p-3 m-4">
+          {images?.length >= 1 &&
+            images?.map((image) => (
+              <img
+                key={image.id}
+                style={{ width: "150px", height: "150px", padding: 12 }}
+                src={image?.url}
+                alt=""
+              />
+            ))}
         </div>
       </div>
       <center className="p-3">
@@ -81,15 +79,14 @@ const PhotoGallery = () => {
           type="file"
           id="contained-button-file"
         />
-        <Button
+        <button
           onClick={handleUpload}
-          variant="contained"
-          color="primary"
+          className="upload-btn"
           component="span"
           disabled={!image}
         >
           Upload
-        </Button>
+        </button>
       </center>
     </div>
   );

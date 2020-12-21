@@ -32,10 +32,13 @@ const NewMatchListCard = ({
         />
       </div>
 
-      <Link to={`/user/${id}`}>
+      <Link
+        style={{ textDecoration: "none", color: "black" }}
+        to={`/user/${id}`}
+      >
         <div className="col-md-9">
-          <p style={{ lineHeight: '100%' }}>
-            <span style={{ fontSize: 14, fontWeight: 'bold' }}>{name}</span>
+          <p style={{ lineHeight: "100%" }}>
+            <span style={{ fontSize: 14, fontWeight: "bold" }}>{name}</span>
             <br />
             <small>
               <p style={{ fontSize: 11 }}>
