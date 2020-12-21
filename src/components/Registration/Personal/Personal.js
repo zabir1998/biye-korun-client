@@ -1,31 +1,42 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import NavReg from '../NavReg/NavReg';
+import NavBar from '../../../components/Home/NavBar/NavBar';
+import { Link } from 'react-router-dom';
+import './Personal.css';
 
-import NavReg from "../NavReg/NavReg";
-import NavBar from "../../../components/Home/NavBar/NavBar";
-import { Link } from "react-router-dom";
-import { Redirect } from "react-router-dom";
-import "./Personal.css";
+import { toast } from 'react-toastify';
 
-import { toast } from "react-toastify";
-
-
-const Personal = ({ countries, fetchCountries, addUserDetail }) => {
+const Personal = () => {
   const [languages, setLanguages] = useState([]);
   const [religions, setReligions] = useState([]);
   const [diets, setDiets] = useState([]);
   const [token, setToken] = useState(null);
-  const { register, handleSubmit, watch, errors } = useForm();
   const [messages, setErrorMessages] = useState([]);
-  const history = useHistory();
+  const [image, setImage] = useState(null);
+  const [countries, setCountries] = useState([]);
+  const [stateId, setStateId] = useState(null);
+  const [cityId, setCityId] = useState(null);
+  const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem("Token"));
+    setToken(sessionStorage.getItem('Token'));
+
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/language/language-list",
+      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
       {
-        method: "GET",
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setCountries(data.data));
+    fetch(
+      'https://biyekorun-staging.techserve4u.com/category/language/language-list',
+      {
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -35,9 +46,9 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
       .then((data) => setLanguages(data.data));
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
+      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,8 +57,8 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
       .then((res) => res.json())
       .then((data) => setReligions(data.data));
 
-    fetch("https://biyekorun-staging.techserve4u.com/category/diet/diet-list", {
-      method: "GET",
+    fetch('https://biyekorun-staging.techserve4u.com/category/diet/diet-list', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -62,7 +73,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
     await fetch(
       `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${data.religion_id}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -70,62 +81,120 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
     )
       .then((res) => res.json())
       .then((returnData) => {
-        // console.log({
-        //   profile_name: data.profile_name,
-        //   religion_id: parseInt(data.religion_id),
-        //   community_id: parseInt(returnData.data[0].id),
-        //   diet_id: parseInt(data.diet_id),
-        //   dateOfBirth: ISODate,
-        //   language_id: parseInt(data.language_id),
-        //   maritial_status: data.marital_status,
-        //   height: data.height,
-        // });
+        fetch(
+          `https://biyekorun-staging.techserve4u.com/category/state/state-by-country/${parseInt(
+            data.country_id
+          )}`,
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        )
+          .then((res) => res.json())
+          .then((state) => {
+            setStateId(state.data[0].id);
+            console.log('state id:', state.data[0].id);
+            fetch(
+              `https://biyekorun-staging.techserve4u.com/category/city/city-by-state/${state.data[0]?.id}`,
+              {
+                method: 'GET',
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              }
+            )
+              .then((res) => res.json())
+              .then((city) => {
+                setCityId(city.data[0]?.id);
+                console.log(city.data[0]?.id);
+                console.log(
+                  JSON.stringify({
+                    profile_name: data.profile_name,
+                    religion_id: parseInt(data.religion_id),
+                    community_id: parseInt(returnData.data[0].id),
+                    diet_id: parseInt(data.diet_id),
+                    country_id: parseInt(data.country_id),
+                    city_id: cityId,
+                    state_id: parseInt(stateId),
+                    dateOfBirth: ISODate,
+                    language_id: parseInt(data.language_id),
+                    maritial_status: data.marital_status,
+                    height: data.height,
+                    gender: data.gender,
+                  })
+                );
 
-        // https://biyekorun-staging.techserve4u.com/user/user-profile
+                fetch(
+                  `https://biyekorun-staging.techserve4u.com/user/user-profile`,
+                  {
+                    method: 'POST',
+                    headers: {
+                      'Content-Type': 'application/json',
+                      Authorization: `Bearer ${token}`,
+                    },
 
-        fetch(`https://biyekorun-staging.techserve4u.com/user/user-profile`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
+                    body: JSON.stringify({
+                      profile_name: data.profile_name,
+                      religion_id: parseInt(data.religion_id),
+                      community_id: parseInt(returnData.data[0].id),
+                      diet_id: parseInt(data.diet_id),
+                      country_id: parseInt(data.country_id),
+                      city_id: cityId !== undefined ? cityId : '',
+                      state_id: stateId,
+                      dateOfBirth: ISODate,
+                      language_id: parseInt(data.language_id),
+                      maritial_status: data.marital_status,
+                      height: data.height,
+                      gender: data.gender,
+                    }),
+                  }
+                )
+                  .then((response) => response.json())
+                  .then((json) => {
+                    let imageFile = image;
+                    let formData = new FormData();
+                    formData.append('file', imageFile);
 
-          body: JSON.stringify({
-            profile_name: data.profile_name,
-            religion_id: parseInt(data.religion_id),
-            community_id: parseInt(returnData.data[0].id),
-            diet_id: parseInt(data.diet_id),
-            dateOfBirth: ISODate,
-            language_id: parseInt(data.language_id),
-            maritial_status: data.marital_status,
-            height: data.height,
-            gender: data.gender,
-          }),
-        })
-          .then((response) => response.json())
-          .then((json) => {
-            console.log(json);
-            if (json.statusCode === 201) {
-              toast.success(json.message);
-            } else if (json.statusCode === 409) {
-              toast.error(json.message);
-            } else if (json.statusCode === 400) {
-              setErrorMessages(json.message);
-            }
+                    fetch(
+                      'https://biyekorun-staging.techserve4u.com/user/image/profile/upload',
+                      {
+                        method: 'POST',
+                        headers: {
+                          Authorization: `Bearer ${token}`,
+                        },
+                        body: formData,
+                      }
+                    )
+                      .then((res) => res.json())
+                      .then((returnJson) => {
+                        console.log(returnJson);
+                        console.log(json);
+                        if (json.statusCode === 201) {
+                          toast.success(json.message);
+                        } else if (json.statusCode === 409) {
+                          toast.error(json.message);
+                        } else if (json.statusCode === 400) {
+                          setErrorMessages(json.message);
+                        }
+                      });
+                  });
 
-            //             console.log(json);
-            //             if (json.statusCode === 201) {
-            //               console.log(typeof json.statusCode);
-            //               window.location.replace('/career');
-            //               alert(json.message);
-            //               return;
-            //             } else if (json.statusCode === 409) {
-            //               window.location.replace('/career');
-            //               alert(json.message);
-            //               return;
-            //             }
+                //             console.log(json);
+                //             if (json.statusCode === 201) {
+                //               console.log(typeof json.statusCode);
+                //               window.location.replace('/career');
+                //               alert(json.message);
+                //               return;
+                //             } else if (json.statusCode === 409) {
+                //               window.location.replace('/career');
+                //               alert(json.message);
+                //               return;
+                //             }
 
-            //             alert(json.message);
+                //             alert(json.message);
+              });
           });
       });
   };
@@ -156,7 +225,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                   className="form-control"
                 />
                 {errors.firstName && (
-                  <span className="text-danger">Bride's Name is required</span>
+                  <span className="text-danger">Profile Name is required</span>
                 )}
               </div>
             </div>
@@ -212,6 +281,30 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 </label>
               </div>
             </div>
+            <div className="form-group">
+              <div>
+                <label className="brand-text" htmlFor="">
+                  Country/Region
+                </label>
+                <select
+                  required
+                  ref={register({ required: true })}
+                  name="country_id"
+                  className="form-control"
+                >
+                  <option value="">-- please select the country --</option>
+                  {countries?.length >= 1 ? (
+                    countries.map((country) => (
+                      <option key={country.id} value={country.id}>
+                        {country.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">Please reload the page again</option>
+                  )}
+                </select>
+              </div>
+            </div>
 
             <div className="form-group">
               <label className="brand-text" htmlFor="">
@@ -225,6 +318,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 {errors.religion && (
                   <span className="text-danger">Religion is required</span>
                 )}
+                <option value="">-- please select the religion --</option>
                 {religions?.length >= 1 ? (
                   religions.map((religion) => (
                     <option key={religion.id} value={religion.id}>
@@ -232,7 +326,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                     </option>
                   ))
                 ) : (
-                  <option value="null">Please reload the page again</option>
+                  <option value="">Please reload the page again</option>
                 )}
               </select>
             </div>
@@ -250,6 +344,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                     Marital Status is required
                   </span>
                 )}
+                <option value="">-- please select the marital status --</option>
                 <option value="Unmarried">Unmarried</option>
                 <option value="Married">Married</option>
               </select>
@@ -267,6 +362,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 {errors.religion && (
                   <span className="text-danger">Mother tongue is required</span>
                 )}
+                <option value="">-- please select the language --</option>
                 {languages?.length >= 1 &&
                   languages.map((language) => (
                     <option key={language.id} value={language.id}>
@@ -288,6 +384,7 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 {errors.religion && (
                   <span className="text-danger">Diet id is required</span>
                 )}
+                <option value="">-- please select the diet list --</option>
                 {diets?.length >= 1 &&
                   diets.map((diet) => (
                     <option key={diet.id} value={diet.id}>
@@ -316,6 +413,28 @@ const Personal = ({ countries, fetchCountries, addUserDetail }) => {
                 )}
               </div>
             </div>
+
+            <div className="form-group">
+              <div>
+                <label className="brand-text" htmlFor="">
+                  Profile Picture
+                </label>
+                <input
+                  onChange={(e) => setImage(e.target.files[0])}
+                  ref={register({ required: true })}
+                  type="file"
+                  placeholder="Please enter your height in cm format"
+                  name="profile_picture"
+                  className="form-control"
+                />
+                {errors.address && (
+                  <span className="text-danger">
+                    Profile Picture is required
+                  </span>
+                )}
+              </div>
+            </div>
+
             <div className="form-group row"></div>
             <div className="form-group row text-right">
               <div>
