@@ -20,7 +20,6 @@ const NavBar = () => {
 
   const profileData = useSelector((state) => state.profile);
 
-
   // useEffect(() => {
   //   const hasToken = sessionStorage.getItem("Token");
   //   if (hasToken) {
@@ -50,7 +49,6 @@ const NavBar = () => {
   //   onFailure,
   // });
 
-
   function openModal() {
     setIsOpen(true);
   }
@@ -74,7 +72,7 @@ const NavBar = () => {
           </Nav.Link>
           <Link to="/registration">
             <Nav.Link
-              style={{ color: "#8e8be6" }}
+              style={{ color: "#8e8be6", textDecoration: "none" }}
               className="brand-text ml-3 main-nav-link"
               href="#"
             >

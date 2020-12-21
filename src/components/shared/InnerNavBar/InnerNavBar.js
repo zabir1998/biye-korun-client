@@ -1,5 +1,7 @@
 import { faBell } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
+
 import React from "react";
 import {
   Button,
@@ -18,6 +20,8 @@ import Dashboard from "../../UserDashboard/Dashboard/Dashboard";
 import "./InnerNavBar.css";
 
 const InnerNavBar = () => {
+  const profileData = useSelector((state) => state.profile);
+
   return (
     <Navbar className="shadow inner-nav-link" bg="light">
       <Navbar.Brand>
@@ -58,11 +62,17 @@ const InnerNavBar = () => {
 
           <Dropdown>
             <Dropdown.Toggle className="dropdown-image" id="dropdown-basic">
-              <img
+              {/* <img
                 src="https://i.imgur.com/8AIDC3f.png"
                 alt=""
                 style={{ width: 35, borderRadius: 35 }}
                 className="ml-2"
+              /> */}
+              <img
+                style={{ width: 35, borderRadius: 35 }}
+                className="  ml-2"
+                src={profileData?.profile?.user_profile[0]?.photo_url}
+                alt=""
               />
             </Dropdown.Toggle>
 

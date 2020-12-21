@@ -50,3 +50,10 @@
   background-color: #8e8be6 !important;
   border: none !important;
 }
+
+.dropdown-item.active,
+.dropdown-item:active {
+  color: #fff;
+  text-decoration: none;
+  background-color: transparent !important;
+}

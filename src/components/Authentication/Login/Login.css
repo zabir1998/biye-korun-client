@@ -13,6 +13,8 @@
 .social-link {
   text-decoration: none !important;
   color: black !important;
+  background: transparent !important;
+  border: none !important;
 }
 
 .social-link:hover {

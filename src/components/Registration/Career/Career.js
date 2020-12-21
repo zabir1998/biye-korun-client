@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { useHistory } from 'react-router-dom';
-import NavBar from '../../Home/NavBar/NavBar';
-import NavReg from '../NavReg/NavReg';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useHistory } from "react-router-dom";
+import NavBar from "../../Home/NavBar/NavBar";
+import NavReg from "../NavReg/NavReg";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
@@ -27,11 +27,11 @@ const Career = ({ fetchCountries, addUserDetail }) => {
   // }, []);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
+      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,9 +43,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     // https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list
 
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list',
+      "https://biyekorun-staging.techserve4u.com/category/occupation/occupation-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,7 +59,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     fetch(
       `https://biyekorun-staging.techserve4u.com/category/occupation-type/occupation-types-by-occupation/${selectOccupation}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -69,9 +69,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
       .then((data) => setOccupationType(data.data));
 
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/currency/currency-list',
+      "https://biyekorun-staging.techserve4u.com/category/currency/currency-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -99,9 +99,9 @@ const Career = ({ fetchCountries, addUserDetail }) => {
     // );
 
     fetch(`https://biyekorun-staging.techserve4u.com/user/user-career`, {
-      method: 'POST',
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
 
@@ -121,23 +121,16 @@ const Career = ({ fetchCountries, addUserDetail }) => {
       .then((json) => {
         //console.log(json);
         if (json.statusCode === 201) {
+          //console.log(typeof json.statusCode);
+          window.location.replace("/lifestyle");
           toast.success(json.message);
+          return;
         } else if (json.statusCode === 409) {
+          // window.location.replace("/lifestyle");
           toast.error(json.message);
+          return;
         } else if (json.statusCode === 400) {
           setErrorMessages(json.message);
-        }
-
-        //console.log(json);
-        if (json.statusCode === 201) {
-          //console.log(typeof json.statusCode);
-          window.location.replace('/lifestyle');
-          toast.success(json.message);
-          return;
-        } else if (json.statusCode === 409) {
-          window.location.replace('/lifestyle');
-          toast.error(json.message);
-          return;
         }
 
         alert(json.message);
@@ -367,19 +360,19 @@ const Career = ({ fetchCountries, addUserDetail }) => {
                 </div>
               </div>
               <div className="form-group row text-right">
-                <div className="my-3 reg-nav-link">
+                {/* <div className="my-3 reg-nav-link">
                   <Link to="/personal" className="main-btn">
                     Go to pervious
                   </Link>
-                </div>
+                </div> */}
                 <div>
                   <input className="main-btn" type="submit" value="Continue" />
                 </div>
-                <div className="my-3 reg-nav-link">
+                {/* <div className="my-3 reg-nav-link">
                   <Link to="/lifestyle" className="main-btn">
                     Go to next
                   </Link>
-                </div>
+                </div> */}
               </div>
             </form>
           </div>
