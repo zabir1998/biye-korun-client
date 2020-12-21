@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { useSelector } from "react-redux";
 import CircularProgress from "@material-ui/core/CircularProgress";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
@@ -44,10 +45,11 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
       .then((json) => {
         //console.log(json);
         if (json.statusCode === 200) {
-          alert(json.message);
+          toast.success(json.message);
           window.location.reload();
         } else {
-          alert(json?.message[0]?.constraints?.minLength);
+          toast.error(json?.message[0]?.constraints?.minLength);
+          console.log(json.message[0]);
         }
       });
   };
@@ -78,7 +80,8 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
               {profileData.loading ? (
                 <CircularProgress />
               ) : (
-                <input
+                <textarea
+                  rows="7"
                   name="bio"
                   placeholder="Tell about yourself"
                   value={bio}
@@ -87,7 +90,7 @@ const EditAboutMyselfTable = ({ modalIsOpen, closeModal }) => {
                   ref={register({
                     required: "Please Tell something about yourself",
                   })}
-                />
+                ></textarea>
               )}
 
               <ErrorMessage

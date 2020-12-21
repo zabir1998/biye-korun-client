@@ -1,3 +1,4 @@
+
 import React, { useContext, useState } from 'react';
 import Modal from 'react-modal';
 import googleIcon from '../../../images/google.png';
@@ -10,6 +11,7 @@ import { Link } from 'react-router-dom';
 import { UserContext } from '../../../App';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 const clientId =
   '39435938639-2kvqil8o2l3sj1esmdldqrm9mrsnublm.apps.googleusercontent.com';
@@ -123,7 +125,8 @@ const Login = ({ modalIsOpen, closeModal }) => {
 
   const onFailure = (res) => {
     console.log('Login failed: res:', res);
-    alert(`Failed to login. 😢`);
+    // toast.error("Login failed", res);
+    toast.error(`Failed to login. 😢`);
   };
 
   const storeAuthToken = () => {
@@ -190,7 +193,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
         <GoogleLogin
           clientId={clientId}
           render={(renderProps) => (
-            <Link
+            <button
               className="social-link"
               onClick={renderProps.onClick}
               disabled={renderProps.disabled}
@@ -205,7 +208,7 @@ const Login = ({ modalIsOpen, closeModal }) => {
                 </div>
                 <div>Continue with Google</div>
               </div>
-            </Link>
+            </button>
           )}
           buttonText="Login"
           onSuccess={onSuccess}

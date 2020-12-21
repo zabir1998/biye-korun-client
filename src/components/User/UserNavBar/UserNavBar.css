@@ -1,7 +1,14 @@
 .user-nav-link {
   font-size: 13px;
   font-weight: 600;
+  padding: 20px 1px;
+  margin-left: 1px;
+  margin-right: 1px;
 }
-.user-nav-link:hover {
+.user-nav-link a:hover {
   color: #8e8be6 !important;
+}
+.user-nav-link a {
+  text-decoration: none;
+  color: black;
 }

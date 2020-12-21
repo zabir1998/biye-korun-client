@@ -1,9 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import { faCamera, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { fakeUser } from '../../../fakeData/fakeUser';
-import { Button } from '@material-ui/core';
-import FileReader from 'filereader';
+import React, { useState, useEffect } from "react";
+import { faCamera, faPlusCircle } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { fakeUser } from "../../../fakeData/fakeUser";
+import { Button } from "@material-ui/core";
+import FileReader from "filereader";
+
+import { toast } from "react-toastify";
+
 
 const PhotoGallery = () => {
   const [image, setImage] = useState(null);
@@ -11,9 +14,9 @@ const PhotoGallery = () => {
   const [token, setToken] = useState(null);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
-    fetch('https://biyekorun-staging.techserve4u.com/user/image/gallery', {
-      method: 'GET',
+    setToken(sessionStorage.getItem("Token"));
+    fetch("https://biyekorun-staging.techserve4u.com/user/image/gallery", {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -27,12 +30,12 @@ const PhotoGallery = () => {
   const handleUpload = async () => {
     let imageFile = image;
     let formData = new FormData();
-    await formData.append('file', imageFile);
+    await formData.append("file", imageFile);
 
     await fetch(
-      'https://biyekorun-staging.techserve4u.com/user/image/gallery/upload/',
+      "https://biyekorun-staging.techserve4u.com/user/image/gallery/upload/",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -41,7 +44,7 @@ const PhotoGallery = () => {
     )
       .then((res) => res.json())
       .then((json) => {
-        alert(json.message);
+        toast.success(json.message);
       });
 
     setImage(null);
@@ -57,17 +60,19 @@ const PhotoGallery = () => {
           Uploaded Photos
         </h3>
       </div>
-      <div className="row  justify-content-center d-flex ">
-        <div className="col-md-6 p-4">
-          {images?.length >= 1 &&
-            images?.map((image) => (
-              <img
-                key={image.id}
-                style={{ width: '9rem' }}
-                src={image?.url}
-                alt=""
-              />
-            ))}
+      <div className="text-center row d-flex justify-content-center  ">
+        <div className="col m-4">
+          <div>
+            {images?.length >= 1 &&
+              images?.map((image) => (
+                <img
+                  key={image.id}
+                  style={{ width: "150px", height: "150px" }}
+                  src={image?.url}
+                  alt=""
+                />
+              ))}
+          </div>
         </div>
       </div>
       <center className="p-3">

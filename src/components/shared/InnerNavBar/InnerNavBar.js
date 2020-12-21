@@ -3,42 +3,84 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import {
   Button,
+  Dropdown,
   Form,
   FormControl,
   Nav,
   Navbar,
   NavDropdown,
 } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import LogOut from "../../Authentication/LogOut/LogOut";
+import AccountSettings from "../../Settings/AccountSettings/AccountSettings";
+import UserProfile from "../../User/UserProfile/UserProfile";
+import Dashboard from "../../UserDashboard/Dashboard/Dashboard";
+import "./InnerNavBar.css";
 
 const InnerNavBar = () => {
   return (
-    <Navbar className="shadow" bg="light">
-      <Navbar.Brand href="/home">BiyeKorun</Navbar.Brand>
+    <Navbar className="shadow inner-nav-link" bg="light">
+      <Navbar.Brand>
+        <Link to="/">BiyeKorun</Link>
+      </Navbar.Brand>
+      <Form inline className="p-3 ">
+        <FormControl type="text" className="searchbar" placeholder="Search" />
+        <Button
+          variant="outline-success"
+          className=" btn premium-btn searchBtn"
+        >
+          Search
+        </Button>
+      </Form>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav">
         <Nav className="ml-auto">
-          <Nav.Link href="/home">Home</Nav.Link>
-          <Nav.Link href="#">Get Pro</Nav.Link>
-          <NavDropdown title="Search" id="basic-nav-dropdown">
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search"
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
+          <Nav.Link>
+            <Link to="/home">Home</Link>
+          </Nav.Link>
+          <Nav.Link>
+            <Link to="#">Get Pro</Link>
+          </Nav.Link>
+          {/* <NavDropdown title="Search" id="basic-nav-dropdown">
+            <Form inline className="p-3">
+              <FormControl type="text" placeholder="Search" />
+              <Button variant="outline-success" className="mt-3">
+                Search
+              </Button>
             </Form>
-          </NavDropdown>
-          <Nav.Link href="/">Help</Nav.Link>
-          <Nav.Link href="/">
+          </NavDropdown> */}
+          <Nav.Link>
+            <Link to="#">Help</Link>{" "}
+          </Nav.Link>
+          <Nav.Link>
             <FontAwesomeIcon style={{ color: "#b9b8c9" }} icon={faBell} />
           </Nav.Link>
-          <img
-            src="https://zc64xuggxl-flywheel.netdna-ssl.com/wp-content/uploads/2019/04/team.png"
-            alt=""
-            style={{ width: 35, borderRadius: 35 }}
-            className="ml-3"
-          />
+
+          <Dropdown>
+            <Dropdown.Toggle className="dropdown-image" id="dropdown-basic">
+              <img
+                src="https://i.imgur.com/8AIDC3f.png"
+                alt=""
+                style={{ width: 35, borderRadius: 35 }}
+                className="ml-2"
+              />
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item as="button">
+                <Link to="/user/dashboard">Dashboard</Link>
+              </Dropdown.Item>
+              <Dropdown.Item as="button">
+                <Link to="/">Account</Link>
+              </Dropdown.Item>
+              <Dropdown.Item as="button">
+                <Link to="/user">Profile</Link>
+              </Dropdown.Item>
+              <Dropdown.Item as="button">
+                <LogOut></LogOut>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Nav>
       </Navbar.Collapse>
     </Navbar>

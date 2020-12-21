@@ -1,37 +1,38 @@
-import React, { useState, useEffect } from 'react';
-import Modal from 'react-modal';
-import { useForm } from 'react-hook-form';
-import { ErrorMessage } from '@hookform/error-message';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import Modal from "react-modal";
+import { useForm } from "react-hook-form";
+import { ErrorMessage } from "@hookform/error-message";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
-    top: '50%',
-    left: '50%',
-    height: '70%',
+    top: "50%",
+    left: "50%",
+    height: "70%",
     // right: "auto",
     // bottom: "auto",
     // marginRight: "-50%",
-    transform: 'translate(-50%, -50%)',
+    transform: "translate(-50%, -50%)",
   },
 };
 
-Modal.setAppElement('#root');
+Modal.setAppElement("#root");
 
 const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
   const { register, handleSubmit } = useForm();
 
-  const [degree, setDegree] = useState('');
+  const [degree, setDegree] = useState("");
   //const [college, setCollege] = useState('');
-  const [companyName, setCompanyName] = useState('');
-  const [professionalArea, setProfessionalArea] = useState('');
-  const [income, setIncome] = useState('');
+  const [companyName, setCompanyName] = useState("");
+  const [professionalArea, setProfessionalArea] = useState("");
+  const [income, setIncome] = useState("");
   const [token, setToken] = useState(null);
 
   const profileData = useSelector((state) => state.profile);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
     setDegree(profileData?.profile?.user_career[0]?.highest_degree);
     setCompanyName(profileData?.profile?.user_career[0]?.working_company);
     setProfessionalArea(
@@ -42,10 +43,10 @@ const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
 
   const onSubmit = (data) => {
     //console.log(data);
-    fetch('https://biyekorun-staging.techserve4u.com/user/user-career/update', {
-      method: 'PUT',
+    fetch("https://biyekorun-staging.techserve4u.com/user/user-career/update", {
+      method: "PUT",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -59,10 +60,10 @@ const EditEducationCareerTable = ({ modalIsOpen, closeModal, bio }) => {
       .then((json) => {
         //console.log(json);
         if (json.statusCode === 200) {
-          alert(json.message);
+          toast.success(json.message);
           window.location.reload();
         } else {
-          alert(json?.message[0]?.constraints?.minLength);
+          toast.error(json?.message[0]?.constraints?.minLength);
         }
       });
   };
