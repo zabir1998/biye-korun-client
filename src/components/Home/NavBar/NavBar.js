@@ -20,6 +20,7 @@ const NavBar = () => {
 
   const profileData = useSelector((state) => state.profile);
 
+
   // useEffect(() => {
   //   const hasToken = sessionStorage.getItem("Token");
   //   if (hasToken) {
@@ -48,6 +49,7 @@ const NavBar = () => {
   //   onLogoutSuccess,
   //   onFailure,
   // });
+
 
   function openModal() {
     setIsOpen(true);
