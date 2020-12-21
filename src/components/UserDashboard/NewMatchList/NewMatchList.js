@@ -31,6 +31,7 @@ const NewMatchList = () => {
           )
             .then((res) => res.json())
             .then((json) => {
+              console.log(json.data);
               json.data.score = data.score;
               setNewMatchLists([json.data]);
               dispatch(getMatchLists(json.data));
@@ -47,6 +48,7 @@ const NewMatchList = () => {
       {newMatchLists?.length >= 1 &&
         newMatchLists?.map((match) => (
           <NewMatchListCard
+            id={match?.user?.uid}
             key={match.id}
             name={match?.user_profile[0]?.profile_name}
             dateOfBirth={match?.user_profile[0]?.dateOfBirth}

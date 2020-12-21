@@ -2,7 +2,14 @@ import React from 'react';
 import Moment from 'react-moment';
 import { Link } from 'react-router-dom';
 
-const NewMatchListCard = ({ name, dateOfBirth, score, height, address }) => {
+const NewMatchListCard = ({
+  id,
+  name,
+  dateOfBirth,
+  score,
+  height,
+  address,
+}) => {
   console.log(dateOfBirth);
   const date = (
     <Moment fromNow ago>
@@ -24,7 +31,7 @@ const NewMatchListCard = ({ name, dateOfBirth, score, height, address }) => {
           srcSet=""
         />
       </div>
-      <Link to="/user/profileMatch">
+      <Link to={`/user/${id}`}>
         <div className="col-md-9">
           <p style={{ lineHeight: '100%' }}>
             <span style={{ fontSize: 14, fontWeight: 'bold' }}>{name}</span>
