@@ -28,6 +28,9 @@ const NavBar = () => {
   }, [setLoggedInUser]);
 
   const onLogoutSuccess = (res) => {
+    localStorage.removeItem(
+      'oauth2_ss::http://localhost:3000::1::DEFAULT::_ss_'
+    );
     //console.log("Logged out Success");
     alert('Logged out Successfully ✌');
     sessionStorage.clear('token');
