@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   faBookOpen,
   faCheck,
@@ -17,6 +17,30 @@ import Moment from 'react-moment';
 
 const DetailedMatch = () => {
   const matchData = useSelector((state) => state.matchLists);
+  const profileData = useSelector((state) => state.profile);
+  const [errorUrl, setErrorUrl] = useState(false);
+  const [token, setToken] = useState(null);
+  const [preferences, setPreferences] = useState([]);
+  console.log(errorUrl);
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+    fetch(
+      'https://biyekorun-staging.techserve4u.com/user/match-comparison-by-preference',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        setPreferences(json?.data);
+      });
+  }, [token]);
+
+  console.log();
 
   return (
     <div className="shadow mt-5 py-4">
@@ -138,18 +162,28 @@ const DetailedMatch = () => {
           <div className="row d-flex justify-content-between my-5">
             <div className="col ">
               <img
-                className="img-fluid circle"
                 style={{ width: 200, border: '8px solid #8e8be6' }}
-                src="https://i.imgur.com/mtxJUHB.jpg"
+                className="img-fluid circle"
+                src={
+                  matchData?.profile?.user_profile[0]?.photo_url === undefined
+                    ? 'https://i.imgur.com/8AIDC3f.png'
+                    : matchData?.profile?.user_profile[0]?.photo_url
+                }
                 alt=""
+                onError={() => setErrorUrl(true)}
               />
             </div>
             <div className="col">
               <img
                 style={{ width: 200, border: '8px solid #8e8be6' }}
                 className="img-fluid circle"
-                src="https://i.imgur.com/47P7Q1e.jpg"
+                src={
+                  !errorUrl
+                    ? profileData?.profile?.user_profile[0].photo_url
+                    : 'https://i.imgur.com/8AIDC3f.png'
+                }
                 alt=""
+                onError={() => setErrorUrl(true)}
               />
             </div>
           </div>
@@ -166,13 +200,8 @@ const DetailedMatch = () => {
               <div className="col px-5">
                 <p className="font-weight-bold">Age</p>
                 <p>
-                  <Moment fromNow ago>
-                    {
-                      new Date(
-                        matchData?.partnerPreference?.user_profile[0]?.dateOfBirth
-                      )
-                    }
-                  </Moment>
+                  {preferences && preferences[0]?.data?.age_range_start} to{' '}
+                  {preferences && preferences[0]?.data?.age_range_end}
                 </p>
               </div>
               <div className="col  px-5">
@@ -190,7 +219,10 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Height</p>
-                <p>{matchData?.partnerPreference?.user_profile[0]?.height}</p>
+                <p>
+                  {preferences && preferences[0]?.data?.height_range_start} to{' '}
+                  {preferences && preferences[0]?.data?.height_range_end}
+                </p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
@@ -207,12 +239,7 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Marital Status</p>
-                <p>
-                  {
-                    matchData?.partnerPreference?.user_profile[0]
-                      ?.maritial_status
-                  }
-                </p>
+                <p>{preferences && preferences[0]?.data?.maritial_status}</p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
@@ -229,12 +256,7 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Religion/ Community</p>
-                <p>
-                  {
-                    matchData?.partnerPreference?.user_profile[0]?.religion_id
-                      .name
-                  }
-                </p>
+                <p>{preferences && preferences[0]?.data?.religion_id?.name}</p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
@@ -251,12 +273,7 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Mother Tongue</p>
-                <p>
-                  {
-                    matchData?.partnerPreference?.user_profile[0]?.language_id
-                      .name
-                  }
-                </p>
+                <p>{preferences && preferences[0]?.data?.language_id?.name}</p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
@@ -273,9 +290,7 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Country Living In</p>
-                <p>
-                  {matchData?.partnerPreference?.user_family?.contact_address}
-                </p>
+                <p>{preferences && preferences[0]?.data?.contact_address}</p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon
@@ -292,9 +307,7 @@ const DetailedMatch = () => {
             <div className="row  d-flex justify-content-between ">
               <div className="col px-5">
                 <p className="font-weight-bold">Annual Income</p>
-                <p>
-                  {matchData?.partnerPreference?.user_career[0]?.yearly_income}
-                </p>
+                <p>{preferences && preferences[0]?.data?.yearly_income}</p>
               </div>
               <div className="col  px-5">
                 <FontAwesomeIcon

@@ -30,7 +30,7 @@ const MatchProfileCard = () => {
           className="row d-flex justify-content-start"
         >
           <div
-            style={{ lineHeight: '50%', borderRight: '1px solid grey' }}
+            style={{ borderRight: '1px solid grey' }}
             className="col-md-4 pr-4"
           >
             <p>
@@ -58,7 +58,7 @@ const MatchProfileCard = () => {
               </small>
             </p>
           </div>
-          <div style={{ lineHeight: '50%' }} className="col-md-4 ml-4">
+          <div className="col-md-4 ml-4">
             <p>
               <small>
                 {matchData?.partnerPreference?.user_career[0]?.highest_degree}
