@@ -1,23 +1,31 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "./UserRequestCard.css";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { faUserPlus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import './UserRequestCard.css';
+import Moment from 'react-moment';
 
-const UserRequestCard = () => {
+const UserRequestCard = ({ name, dateOfBirth, id, height, address }) => {
+  const date = (
+    <Moment fromNow ago>
+      {new Date(dateOfBirth).toString()}
+    </Moment>
+  );
   return (
     <div>
       <div class="card shadow user-card pt-2  mx-3">
         <img
-          style={{ width: "70px" }}
+          style={{ width: '70px' }}
           class="card-img img-fluid mx-auto"
           src="https://i.imgur.com/mtxJUHB.jpg"
           alt=""
         />
         <div class="card-body  text-center">
-          <h5 class="card-title">Kamali Begum</h5>
-          <h6 class="card-subtitle mb-2 text-muted">(KAA12491E)</h6>
-          <small class="card-text ">21 Years Old | 36 | Paris, France</small>
+          <h5 class="card-title">{name}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{id}</h6>
+          <small class="card-text ">
+            {date} Old | {height} | {address}
+          </small>
           <br />
           <Link
             style={{ fontSize: 13 }}

@@ -13,3 +13,36 @@
 .profile-card {
   border: none;
 }
+
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  display: block;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.up-btn {
+  border: 2px solid #8e8be6;
+  color: #8e8be6;
+  background-color: white;
+  padding: 5px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.4s;
+  cursor: pointer;
+}
+.up-btn:hover {
+  border: transparent !important;
+  background: #8e8be6;
+  color: white;
+}
+
+.upload-btn-wrapper input[type="file"] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
