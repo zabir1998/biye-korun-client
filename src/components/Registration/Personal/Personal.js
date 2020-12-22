@@ -177,7 +177,7 @@ const Personal = () => {
                         } else if (json.statusCode === 409) {
                           toast.error(json.message);
                         } else if (json.statusCode === 400) {
-                          setErrorMessages(json.message);
+                          toast.error(json.message);
                         }
                       });
                   });
