@@ -14,14 +14,17 @@ const ProfileCard = ({ style }) => {
   const [urlError, setUrlError] = useState(false);
   const dispatch = useDispatch();
   const profileData = useSelector((state) => state.profile);
-  console.log(profileData?.profile?.user_profile[0]?.photo_url);
+
   //console.log(profileData);
-  const handleUpload = () => {
+  useEffect(() => {
     setToken(sessionStorage.getItem('Token'));
+  }, []);
+
+  const handleUpload = () => {
     let imageFile = image;
     let formData = new FormData();
     formData.append('file', imageFile);
-
+    console.log(token);
     fetch(
       'https://biyekorun-staging.techserve4u.com/user/image/profile/upload',
       {
@@ -58,12 +61,17 @@ const ProfileCard = ({ style }) => {
           onError={() => setUrlError(true)}
           alt=""
         />
-        <div className="form-group">
-          <input
-            type="file"
-            name="myfile"
-            onChange={(e) => setImage(e.target.files[0])}
-          />
+        <div className="form-group mt-3">
+          <div class="upload-btn-wrapper">
+            <p style={{ width: '55%', margin: '0 auto' }} class="up-btn">
+              choose a photo
+            </p>
+            <input
+              onChange={(e) => setImage(e.target.files[0])}
+              type="file"
+              name="myfile"
+            />
+          </div>
           <div class="upload-btn-wrapper">
             {/* <button disabled={!image} onClick={handleUpload} class="up-btn">
               Change photo
