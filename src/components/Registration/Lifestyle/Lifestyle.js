@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import NavBar from "../../Home/NavBar/NavBar";
 import NavReg from "../NavReg/NavReg";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
   const { register, handleSubmit, errors } = useForm();
@@ -65,11 +66,11 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
       .then((json) => {
         //console.log(json);
         if (json.statusCode === 201) {
-          alert(json.message);
+          toast.success(json.message);
         } else if (json.statusCode === 409) {
-          alert(json.message);
+          toast.error(json.message);
         } else if (json.statusCode === 400) {
-          setErrorMessages(json.message);
+          toast.error(json.message);
         }
       });
   };
@@ -79,9 +80,9 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
       <div>
         <NavBar></NavBar>
       </div>
-      <div className="row mt-3">
-        <div className="col-md-2"></div>
-        <div className="col-md-8 form-container">
+      <div className="row ">
+        <div className="col-md-3"></div>
+        <div className="col-md-6 form-container">
           <div>
             <NavReg></NavReg>
           </div>
@@ -248,16 +249,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
                   <label className="brand-text" htmlFor="">
                     About My Family
                   </label>
-                  <textarea
-                    rows="7"
-                    cols="5"
-                    ref={register({ required: true })}
-                    type="text"
-                    name="family_bio"
-                    className="form-control"
-                    placeholder="Family Bio must be longer than 50 characters"
-                  ></textarea>
-                  {/* <input
+                  <input
                     ref={register({ required: true })}
                     type="text"
                     name="family_bio"
@@ -271,16 +263,16 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
                       boxShadow: 40,
                       borderRadius: 5,
                     }}
-                  /> */}
+                  />
                 </div>
               </div>
               <div className="form-group">
                 <div className="d-flex justify-content-around align-items-center">
-                  {/* <div className="reg-nav-link">
+                  <div>
                     <Link to="/career" className="main-btn">
                       Go to pervious
                     </Link>
-                  </div> */}
+                  </div>
                   <div>
                     <input
                       className="main-btn"
@@ -291,18 +283,18 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
                 </div>
               </div>
 
-              {/* <div className="col-md-12 text-center">
+              <div className="col-md-12 text-center">
                 <a
                   style={{ color: "#8e8be6", paddingTop: 15 }}
                   href="https://google.com"
                 >
                   I will add this later
                 </a>
-              </div> */}
+              </div>
             </form>
           </div>
         </div>
-        <div className="col-md-2"></div>
+        <div className="col-md-3"></div>
       </div>
     </div>
   );
