@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import NavReg from "../NavReg/NavReg";
-import NavBar from "../../../components/Home/NavBar/NavBar";
-import { Link } from "react-router-dom";
-import "./Personal.css";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import NavReg from '../NavReg/NavReg';
+import NavBar from '../../../components/Home/NavBar/NavBar';
+import { Link } from 'react-router-dom';
+import './Personal.css';
 
-import { toast } from "react-toastify";
+import { toast } from 'react-toastify';
 
 const Personal = () => {
   const [languages, setLanguages] = useState([]);
@@ -13,19 +13,19 @@ const Personal = () => {
   const [diets, setDiets] = useState([]);
   const [token, setToken] = useState(null);
   const [messages, setErrorMessages] = useState([]);
-  const [image, setImage] = useState(null);
+
   const [countries, setCountries] = useState([]);
   const [stateId, setStateId] = useState(null);
   const [cityId, setCityId] = useState(null);
   const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem("Token"));
+    setToken(sessionStorage.getItem('Token'));
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
+      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -34,9 +34,9 @@ const Personal = () => {
       .then((res) => res.json())
       .then((data) => setCountries(data.data));
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/language/language-list",
+      'https://biyekorun-staging.techserve4u.com/category/language/language-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -46,9 +46,9 @@ const Personal = () => {
       .then((data) => setLanguages(data.data));
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
+      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -57,8 +57,8 @@ const Personal = () => {
       .then((res) => res.json())
       .then((data) => setReligions(data.data));
 
-    fetch("https://biyekorun-staging.techserve4u.com/category/diet/diet-list", {
-      method: "GET",
+    fetch('https://biyekorun-staging.techserve4u.com/category/diet/diet-list', {
+      method: 'GET',
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -73,7 +73,7 @@ const Personal = () => {
     await fetch(
       `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${data.religion_id}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -86,7 +86,7 @@ const Personal = () => {
             data.country_id
           )}`,
           {
-            method: "GET",
+            method: 'GET',
             headers: {
               Authorization: `Bearer ${token}`,
             },
@@ -95,11 +95,11 @@ const Personal = () => {
           .then((res) => res.json())
           .then((state) => {
             setStateId(state.data[0].id);
-            console.log("state id:", state.data[0].id);
+            console.log('state id:', state.data[0].id);
             fetch(
               `https://biyekorun-staging.techserve4u.com/category/city/city-by-state/${state.data[0]?.id}`,
               {
-                method: "GET",
+                method: 'GET',
                 headers: {
                   Authorization: `Bearer ${token}`,
                 },
@@ -129,9 +129,9 @@ const Personal = () => {
                 fetch(
                   `https://biyekorun-staging.techserve4u.com/user/user-profile`,
                   {
-                    method: "POST",
+                    method: 'POST',
                     headers: {
-                      "Content-Type": "application/json",
+                      'Content-Type': 'application/json',
                       Authorization: `Bearer ${token}`,
                     },
 
@@ -141,7 +141,7 @@ const Personal = () => {
                       community_id: parseInt(returnData.data[0].id),
                       diet_id: parseInt(data.diet_id),
                       country_id: parseInt(data.country_id),
-                      city_id: cityId !== undefined ? cityId : "",
+                      city_id: cityId !== undefined ? cityId : '',
                       state_id: stateId,
                       dateOfBirth: ISODate,
                       language_id: parseInt(data.language_id),
@@ -153,49 +153,31 @@ const Personal = () => {
                 )
                   .then((response) => response.json())
                   .then((json) => {
-                    let imageFile = image;
-                    let formData = new FormData();
-                    formData.append("file", imageFile);
-
-                    fetch(
-                      "https://biyekorun-staging.techserve4u.com/user/image/profile/upload",
-                      {
-                        method: "POST",
-                        headers: {
-                          Authorization: `Bearer ${token}`,
-                        },
-                        body: formData,
-                      }
-                    )
-                      .then((res) => res.json())
-                      .then((returnJson) => {
-                        console.log(returnJson);
-                        console.log(json);
-                        if (json.statusCode === 201) {
-                          toast.success(json.message);
-                          window.location.replace("/career");
-                        } else if (json.statusCode === 409) {
-                          toast.error(json.message);
-                        } else if (json.statusCode === 400) {
-                          setErrorMessages(json.message);
-                        }
-                      });
+                    console.log(json);
+                    if (json.statusCode === 201) {
+                      toast.success(json.message);
+                      window.location.replace('/career');
+                    } else if (json.statusCode === 409) {
+                      toast.error(json.message);
+                    } else if (json.statusCode === 400) {
+                      setErrorMessages(json.message);
+                    }
                   });
-
-                //             console.log(json);
-                //             if (json.statusCode === 201) {
-                //               console.log(typeof json.statusCode);
-                //               window.location.replace('/career');
-                //               alert(json.message);
-                //               return;
-                //             } else if (json.statusCode === 409) {
-                //               window.location.replace('/career');
-                //               alert(json.message);
-                //               return;
-                //             }
-
-                //             alert(json.message);
               });
+
+            //             console.log(json);
+            //             if (json.statusCode === 201) {
+            //               console.log(typeof json.statusCode);
+            //               window.location.replace('/career');
+            //               alert(json.message);
+            //               return;
+            //             } else if (json.statusCode === 409) {
+            //               window.location.replace('/career');
+            //               alert(json.message);
+            //               return;
+            //             }
+
+            //             alert(json.message);
           });
       });
   };
@@ -412,27 +394,6 @@ const Personal = () => {
                 />
                 {errors.address && (
                   <span className="text-danger">Height is required</span>
-                )}
-              </div>
-            </div>
-
-            <div className="form-group">
-              <div>
-                <label className="brand-text" htmlFor="">
-                  Profile Picture
-                </label>
-                <input
-                  onChange={(e) => setImage(e.target.files[0])}
-                  ref={register({ required: true })}
-                  type="file"
-                  placeholder="Please enter your height in cm format"
-                  name="profile_picture"
-                  className="form-control"
-                />
-                {errors.address && (
-                  <span className="text-danger">
-                    Profile Picture is required
-                  </span>
                 )}
               </div>
             </div>

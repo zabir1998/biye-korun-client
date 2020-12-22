@@ -1,8 +1,8 @@
-import { faBell } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useDispatch, useSelector } from "react-redux";
+import { faBell } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useDispatch, useSelector } from 'react-redux';
 
-import React from "react";
+import React from 'react';
 import {
   Button,
   Dropdown,
@@ -11,13 +11,13 @@ import {
   Nav,
   Navbar,
   NavDropdown,
-} from "react-bootstrap";
-import { Link } from "react-router-dom";
-import LogOut from "../../Authentication/LogOut/LogOut";
-import AccountSettings from "../../Settings/AccountSettings/AccountSettings";
-import UserProfile from "../../User/UserProfile/UserProfile";
-import Dashboard from "../../UserDashboard/Dashboard/Dashboard";
-import "./InnerNavBar.css";
+} from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import LogOut from '../../Authentication/LogOut/LogOut';
+import AccountSettings from '../../Settings/AccountSettings/AccountSettings';
+import UserProfile from '../../User/UserProfile/UserProfile';
+import Dashboard from '../../UserDashboard/Dashboard/Dashboard';
+import './InnerNavBar.css';
 
 const InnerNavBar = () => {
   const profileData = useSelector((state) => state.profile);
@@ -54,10 +54,10 @@ const InnerNavBar = () => {
             </Form>
           </NavDropdown> */}
           <Nav.Link>
-            <Link to="#">Help</Link>{" "}
+            <Link to="#">Help</Link>{' '}
           </Nav.Link>
           <Nav.Link>
-            <FontAwesomeIcon style={{ color: "#b9b8c9" }} icon={faBell} />
+            <FontAwesomeIcon style={{ color: '#b9b8c9' }} icon={faBell} />
           </Nav.Link>
 
           <Dropdown>
@@ -71,7 +71,11 @@ const InnerNavBar = () => {
               <img
                 style={{ width: 35, borderRadius: 35 }}
                 className="  ml-2"
-                src={profileData?.profile?.user_profile[0]?.photo_url}
+                src={
+                  profileData?.profile?.user_profile[0]?.photo_url === undefined
+                    ? 'https://i.imgur.com/8AIDC3f.png'
+                    : profileData?.profile?.user_profile[0]?.photo_url
+                }
                 alt=""
               />
             </Dropdown.Toggle>
