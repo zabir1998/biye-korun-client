@@ -4,7 +4,7 @@ import NearPeopleBody from "../NearPeopleBody/NearPeopleBody";
 
 const PeopleNear = () => {
   return (
-    <div className="container">
+    <div style={{ paddingLeft: 80, paddingRight: 80 }}>
       <InnerNavBar></InnerNavBar>
       <NearPeopleBody></NearPeopleBody>
     </div>

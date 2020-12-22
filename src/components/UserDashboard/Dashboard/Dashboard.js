@@ -27,7 +27,7 @@ const Dashboard = () => {
       <InnerNavBar></InnerNavBar>
       <div className="row mt-5">
         <div className="col">
-          <ProfileCard style={{ width: "16rem" }}></ProfileCard>
+          <ProfileCard></ProfileCard>
           <ProfileCompletion
             profileCompletion={profileCompletion}
           ></ProfileCompletion>

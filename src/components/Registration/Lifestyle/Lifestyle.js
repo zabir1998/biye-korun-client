@@ -81,8 +81,8 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
         <NavBar></NavBar>
       </div>
       <div className="row ">
-        <div className="col-md-3"></div>
-        <div className="col-md-6 form-container">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 form-container">
           <div>
             <NavReg></NavReg>
           </div>
@@ -294,7 +294,7 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
             </form>
           </div>
         </div>
-        <div className="col-md-3"></div>
+        <div className="col-md-2"></div>
       </div>
     </div>
   );

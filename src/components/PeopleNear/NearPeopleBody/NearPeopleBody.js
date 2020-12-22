@@ -7,10 +7,7 @@ import VisitorDistance from "../VisitorDistance/VisitorDistance";
 
 const NearPeopleBody = () => {
   return (
-    <div
-      className="row d-flex justify-content-between"
-      style={{ marginTop: 10 }}
-    >
+    <div className="row d-flex justify-content-between mt-5">
       <div className="col-md-3">
         <ProfileCard></ProfileCard>
         <br />

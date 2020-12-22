@@ -39,10 +39,10 @@ const UserNavBar = ({ className }) => {
           <Link to="/user">Profile</Link>
         </div>
         <div className="px-3">
-          <Link to="/lifestyle">Inbox</Link>
+          <Link to="#">Inbox</Link>
         </div>
         <div className="px-3">
-          <Link to="/personal">Matches</Link>
+          <Link to="/user/topmatches">Matches</Link>
         </div>
         <div className="px-3">
           <Link to="/searchResult">Saved Search</Link>
