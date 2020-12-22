@@ -39,7 +39,7 @@ const UserProfile = () => {
   }, [token, dispatch]);
 
   return (
-    <div style={{ paddingLeft: 120, paddingRight: 120 }}>
+    <div style={{ paddingLeft: 80, paddingRight: 80 }}>
       <InnerNavBar></InnerNavBar>
       <div className="row mt-5">
         <div className="col-md-3">

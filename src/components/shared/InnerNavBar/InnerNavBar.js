@@ -1,8 +1,8 @@
-import { faBell } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useDispatch, useSelector } from 'react-redux';
+import { faBell } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useDispatch, useSelector } from "react-redux";
 
-import React from 'react';
+import React from "react";
 import {
   Button,
   Dropdown,
@@ -11,13 +11,13 @@ import {
   Nav,
   Navbar,
   NavDropdown,
-} from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import LogOut from '../../Authentication/LogOut/LogOut';
-import AccountSettings from '../../Settings/AccountSettings/AccountSettings';
-import UserProfile from '../../User/UserProfile/UserProfile';
-import Dashboard from '../../UserDashboard/Dashboard/Dashboard';
-import './InnerNavBar.css';
+} from "react-bootstrap";
+import { Link } from "react-router-dom";
+import LogOut from "../../Authentication/LogOut/LogOut";
+import AccountSettings from "../../Settings/AccountSettings/AccountSettings";
+import UserProfile from "../../User/UserProfile/UserProfile";
+import Dashboard from "../../UserDashboard/Dashboard/Dashboard";
+import "./InnerNavBar.css";
 
 const InnerNavBar = () => {
   const profileData = useSelector((state) => state.profile);
@@ -27,7 +27,7 @@ const InnerNavBar = () => {
       <Navbar.Brand>
         <Link to="/">BiyeKorun</Link>
       </Navbar.Brand>
-      <Form inline className="p-3 ">
+      <Form inline className="p-3 px-5">
         <FormControl type="text" className="searchbar" placeholder="Search" />
         <Button
           variant="outline-success"
@@ -45,19 +45,11 @@ const InnerNavBar = () => {
           <Nav.Link>
             <Link to="#">Get Pro</Link>
           </Nav.Link>
-          {/* <NavDropdown title="Search" id="basic-nav-dropdown">
-            <Form inline className="p-3">
-              <FormControl type="text" placeholder="Search" />
-              <Button variant="outline-success" className="mt-3">
-                Search
-              </Button>
-            </Form>
-          </NavDropdown> */}
           <Nav.Link>
-            <Link to="#">Help</Link>{' '}
+            <Link to="#">Help</Link>{" "}
           </Nav.Link>
           <Nav.Link>
-            <FontAwesomeIcon style={{ color: '#b9b8c9' }} icon={faBell} />
+            <FontAwesomeIcon style={{ color: "#b9b8c9" }} icon={faBell} />
           </Nav.Link>
 
           <Dropdown>
@@ -73,7 +65,7 @@ const InnerNavBar = () => {
                 className="  ml-2"
                 src={
                   profileData?.profile?.user_profile[0]?.photo_url === undefined
-                    ? 'https://i.imgur.com/8AIDC3f.png'
+                    ? "https://i.imgur.com/8AIDC3f.png"
                     : profileData?.profile?.user_profile[0]?.photo_url
                 }
                 alt=""

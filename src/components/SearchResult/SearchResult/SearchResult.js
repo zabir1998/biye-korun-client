@@ -12,8 +12,8 @@ import SearchResultBody from "../SearchResultBody/SearchResultBody";
 
 const SearchResult = () => {
   return (
-    <div style={{ paddingLeft: 100, paddingRight: 100 }}>
-      <div style={{ marginBottom: 10 }}>
+    <div style={{ paddingLeft: 80, paddingRight: 80 }}>
+      <div className="mb-5">
         <InnerNavBar></InnerNavBar>
       </div>
       <div className="row">
