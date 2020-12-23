@@ -27,7 +27,7 @@ const NavReg = () => {
           <Link to="/career">Career Details</Link>
         </div>
         <div className="col-md-3 reg-nav ">
-          <Link to="/lifestyle">Lifestyle & Family Details</Link>
+          <Link to="/lifestyle">Family Details</Link>
         </div>
         <div className="col-md-3 reg-nav ">
           <Link to="/physical">Physical Details</Link>
