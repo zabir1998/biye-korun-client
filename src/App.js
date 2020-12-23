@@ -21,6 +21,7 @@ import TopMatchesList from "./components/UserDashboard/TopMatchesList/TopMatches
 import SearchResult from "./components/SearchResult/SearchResult/SearchResult";
 import { useDispatch } from "react-redux";
 import { getProfile } from "./actions";
+import Physical from "./components/Registration/Physical/Physical";
 
 export const UserContext = createContext();
 
@@ -73,6 +74,9 @@ function App() {
           </Route>
           <Route path="/lifestyle">
             <Lifestyle></Lifestyle>
+          </Route>
+          <Route path="/physical">
+            <Physical></Physical>
           </Route>
           <Route path="/visitor">
             <ProfileVisitors></ProfileVisitors>
