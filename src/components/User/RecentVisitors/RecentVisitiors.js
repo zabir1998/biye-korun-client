@@ -63,7 +63,7 @@ const RecentVisitors = () => {
         <div className="text-center pb-3">
           <Link
             style={{ fontSize: 14 }}
-            to="/"
+            to="/visitor"
             className="btn premium-btn mt-3"
           >
             <span>

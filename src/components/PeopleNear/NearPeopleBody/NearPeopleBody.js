@@ -1,9 +1,9 @@
-import React from "react";
-import VisitorCard from "../../ProfileVisitors/VisitorCard/VisitorCard";
-import IdSearchBar from "../../User/IdSearchBar/IdSearchBar";
-import ProfileCard from "../../User/ProfileCard/ProfileCard";
-import UserNavBar from "../../User/UserNavBar/UserNavBar";
-import VisitorDistance from "../VisitorDistance/VisitorDistance";
+import React from 'react';
+import VisitorCard from '../../ProfileVisitors/VisitorCard/VisitorCard';
+import IdSearchBar from '../../User/IdSearchBar/IdSearchBar';
+import ProfileCard from '../../User/ProfileCard/ProfileCard';
+import UserNavBar from '../../User/UserNavBar/UserNavBar';
+import VisitorDistance from '../VisitorDistance/VisitorDistance';
 
 const NearPeopleBody = () => {
   return (
@@ -20,16 +20,6 @@ const NearPeopleBody = () => {
           </div>
           <div className="col-md-4">
             <IdSearchBar></IdSearchBar>
-          </div>
-        </div>
-        <div className="row">
-          <div class="col">
-            <VisitorCard></VisitorCard>
-          </div>
-        </div>
-        <div className="row">
-          <div class="col">
-            <VisitorCard></VisitorCard>
           </div>
         </div>
         <div className="row">
