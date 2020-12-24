@@ -1,6 +1,6 @@
 import React from "react";
 
-const VisitorCard = () => {
+const VisitorCard = ({ visitor }) => {
   return (
     <div className="pr-3 mb-2">
       <div className="row pt-4 px-3">

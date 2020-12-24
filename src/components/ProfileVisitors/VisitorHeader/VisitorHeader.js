@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Search from "../../Search/Search/Search";
 import IdSearchBar from "../../User/IdSearchBar/IdSearchBar";
 import ProfileCard from "../../User/ProfileCard/ProfileCard";
@@ -8,6 +8,26 @@ import VisitorCount from "../VisitorCount/VisitorCount";
 import VisitorNav from "../VisitorNav/VisitorNav";
 
 const VisitorHeader = () => {
+  const [profileVisitors, setProfileVisitors] = useState([]);
+  const [token, setToken] = useState(null);
+  //console.log(profileVisitors);
+  useEffect(() => {
+    setToken(sessionStorage.getItem("Token"));
+    fetch(
+      "https://biyekorun-staging.techserve4u.com/user/recent-profile-visitor",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        //console.log(json.data);
+        setProfileVisitors(json.data);
+      });
+  }, [token]);
   return (
     <div
       className="row d-flex justify-content-between mt-5 "
@@ -32,19 +52,12 @@ const VisitorHeader = () => {
             <VisitorNav></VisitorNav>
           </div>
         </div>
+
         <div className="row">
           <div className="col">
-            <VisitorCard></VisitorCard>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <VisitorCard></VisitorCard>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col">
-            <VisitorCard></VisitorCard>
+            {profileVisitors?.map((visitor) => (
+              <VisitorCard visitor={visitor} />
+            ))}
           </div>
         </div>
       </div>
