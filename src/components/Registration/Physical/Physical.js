@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import NavBar from '../../Home/NavBar/NavBar';
-import NavReg from '../NavReg/NavReg';
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import NavBar from "../../Home/NavBar/NavBar";
+import NavReg from "../NavReg/NavReg";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Physical = () => {
   const { register, handleSubmit, errors } = useForm();
@@ -11,17 +11,17 @@ const Physical = () => {
   const [messages, setErrorMessages] = useState([]);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
   }, []);
 
   const onSubmit = async (data) => {
     console.log(data);
     fetch(
-      'https://biyekorun-staging.techserve4u.com/user/user-physical-lifestyle',
+      "https://biyekorun-staging.techserve4u.com/user/user-physical-lifestyle",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify({
@@ -45,11 +45,21 @@ const Physical = () => {
           setErrorMessages(json.message);
           window.scrollTo(0, 0);
         } else if (json.statusCode === 409) {
-          window.location.replace('/user/dashboard');
+          window.location.replace("/user/dashboard");
         } else if (json.statusCode === 200) {
-          window.location.replace('/user/dashboard');
+          window.location.replace("/user/dashboard");
+          toast.success(json.message);
         }
       });
+    fetch(
+      "https://biyekorun-staging.techserve4u.com/user/add-match-constraints",
+      {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
   };
 
   return (

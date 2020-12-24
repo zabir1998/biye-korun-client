@@ -131,6 +131,7 @@ const Career = ({ fetchCountries, addUserDetail }) => {
           return;
         } else if (json.statusCode === 400) {
           toast.error(json.message);
+          setErrorMessages(json.message);
         }
 
         toast.success(json.message);

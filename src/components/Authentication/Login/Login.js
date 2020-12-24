@@ -95,10 +95,17 @@ const Login = ({ modalIsOpen, closeModal }) => {
               )
                 .then((res) => res.json())
                 .then((json) => {
+                  console.log(json);
                   const route = json.message.toLowerCase();
                   let finalRoute = route.slice(5, 11);
                   if (finalRoute === "carrer") {
                     finalRoute = "career";
+                    window.location.replace(`/${finalRoute}`);
+                  } else if (finalRoute === "profil") {
+                    finalRoute = "personal";
+                    window.location.replace(`/${finalRoute}`);
+                  } else if (finalRoute === "family") {
+                    finalRoute = "lifestyle";
                     window.location.replace(`/${finalRoute}`);
                   }
                 });

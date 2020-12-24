@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import './ProfileCard.css';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import getAge from 'get-age';
-import { useSelector } from 'react-redux';
+import React, { useState, useEffect } from "react";
+import "./ProfileCard.css";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import getAge from "get-age";
+import { useSelector } from "react-redux";
 
 const ProfileCard = ({ style }) => {
   const profileData = useSelector((state) => state.getProfileById);
@@ -17,9 +17,10 @@ const ProfileCard = ({ style }) => {
         <img
           className=" img-fluid profile-img rounded-circle"
           src={
-             profileData?.profile?.user_profile[0]?.photo_url === undefined ?
-             'https://i.imgur.com/8AIDC3f.png' : profileData?.profile?.user_profile[0]?.photo_url
-              
+            profileData?.profile?.user_profile[0]?.photo_url === undefined ||
+            profileData?.profile?.user_profile[0]?.photo_url === null
+              ? "https://i.imgur.com/8AIDC3f.png"
+              : profileData?.profile?.user_profile[0]?.photo_url
           }
           onError={() => setUrlError(true)}
           alt=""
@@ -38,11 +39,11 @@ const ProfileCard = ({ style }) => {
               <p>
                 {getAge(
                   profileData?.getProfileById?.user_profile[0]?.dateOfBirth
-                )}{' '}
+                )}{" "}
                 Years old
               </p>
               <p className="card-text mt-3">
-                {' '}
+                {" "}
                 {profileData?.getProfileById?.user_family?.family_living_place}
               </p>
             </div>

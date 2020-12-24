@@ -64,7 +64,9 @@ const InnerNavBar = () => {
                 style={{ width: 35, borderRadius: 35 }}
                 className="  ml-2"
                 src={
-                  profileData?.profile?.user_profile[0]?.photo_url === undefined
+                  profileData?.profile?.user_profile[0]?.photo_url ===
+                    undefined ||
+                  profileData?.profile?.user_profile[0]?.photo_url === null
                     ? "https://i.imgur.com/8AIDC3f.png"
                     : profileData?.profile?.user_profile[0]?.photo_url
                 }
