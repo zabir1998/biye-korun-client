@@ -105,6 +105,16 @@ const PersonalDetailsTable = () => {
             <p>Phone</p>
             <p>{profileData?.profile?.user?.phone_number}</p>
           </div>
+          <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
+            <p>Height</p>
+            <p>{`${profileData?.profile?.user_profile[0]?.height?.slice(
+              0,
+              1
+            )}'${profileData?.profile?.user_profile[0]?.height?.slice(
+              2,
+              3
+            )}" `}</p>
+          </div>
         </div>
       )}
       <EditPersonalDetailsTable

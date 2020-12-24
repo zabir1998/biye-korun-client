@@ -6,10 +6,18 @@ import { useSelector } from 'react-redux';
 import Moment from 'react-moment';
 import { toast } from 'react-toastify';
 
-const MatchProfileCard = () => {
+const MatchProfileCard = ({
+  id,
+  name,
+  dateOfBirth,
+  maritalStatus,
+  professionalArea,
+  yearlyIncome,
+  address,
+  highestDegree,
+  religionName,
+}) => {
   const [token, setToken] = useState(null);
-  const matchData = useSelector((state) => state.matchLists);
-  console.log(matchData);
 
   const profileData = useSelector((state) => state.profile);
 
@@ -19,7 +27,7 @@ const MatchProfileCard = () => {
 
   const handleRequest = () => {
     const senderId = profileData?.profile?.user?.id;
-    const receiverId = matchData?.partnerPreference?.user_profile[0]?.id;
+    const receiverId = id;
     console.log(senderId, receiverId);
 
     fetch(
@@ -54,8 +62,8 @@ const MatchProfileCard = () => {
       </div>
       <div className="col-md-5">
         <div>
-          <h5>{matchData?.partnerPreference?.user_profile[0]?.profile_name}</h5>
-          <h6>{matchData?.partnerPreference?.user_profile[0]?.id}</h6>
+          <h5>{name}</h5>
+          <h6>{id}</h6>
           <p>
             <small>Active Now</small>
           </p>
@@ -71,51 +79,29 @@ const MatchProfileCard = () => {
             <p>
               <small>
                 <Moment fromNow ago>
-                  {
-                    new Date(
-                      matchData?.partnerPreference?.user_profile[0]?.dateOfBirth
-                    )
-                  }
+                  {new Date(dateOfBirth)}
                 </Moment>
               </small>
             </p>
             <p>
-              <small>
-                {matchData?.partnerPreference?.user_family?.contact_address}
-              </small>
+              <small>{address}</small>
             </p>
             <p>
-              <small>
-                {
-                  matchData?.partnerPreference?.user_profile[0]?.religion_id
-                    .name
-                }
-              </small>
+              <small>{religionName}</small>
             </p>
           </div>
           <div className="col-md-4 ml-4">
             <p>
-              <small>
-                {matchData?.partnerPreference?.user_career[0]?.highest_degree}
-              </small>
+              <small>{highestDegree}</small>
             </p>
             <p>
-              <small>
-                {
-                  matchData?.partnerPreference?.user_career[0]
-                    ?.professional_area
-                }
-              </small>
+              <small>{professionalArea}</small>
             </p>
             <p>
-              <small>
-                {matchData?.partnerPreference?.user_career[0]?.yearly_income}
-              </small>
+              <small>{yearlyIncome}</small>
             </p>
             <p>
-              <small>
-                {matchData?.partnerPreference?.user_profile[0]?.maritial_status}
-              </small>
+              <small>{maritalStatus}</small>
             </p>
           </div>
         </div>

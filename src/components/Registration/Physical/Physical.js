@@ -1,14 +1,56 @@
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import NavBar from "../../Home/NavBar/NavBar";
-import NavReg from "../NavReg/NavReg";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import NavBar from '../../Home/NavBar/NavBar';
+import NavReg from '../NavReg/NavReg';
+import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const Physical = () => {
   const { register, handleSubmit, errors } = useForm();
   const [token, setToken] = useState(null);
   const [messages, setErrorMessages] = useState([]);
+
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+  }, []);
+
+  const onSubmit = async (data) => {
+    console.log(data);
+    fetch(
+      'https://biyekorun-staging.techserve4u.com/user/user-physical-lifestyle',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({
+          smoking_status: data.smoking_status,
+          drinking_status: data.drinking_status,
+          sun_sign: data.sun_sign,
+          blood_group: data.blood_group,
+          health_status: data.health_status,
+          disability_status: data.disability_status,
+          hair_color_id: 0,
+          body_type_id: 0,
+          weight: parseInt(data.weight),
+        }),
+      }
+    )
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        toast.success(json.message);
+        if (json.statusCode === 400) {
+          setErrorMessages(json.message);
+          window.scrollTo(0, 0);
+        } else if (json.statusCode === 409) {
+          window.location.replace('/user/dashboard');
+        } else if (json.statusCode === 200) {
+          window.location.replace('/user/dashboard');
+        }
+      });
+  };
 
   return (
     <div className="container">
@@ -22,7 +64,13 @@ const Physical = () => {
             <NavReg></NavReg>
           </div>
           <div>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
+              {messages.length >= 1 &&
+                messages.map((message) => (
+                  <p className="text-danger">
+                    {JSON.stringify(message.constraints)}
+                  </p>
+                ))}
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
@@ -30,6 +78,7 @@ const Physical = () => {
                   </label>
                   <input
                     ref={register({ required: true })}
+                    type="number"
                     name="weight"
                     className="form-control"
                     placeholder="Ex: 50 kg"
@@ -39,29 +88,57 @@ const Physical = () => {
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
-                    Hair Color
+                    Smoking Status
                   </label>
                   <input
+                    type="text"
                     ref={register({ required: true })}
-                    name="hair_color"
+                    name="smoking_status"
                     className="form-control"
-                    placeholder="Ex: Brown"
+                    placeholder="Ex: Nevenr"
                   />
                 </div>
               </div>
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
+                    Drinking Status
+                  </label>
+                  <input
+                    type="text"
+                    ref={register({ required: true })}
+                    name="drinking_status"
+                    className="form-control"
+                    placeholder="Ex: Normal Water"
+                  />
+                </div>
+              </div>
+              {/* <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Hair Color
+                  </label>
+                  <input
+                    ref={register({ required: true })}
+                    name="hair_color_id"
+                    className="form-control"
+                    placeholder="Ex: Brown"
+                  />
+                </div>
+              </div> */}
+              {/* <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
                     Body Type
                   </label>
                   <input
                     ref={register({ required: true })}
-                    name="body_type"
+                    name="body_type_id"
                     className="form-control"
                     placeholder="Ex: Tall"
                   />
                 </div>
-              </div>
+              </div> */}
               <div className="form-group">
                 <div>
                   <label className="brand-text" htmlFor="">
@@ -69,7 +146,7 @@ const Physical = () => {
                   </label>
                   <input
                     ref={register({ required: true })}
-                    name="health_info"
+                    name="health_status"
                     className="form-control"
                     placeholder="Ex: Fit"
                   />
@@ -130,7 +207,7 @@ const Physical = () => {
                   </label>
                   <input
                     ref={register({ required: true })}
-                    name="disability"
+                    name="disability_status"
                     className="form-control"
                     placeholder="Ex: I have diabetic and blood pressure"
                   />

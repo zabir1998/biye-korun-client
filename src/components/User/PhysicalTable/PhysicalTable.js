@@ -1,10 +1,10 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import EditPhysicalTable from "./EditPhysicalTable";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import EditPhysicalTable from './EditPhysicalTable';
 
 const PhysicalTable = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -37,46 +37,46 @@ const PhysicalTable = () => {
           </Link>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
-          <p>Height</p>
-          <p>{`${profileData?.profile?.user_profile[0]?.height?.slice(
-            0,
-            1
-          )}'${profileData?.profile?.user_profile[0]?.height?.slice(
-            2,
-            3
-          )}" `}</p>
+          <p>Smoking Status</p>
+          <p>
+            {profileData?.profile?.user_physical_lifestyle[0]?.smoking_status}
+          </p>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Weight</p>
-          <p>76 kg</p>
+          <p>{profileData?.profile?.user_physical_lifestyle[0]?.weight}</p>
         </div>
-        <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
+        {/* <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Hair Color</p>
           <p>Brown</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
+        </div> */}
+        {/* <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Body Type</p>
           <p>Tall</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
-          <p>Diet</p>
-          <p>{profileData?.profile?.user_profile[0]?.diet_id.name}</p>
-        </div>
+        </div> */}
+
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Sun Sign</p>
-          <p>Pisces</p>
+          <p>{profileData?.profile?.user_physical_lifestyle[0]?.sun_sign}</p>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Blood Group</p>
-          <p>O +ve</p>
+          <p>{profileData?.profile?.user_physical_lifestyle[0]?.blood_group}</p>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row">
           <p>Health Info</p>
-          <p>None</p>
+          <p>
+            {profileData?.profile?.user_physical_lifestyle[0]?.health_status}
+          </p>
         </div>
         <div className="row d-flex justify-content-between mt-1 mx-2 table-row mb-2">
           <p>Disability</p>
-          <p>None</p>
+          <p>
+            {
+              profileData?.profile?.user_physical_lifestyle[0]
+                ?.disability_status
+            }
+          </p>
         </div>
       </div>
       <EditPhysicalTable

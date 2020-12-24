@@ -4,7 +4,7 @@ import InnerNavBar from '../../shared/InnerNavBar/InnerNavBar';
 import IdSearchBar from '../../User/IdSearchBar/IdSearchBar';
 import ProfileCard from '../../User/ProfileCard/ProfileCard';
 import UserNavBar from '../../User/UserNavBar/UserNavBar';
-import MatchProfileCard from '../MatchProfileCard/MatchProfileCard';
+import MatchProfileCard from './MatchProfileCard/MatchProfileCard';
 import NewMatchList from '../NewMatchList/NewMatchList';
 import './MatchProfileList.css';
 
@@ -119,7 +119,20 @@ const MatchProfileList = () => {
             </div>
 
             {newMatchLists?.length >= 1 &&
-              newMatchLists?.map((match) => <MatchProfileCard />)}
+              newMatchLists?.map((match) => (
+                <MatchProfileCard
+                  id={match?.user?.id}
+                  key={match.id}
+                  name={match?.user_profile[0]?.profile_name}
+                  maritalStatus={match?.user_profile[0]?.maritalStatus}
+                  dateOfBirth={match?.user_profile[0]?.dateOfBirth}
+                  yearlyIncome={match?.user_career[0]?.yearly_income}
+                  professionalArea={match?.user_career[0]?.professional_area}
+                  address={match?.user_family?.contact_address}
+                  highestDegree={match?.user_career[0].highest_degree}
+                  religionName={match?.user_profile[0]?.religion_id.name}
+                />
+              ))}
           </div>
         </div>
       </div>

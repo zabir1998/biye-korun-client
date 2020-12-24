@@ -13,9 +13,11 @@ const Personal = () => {
   const [diets, setDiets] = useState([]);
   const [token, setToken] = useState(null);
   const [messages, setErrorMessages] = useState([]);
-
+  const [countryId, setCountryId] = useState(null);
   const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
   const [stateId, setStateId] = useState(null);
+  const [cities, setCities] = useState([]);
   const [cityId, setCityId] = useState(null);
   const { register, handleSubmit, errors } = useForm();
 
@@ -65,7 +67,37 @@ const Personal = () => {
     })
       .then((res) => res.json())
       .then((data) => setDiets(data.data));
-  }, [token]);
+
+    fetch(
+      `https://biyekorun-staging.techserve4u.com/category/state/state-by-country/${parseInt(
+        countryId
+      )}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((state) => {
+        setStates(state.data);
+      });
+
+    fetch(
+      `https://biyekorun-staging.techserve4u.com/category/city/city-by-state/${stateId}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((city) => {
+        setCities(city.data);
+      });
+  }, [token, countryId, stateId]);
 
   const onSubmit = async (data) => {
     const ISODate = new Date(data.dateOfBirth).toISOString();
@@ -81,104 +113,71 @@ const Personal = () => {
     )
       .then((res) => res.json())
       .then((returnData) => {
-        fetch(
-          `https://biyekorun-staging.techserve4u.com/category/state/state-by-country/${parseInt(
-            data.country_id
-          )}`,
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        )
-          .then((res) => res.json())
-          .then((state) => {
-            setStateId(state.data[0].id);
-            console.log('state id:', state.data[0].id);
-            fetch(
-              `https://biyekorun-staging.techserve4u.com/category/city/city-by-state/${state.data[0]?.id}`,
-              {
-                method: 'GET',
-                headers: {
-                  Authorization: `Bearer ${token}`,
-                },
-              }
-            )
-              .then((res) => res.json())
-              .then((city) => {
-                setCityId(city.data[0]?.id);
-                console.log(city.data[0]?.id);
-                console.log(
-                  JSON.stringify({
-                    profile_name: data.profile_name,
-                    religion_id: parseInt(data.religion_id),
-                    community_id: parseInt(returnData.data[0].id),
-                    diet_id: parseInt(data.diet_id),
-                    country_id: parseInt(data.country_id),
-                    city_id: cityId,
-                    state_id: parseInt(stateId),
-                    dateOfBirth: ISODate,
-                    language_id: parseInt(data.language_id),
-                    maritial_status: data.marital_status,
-                    height: data.height,
-                    gender: data.gender,
-                  })
-                );
+        console.log(
+          JSON.stringify({
+            profile_name: data.profile_name,
+            religion_id: parseInt(data.religion_id),
+            community_id: parseInt(returnData.data[0].id),
+            diet_id: parseInt(data.diet_id),
+            country_id: parseInt(data.country_id),
+            city_id: parseInt(data.city_id),
+            state_id: parseInt(data.state_id),
+            dateOfBirth: ISODate,
+            language_id: parseInt(data.language_id),
+            maritial_status: data.marital_status,
+            height: data.height,
+            gender: data.gender,
+          })
+        );
 
-                fetch(
-                  `https://biyekorun-staging.techserve4u.com/user/user-profile`,
-                  {
-                    method: 'POST',
-                    headers: {
-                      'Content-Type': 'application/json',
-                      Authorization: `Bearer ${token}`,
-                    },
+        fetch(`https://biyekorun-staging.techserve4u.com/user/user-profile`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+          },
 
-                    body: JSON.stringify({
-                      profile_name: data.profile_name,
-                      religion_id: parseInt(data.religion_id),
-                      community_id: parseInt(returnData.data[0].id),
-                      diet_id: parseInt(data.diet_id),
-                      country_id: parseInt(data.country_id),
-                      city_id: cityId !== undefined ? cityId : '',
-                      state_id: stateId,
-                      dateOfBirth: ISODate,
-                      language_id: parseInt(data.language_id),
-                      maritial_status: data.marital_status,
-                      height: data.height,
-                      gender: data.gender,
-                    }),
-                  }
-                )
-                  .then((response) => response.json())
-                  .then((json) => {
-                    console.log(json);
-                    if (json.statusCode === 201) {
-                      toast.success(json.message);
-                      window.location.replace('/career');
-                    } else if (json.statusCode === 409) {
-                      toast.error(json.message);
-                    } else if (json.statusCode === 400) {
-                      setErrorMessages(json.message);
-                    }
-                  });
-              });
-
-            //             console.log(json);
-            //             if (json.statusCode === 201) {
-            //               console.log(typeof json.statusCode);
-            //               window.location.replace('/career');
-            //               alert(json.message);
-            //               return;
-            //             } else if (json.statusCode === 409) {
-            //               window.location.replace('/career');
-            //               alert(json.message);
-            //               return;
-            //             }
-
-            //             alert(json.message);
+          body: JSON.stringify({
+            profile_name: data.profile_name,
+            religion_id: parseInt(data.religion_id),
+            community_id: parseInt(returnData.data[0].id),
+            diet_id: parseInt(data.diet_id),
+            country_id: parseInt(data.country_id),
+            city_id: parseInt(data.city_id),
+            state_id: parseInt(data.state_id),
+            dateOfBirth: ISODate,
+            language_id: parseInt(data.language_id),
+            maritial_status: data.marital_status,
+            height: data.height,
+            gender: data.gender,
+          }),
+        })
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+            if (json.statusCode === 201) {
+              toast.success(json.message);
+              window.location.replace('/career');
+            } else if (json.statusCode === 409) {
+              toast.error(json.message);
+            } else if (json.statusCode === 400) {
+              setErrorMessages(json.message);
+            }
           });
+
+        //             console.log(json);
+        //             if (json.statusCode === 201) {
+        //               console.log(typeof json.statusCode);
+        //               window.location.replace('/career');
+        //               alert(json.message);
+        //               return;
+        //             } else if (json.statusCode === 409) {
+        //               window.location.replace('/career');
+        //               alert(json.message);
+        //               return;
+        //             }
+
+        //             alert(json.message);
       });
   };
 
@@ -265,6 +264,7 @@ const Personal = () => {
                 </label>
               </div>
             </div>
+
             <div className="form-group">
               <div>
                 <label className="brand-text" htmlFor="">
@@ -275,6 +275,8 @@ const Personal = () => {
                   ref={register({ required: true })}
                   name="country_id"
                   className="form-control"
+                  value={countryId}
+                  onChange={(e) => setCountryId(e.target.value)}
                 >
                   <option value="">-- please select the country --</option>
                   {countries?.length >= 1 ? (
@@ -285,6 +287,64 @@ const Personal = () => {
                     ))
                   ) : (
                     <option value="">Please reload the page again</option>
+                  )}
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div>
+                <label className="brand-text" htmlFor="">
+                  State
+                </label>
+                <select
+                  required
+                  ref={register({ required: true })}
+                  name="state_id"
+                  className="form-control"
+                  value={stateId}
+                  onChange={(e) => setStateId(e.target.value)}
+                >
+                  <option value="">
+                    -- please select country before select the state--
+                  </option>
+                  {states?.length >= 1 ? (
+                    states.map((state) => (
+                      <option key={state.id} value={state.id}>
+                        {state.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="">Please reload the page again</option>
+                  )}
+                </select>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <div>
+                <label className="brand-text" htmlFor="">
+                  City
+                </label>
+                <select
+                  required
+                  ref={register({ required: true })}
+                  name="city_id"
+                  className="form-control"
+                  value={cityId}
+                  onChange={(e) => setCityId(e.target.value)}
+                >
+                  <option value="">
+                    -- please select state before select the city--
+                  </option>
+                  {cities?.length >= 1 ? (
+                    cities.map((city) => (
+                      <option key={city.id} value={city.id}>
+                        {city.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="null">City Not found in this state</option>
                   )}
                 </select>
               </div>

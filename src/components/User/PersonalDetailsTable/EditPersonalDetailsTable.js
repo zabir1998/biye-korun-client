@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import Modal from "react-modal";
-import { useForm } from "react-hook-form";
-import { ErrorMessage } from "@hookform/error-message";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
+import React, { useEffect, useState } from 'react';
+import Modal from 'react-modal';
+import { useForm } from 'react-hook-form';
+import { ErrorMessage } from '@hookform/error-message';
+import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const customStyles = {
   content: {
-    top: "50%",
-    left: "50%",
-    height: "70%",
+    top: '50%',
+    left: '50%',
+    height: '70%',
     // right: "auto",
     // bottom: "auto",
     // marginRight: "-50%",
-    transform: "translate(-50%, -50%)",
+    transform: 'translate(-50%, -50%)',
   },
 };
 
-Modal.setAppElement("#root");
+Modal.setAppElement('#root');
 
 const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
   const [languages, setLanguages] = useState([]);
@@ -25,16 +25,16 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
   const [token, setToken] = useState(null);
   const { register, errors, handleSubmit } = useForm();
 
-  const [name, setName] = useState("");
-  const [date, setDate] = useState("");
+  const [name, setName] = useState('');
+  const [date, setDate] = useState('');
   const [religionId, setReligionId] = useState(0);
-  const [meritalStatus, setMeritalStatus] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [meritalStatus, setMeritalStatus] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const profileData = useSelector((state) => state.profile);
 
   useEffect(() => {
-    setToken(sessionStorage.getItem("Token"));
+    setToken(sessionStorage.getItem('Token'));
 
     setName(profileData?.profile?.user_profile[0]?.profile_name);
     setDate(profileData?.profile?.user_profile[0]?.dateOfBirth?.slice(0, 10));
@@ -43,9 +43,9 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
     setPhoneNumber(profileData?.profile?.user?.phone_number);
 
     fetch(
-      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
+      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,10 +59,10 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
     //console.log(data);
     const ISODate = new Date(data.dateOfBirth).toISOString();
 
-    await fetch("https://biyekorun-staging.techserve4u.com/user/update-phone", {
-      method: "PUT",
+    await fetch('https://biyekorun-staging.techserve4u.com/user/update-phone', {
+      method: 'PUT',
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
@@ -73,7 +73,7 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
     await fetch(
       `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${data.religion_id}`,
       {
-        method: "GET",
+        method: 'GET',
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -82,11 +82,11 @@ const EditPersonalDetailsTable = ({ modalIsOpen, closeModal, bio }) => {
       .then((res) => res.json())
       .then((returnData) => {
         fetch(
-          "https://biyekorun-staging.techserve4u.com/user/user-profile/update",
+          'https://biyekorun-staging.techserve4u.com/user/user-profile/update',
           {
-            method: "PUT",
+            method: 'PUT',
             headers: {
-              "Content-Type": "application/json",
+              'Content-Type': 'application/json',
               Authorization: `Bearer ${token}`,
             },
             body: JSON.stringify({
