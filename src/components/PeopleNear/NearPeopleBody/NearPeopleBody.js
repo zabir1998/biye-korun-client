@@ -6,6 +6,7 @@ import UserNavBar from "../../User/UserNavBar/UserNavBar";
 import NearPeopleCard from "../NearPeopleCard/NearPeopleCard";
 import VisitorDistance from "../VisitorDistance/VisitorDistance";
 
+
 const NearPeopleBody = () => {
   return (
     <div className="row d-flex justify-content-between mt-5">
@@ -26,6 +27,7 @@ const NearPeopleBody = () => {
         <div className="row">
           <div class="col">
             <NearPeopleCard></NearPeopleCard>
+
           </div>
         </div>
       </div>

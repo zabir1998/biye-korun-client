@@ -1,10 +1,10 @@
-import { faEdit } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
-import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
-import { useState } from "react";
-import EditBasicLifeStyleTable from "./EditBasicLifeStyleTable";
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { useState } from 'react';
+import EditBasicLifeStyleTable from './EditBasicLifeStyleTable';
 
 const BasicLifeStyleTable = () => {
   const profileData = useSelector((state) => state.profile);
@@ -39,10 +39,6 @@ const BasicLifeStyleTable = () => {
         <div className="row d-flex justify-content-between mt-2 mx-2 table-row">
           <p>Interests</p>
           <p>Pool, Card, Swimming</p>
-        </div>
-        <div className="row d-flex justify-content-between mt-2 mx-2 table-row">
-          <p>Smoking</p>
-          <p>Never</p>
         </div>
         <div className="row d-flex justify-content-between mt-2 mx-2 table-row">
           <p>Language</p>
