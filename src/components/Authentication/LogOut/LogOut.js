@@ -26,6 +26,7 @@ const LogOut = () => {
     sessionStorage.clear("token");
     toast.success("Logged out Successfully ✌");
     setLoggedInUser(false);
+    window.location.replace("/");
   };
 
   const onFailure = () => {

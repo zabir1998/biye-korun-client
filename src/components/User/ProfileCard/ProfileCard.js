@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import './ProfileCard.css';
-import { useDispatch, useSelector } from 'react-redux';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import getAge from 'get-age';
-import { faCrown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./ProfileCard.css";
+import { useDispatch, useSelector } from "react-redux";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import getAge from "get-age";
+import { faCrown } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { toast } from "react-toastify";
 
 const ProfileCard = ({ style }) => {
   const [token, setToken] = useState(null);
@@ -17,18 +17,18 @@ const ProfileCard = ({ style }) => {
 
   //console.log(profileData);
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
   }, []);
 
   const handleUpload = () => {
     let imageFile = image;
     let formData = new FormData();
-    formData.append('file', imageFile);
+    formData.append("file", imageFile);
     console.log(token);
     fetch(
-      'https://biyekorun-staging.techserve4u.com/user/image/profile/upload',
+      "https://biyekorun-staging.techserve4u.com/user/image/profile/upload",
       {
-        method: 'POST',
+        method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -43,6 +43,7 @@ const ProfileCard = ({ style }) => {
       });
     window.scrollTo(0, 0);
   };
+  console.log(profileData?.profile?.user_profile[0]?.photo_url);
 
   return (
     <>
@@ -54,8 +55,9 @@ const ProfileCard = ({ style }) => {
         <img
           className=" img-fluid profile-img rounded-circle"
           src={
-            profileData?.profile?.user_profile[0]?.photo_url === undefined
-              ? 'https://i.imgur.com/8AIDC3f.png'
+            profileData?.profile?.user_profile[0]?.photo_url === undefined ||
+            profileData?.profile?.user_profile[0]?.photo_url === null
+              ? "https://i.imgur.com/8AIDC3f.png"
               : profileData?.profile?.user_profile[0]?.photo_url
           }
           onError={() => setUrlError(true)}
@@ -63,7 +65,7 @@ const ProfileCard = ({ style }) => {
         />
         <div className="form-group mt-3">
           <div class="upload-btn-wrapper">
-            <p style={{ width: '55%', margin: '0 auto' }} class="up-btn">
+            <p style={{ width: "55%", margin: "0 auto" }} class="up-btn">
               choose a photo
             </p>
             <input
@@ -83,10 +85,10 @@ const ProfileCard = ({ style }) => {
             disabled={!image}
             onClick={handleUpload}
             style={{
-              width: '50%',
-              padding: '7px 19px',
-              borderRadius: '5px',
-              border: 'none',
+              width: "50%",
+              padding: "7px 19px",
+              borderRadius: "5px",
+              border: "none",
             }}
             className="premium-btn"
           >
@@ -105,17 +107,17 @@ const ProfileCard = ({ style }) => {
                 {profileData?.profile?.user_profile[0]?.user_id}
               </h6>
               <p>
-                {getAge(profileData?.profile?.user_profile[0]?.dateOfBirth)}{' '}
+                {getAge(profileData?.profile?.user_profile[0]?.dateOfBirth)}{" "}
                 Years old
               </p>
               <p className="card-text mt-3">
-                {' '}
+                {" "}
                 {profileData?.profile?.user_family?.family_living_place}
               </p>
               <Link to="/user" className="btn premium-btn mt-3">
                 <span>
                   <FontAwesomeIcon
-                    style={{ color: '#ffcc00' }}
+                    style={{ color: "#ffcc00" }}
                     className="mr-2"
                     icon={faCrown}
                   />

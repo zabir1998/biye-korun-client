@@ -67,10 +67,13 @@ const Lifestyle = ({ countries, fetchCountries, addUserDetail }) => {
         //console.log(json);
         if (json.statusCode === 201) {
           toast.success(json.message);
+          window.location.replace("/physical");
         } else if (json.statusCode === 409) {
           toast.error(json.message);
+          window.location.replace("/physical");
         } else if (json.statusCode === 400) {
           toast.error(json.message);
+          setErrorMessages(json.message);
         }
       });
   };
