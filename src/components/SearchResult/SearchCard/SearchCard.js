@@ -1,7 +1,15 @@
-import React from "react";
-import visitor from "../../../images/visitor.jpg";
+import React from 'react';
+import visitor from '../../../images/visitor.jpg';
 
-const SearchCard = () => {
+const SearchCard = ({
+  id,
+  religion,
+  degree,
+  professionalArea,
+  contactAddress,
+  height,
+  maritalStatus,
+}) => {
   return (
     <div className="row p-4">
       <div className="col-md-3">
@@ -11,19 +19,19 @@ const SearchCard = () => {
         <div className="row">
           <div className="col">
             <h4>Sufia Begum</h4>
-            <p>SF123456</p>
+            <p>{id}</p>
           </div>
         </div>
         <div className="row d-flex justify-content-start">
           <div className="col-md-6">
-            <p className="small">21 Years , 5'5"</p>
-            <p className="small">Muslim</p>
-            <p className="small">Paris,France</p>
+            <p className="small">21 Years , {height} cm</p>
+            <p className="small">{religion}</p>
+            <p className="small">{contactAddress}</p>
           </div>
           <div className="col-md-6">
-            <p className="small">B.E./B.Tech</p>
-            <p className="small">Software Engineer</p>
-            <p className="small">Never Married</p>
+            <p className="small">{degree}</p>
+            <p className="small">{professionalArea}</p>
+            <p className="small">{maritalStatus}</p>
           </div>
         </div>
       </div>
