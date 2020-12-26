@@ -1,22 +1,94 @@
-import React from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
-import NavBar from "../../Home/NavBar/NavBar";
-import Age from "../Age/Age";
-import NavSearch from "../Search/NavSearch/NavSearch";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
+import NavBar from '../../Home/NavBar/NavBar';
+import Age from '../Age/Age';
+import NavSearch from '../Search/NavSearch/NavSearch';
 // import { fetchCountries } from '../../../redux/actions/fetchCountriesActions';
 // import { connect } from 'react-redux';
 
-const Basic = ({ countries, fetchCountries, addUserDetail }) => {
+const Basic = () => {
   const { register, handleSubmit, watch, errors } = useForm();
-  const history = useHistory();
+  const [countries, setCountries] = useState([]);
+  const [religions, setReligions] = useState([]);
+  const [languages, setLanguages] = useState([]);
+  const [states, setStates] = useState([]);
+  const [countryId, setCountryId] = useState(null);
+  const [religionId, setReligionId] = useState(null);
+  const [communities, setCommunities] = useState([]);
+  const [token, setToken] = useState(null);
 
-  // useEffect(() => {
-  //     fetchCountries();
-  // }, []);
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+
+    fetch(
+      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setCountries(data.data));
+    fetch(
+      'https://biyekorun-staging.techserve4u.com/category/language/language-list',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setLanguages(data.data));
+
+    fetch(
+      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((data) => setReligions(data.data));
+
+    fetch(
+      `https://biyekorun-staging.techserve4u.com/category/state/state-by-country/${parseInt(
+        countryId
+      )}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((state) => {
+        setStates(state.data);
+      });
+
+    fetch(
+      `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${religionId}`,
+      {
+        method: 'GET',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    )
+      .then((res) => res.json())
+      .then((returnData) => {
+        setCommunities(returnData.data);
+      });
+  }, [token, countryId, religionId]);
 
   const onSubmit = (data) => {
-    history.push(`/search/advance`);
+    console.log(data);
   };
 
   return (
@@ -43,26 +115,27 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                     </label>
                   </div>
                   <div>
-                    <Age></Age>
-                  </div>
-                </div>
-                <div className="form-group row">
-                  <div className="col-md-2">
-                    <label className="" htmlFor="">
-                      Height
-                    </label>
-                  </div>
-                  <div className="col-md-10">
                     <input
+                      type="number"
+                      name="age"
                       ref={register({ required: true })}
-                      type="range"
-                      name="height"
+                      placeholder="Age"
                       className="form-control"
                     />
-                    {errors.firstName && (
-                      <span className="text-danger">Height is required</span>
-                    )}
                   </div>
+                </div>
+                <div className="form-group">
+                  <label className="col-md-6" htmlFor="">
+                    Height
+                  </label>
+
+                  <input
+                    ref={register({ required: true })}
+                    type="number"
+                    name="height"
+                    placeholder="Height"
+                    className="form-control"
+                  />
                 </div>
                 <div className="form-group">
                   <label className="" htmlFor="">
@@ -70,7 +143,7 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                   </label>
                   <select
                     ref={register({ required: true })}
-                    name="maritalStatus"
+                    name="merital_status"
                     className="form-control"
                   >
                     {errors.maritalStatus && (
@@ -88,14 +161,24 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                   </label>
                   <select
                     ref={register({ required: true })}
-                    name="religion"
+                    name="religion_id"
                     className="form-control"
+                    value={religionId}
+                    onChange={(e) => setReligionId(e.target.value)}
                   >
                     {errors.religion && (
                       <span className="text-danger">Religion is required</span>
                     )}
-                    <option value="Islam">Islam</option>
-                    <option value="Others">Others</option>
+                    <option value="">-- please select the religion --</option>
+                    {religions?.length >= 1 ? (
+                      religions.map((religion) => (
+                        <option key={religion.id} value={religion.id}>
+                          {religion.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">Please reload the page again</option>
+                    )}
                   </select>
                 </div>
 
@@ -105,14 +188,22 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                   </label>
                   <select
                     ref={register({ required: true })}
-                    name="community"
+                    name="community_id"
                     className="form-control"
                   >
-                    {errors.religion && (
-                      <span className="text-danger">Community is required</span>
+                    <option value="">
+                      -- please select the religion before select the community
+                      --
+                    </option>
+                    {communities?.length >= 1 ? (
+                      communities.map((community) => (
+                        <option key={community.id} value={community.id}>
+                          {community.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">Please reload the page again</option>
                     )}
-                    <option value="Islam">Islam</option>
-                    <option value="Others">Others</option>
                   </select>
                 </div>
                 <div className="form-group">
@@ -121,7 +212,7 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                   </label>
                   <select
                     ref={register({ required: true })}
-                    name="motherTongue"
+                    name="language_id"
                     className="form-control"
                   >
                     {errors.religion && (
@@ -129,8 +220,13 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                         Mother tongue is required
                       </span>
                     )}
-                    <option value="Bengali">Bengali</option>
-                    <option value="Others">Others</option>
+                    <option value="">-- please select the language --</option>
+                    {languages?.length >= 1 &&
+                      languages.map((language) => (
+                        <option key={language.id} value={language.id}>
+                          {language.name}
+                        </option>
+                      ))}
                   </select>
                 </div>
                 <div className="form-group">
@@ -140,12 +236,21 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                     </label>
                     <select
                       ref={register({ required: true })}
-                      name="countryLiving"
+                      name="country"
                       className="form-control"
+                      value={countryId}
+                      onChange={(e) => setCountryId(e.target.value)}
                     >
-                      {/* {
-                  countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
-              }                              */}
+                      <option value="">-- please select the country --</option>
+                      {countries?.length >= 1 ? (
+                        countries.map((country) => (
+                          <option key={country.id} value={country.id}>
+                            {country.name}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="">Please reload the page again</option>
+                      )}
                     </select>
                   </div>
                 </div>
@@ -155,13 +260,23 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                       State Living In
                     </label>
                     <select
+                      required
                       ref={register({ required: true })}
-                      name="state"
+                      name="state_id"
                       className="form-control"
                     >
-                      {/* {
-                  countries.map(country => <option key={country.name} value={country.name}>{country.name}</option> )
-              }                              */}
+                      <option value="">
+                        -- please select country before select the state--
+                      </option>
+                      {states?.length >= 1 ? (
+                        states.map((state) => (
+                          <option key={state.id} value={state.id}>
+                            {state.name}
+                          </option>
+                        ))
+                      ) : (
+                        <option value="">Please reload the page again</option>
+                      )}
                     </select>
                   </div>
                 </div>
@@ -254,7 +369,7 @@ const Basic = ({ countries, fetchCountries, addUserDetail }) => {
                       Save search as
                     </label>
                     <input
-                      ref={register({ required: true })}
+                      //ref={register({ required: true })}
                       type="text"
                       name="brideName"
                       className="form-control"
