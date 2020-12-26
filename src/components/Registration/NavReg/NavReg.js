@@ -20,17 +20,20 @@ const NavReg = () => {
         </Nav>
       </Navbar> */}
       <div className="row text-center d-flex align-items-center reg-nav-link justify-content-center mb-3 ">
-        <div className="col-md-3 reg-nav">
+        <div className="col reg-nav">
           <Link to="/personal">Personal Details</Link>
         </div>
-        <div className="col-md-3 reg-nav">
+        <div className="col reg-nav">
           <Link to="/career">Career Details</Link>
         </div>
-        <div className="col-md-3 reg-nav ">
+        <div className="col reg-nav ">
           <Link to="/lifestyle">Family Details</Link>
         </div>
-        <div className="col-md-3 reg-nav ">
+        <div className="col reg-nav ">
           <Link to="/physical">Physical Details</Link>
+        </div>
+        <div className="col reg-nav ">
+          <Link to="/preference">Preference</Link>
         </div>
       </div>
     </div>
