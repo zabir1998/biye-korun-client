@@ -2,6 +2,7 @@ import React from "react";
 import Modal from "react-modal";
 import { useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
+import { toast } from "react-toastify";
 
 const customStyles = {
   content: {
