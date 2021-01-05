@@ -7,6 +7,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Slider from "@material-ui/core/Slider";
 import { toast } from "react-toastify";
+import NavReg from "../../Registration/NavReg/NavReg";
 
 const useStyles = makeStyles({
   root: {
@@ -144,216 +145,210 @@ const Preference = () => {
         <div>
           <NavBar></NavBar>
         </div>
-        <div>
-          <h3
-            className="text-center"
-            style={{ paddingBottom: 20, marginTop: 10 }}
-          >
-            Desired Partner Profile
-          </h3>
-        </div>
-        <div>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam
-            auctor feugiat congue. Aenean vitae faucibus orci. Aliquam bibendum
-            vitae neque in ultrices. Sed nec aliquet est. Nunc cursus, orci non
-            pharetra commodo, erat lorem egestas enim, a lacinia neque neque
-            eget nisl. Nunc scelerisque, tellus tristique tincidunt pretium.
-          </p>
-        </div>
-        <div
-          className="text-center"
-          style={{ backgroundColor: "#8e8be6", color: "white", padding: 20 }}
-        >
-          <h4> No. of mutual with below criteria 974 </h4>
+      </div>
+      <div className="row">
+        <div className="col-md-2"></div>
+        <div className="col-md-8 form-container">
+          <div>
+            <NavReg></NavReg>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <div className={classes.root}>
+                <Typography
+                  className="text-center"
+                  id="range-slider"
+                  gutterBottom
+                >
+                  Age Range
+                </Typography>
+                <Slider
+                  value={ageValue}
+                  onChange={handleAgeChange}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                  getAriaValueText={valuetext}
+                />
+              </div>
+
+              <div className={classes.root}>
+                <Typography
+                  className="text-center"
+                  id="range-slider"
+                  gutterBottom
+                >
+                  Height Range (cm)
+                </Typography>
+                <Slider
+                  max={maxHeightValue}
+                  min={minHeightValue}
+                  value={heightValue}
+                  onChange={handleHeightChange}
+                  valueLabelDisplay="auto"
+                  aria-labelledby="range-slider"
+                  getAriaValueText={valuetext}
+                />
+              </div>
+
+              <div className="form-group">
+                <label className="brand-text" htmlFor="">
+                  Religion
+                </label>
+                <select
+                  ref={register({ required: true })}
+                  name="religion_id"
+                  className="form-control"
+                >
+                  {errors.religion && (
+                    <span className="text-danger">Religion is required</span>
+                  )}
+                  {religions?.length >= 1 ? (
+                    religions.map((religion) => (
+                      <option key={religion.id} value={religion.id}>
+                        {religion.name}
+                      </option>
+                    ))
+                  ) : (
+                    <option value="null">Please reload the page again</option>
+                  )}
+                </select>
+              </div>
+              <div className="form-group">
+                <label className="brand-text" htmlFor="">
+                  Diet List
+                </label>
+                <select
+                  ref={register({ required: true })}
+                  name="diet_id"
+                  className="form-control"
+                >
+                  {errors.religion && (
+                    <span className="text-danger">Diet id is required</span>
+                  )}
+                  {diets?.length >= 1 &&
+                    diets.map((diet) => (
+                      <option key={diet.id} value={diet.id}>
+                        {diet.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Country/Region
+                  </label>
+                  <select
+                    required
+                    ref={register({ required: true })}
+                    name="country_id"
+                    className="form-control"
+                  >
+                    <option value="">-- please select the country --</option>
+                    {countries?.length >= 1 ? (
+                      countries.map((country) => (
+                        <option key={country.id} value={country.id}>
+                          {country.name}
+                        </option>
+                      ))
+                    ) : (
+                      <option value="">Please reload the page again</option>
+                    )}
+                  </select>
+                </div>
+              </div>
+
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Highest Degrees
+                  </label>
+                  <input
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="highest_degree"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Professional Area
+                  </label>
+                  <input
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="professional_area"
+                    className="form-control"
+                    placeholder="Ex: Software Developer"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Employed In
+                  </label>
+                  <input
+                    required
+                    ref={register({ required: true })}
+                    type="text"
+                    name="working_company"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <div>
+                  <label className="brand-text" htmlFor="">
+                    Annual Income
+                  </label>
+                  <input
+                    required
+                    ref={register({ required: true })}
+                    type="number"
+                    name="yearly_income"
+                    className="form-control"
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label className="brand-text" htmlFor="">
+                  Marital Status
+                </label>
+                <select
+                  ref={register({ required: true })}
+                  name="marital_status"
+                  className="form-control"
+                >
+                  {errors.maritalStatus && (
+                    <span className="text-danger">
+                      Marital Status is required
+                    </span>
+                  )}
+                  <option value="Unmarried">Unmarried</option>
+                  <option value="Married">Married</option>
+                </select>
+              </div>
+            </div>
+            <br />
+
+            <input
+              style={{ backgroundColor: "rgb(142, 139, 230)", color: "white" }}
+              className="form-control"
+              type="submit"
+              value="submit"
+            />
+
+            <br />
+          </form>
         </div>
       </div>
-      <hr />
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <div className={classes.root}>
-            <Typography className="text-center" id="range-slider" gutterBottom>
-              Age Range
-            </Typography>
-            <Slider
-              value={ageValue}
-              onChange={handleAgeChange}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              getAriaValueText={valuetext}
-            />
-          </div>
-
-          <div className={classes.root}>
-            <Typography className="text-center" id="range-slider" gutterBottom>
-              Height Range
-            </Typography>
-            <Slider
-              max={maxHeightValue}
-              min={minHeightValue}
-              value={heightValue}
-              onChange={handleHeightChange}
-              valueLabelDisplay="auto"
-              aria-labelledby="range-slider"
-              getAriaValueText={valuetext}
-            />
-          </div>
-
-          <div className="form-group">
-            <label className="brand-text" htmlFor="">
-              Religion
-            </label>
-            <select
-              ref={register({ required: true })}
-              name="religion_id"
-              className="form-control"
-            >
-              {errors.religion && (
-                <span className="text-danger">Religion is required</span>
-              )}
-              {religions?.length >= 1 ? (
-                religions.map((religion) => (
-                  <option key={religion.id} value={religion.id}>
-                    {religion.name}
-                  </option>
-                ))
-              ) : (
-                <option value="null">Please reload the page again</option>
-              )}
-            </select>
-          </div>
-          <div className="form-group">
-            <label className="brand-text" htmlFor="">
-              Diet List
-            </label>
-            <select
-              ref={register({ required: true })}
-              name="diet_id"
-              className="form-control"
-            >
-              {errors.religion && (
-                <span className="text-danger">Diet id is required</span>
-              )}
-              {diets?.length >= 1 &&
-                diets.map((diet) => (
-                  <option key={diet.id} value={diet.id}>
-                    {diet.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-
-          <div className="form-group">
-            <div>
-              <label className="brand-text" htmlFor="">
-                Country/Region
-              </label>
-              <select
-                required
-                ref={register({ required: true })}
-                name="country_id"
-                className="form-control"
-              >
-                <option value="">-- please select the country --</option>
-                {countries?.length >= 1 ? (
-                  countries.map((country) => (
-                    <option key={country.id} value={country.id}>
-                      {country.name}
-                    </option>
-                  ))
-                ) : (
-                  <option value="">Please reload the page again</option>
-                )}
-              </select>
-            </div>
-          </div>
-
-          <div className="form-group">
-            <div>
-              <label className="brand-text" htmlFor="">
-                Highest Degrees
-              </label>
-              <input
-                required
-                ref={register({ required: true })}
-                type="text"
-                name="highest_degree"
-                className="form-control"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div>
-              <label className="brand-text" htmlFor="">
-                Professional Area
-              </label>
-              <input
-                required
-                ref={register({ required: true })}
-                type="text"
-                name="professional_area"
-                className="form-control"
-                placeholder="Ex: Software Developer"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div>
-              <label className="brand-text" htmlFor="">
-                Employed In
-              </label>
-              <input
-                required
-                ref={register({ required: true })}
-                type="text"
-                name="working_company"
-                className="form-control"
-              />
-            </div>
-          </div>
-          <div className="form-group">
-            <div>
-              <label className="brand-text" htmlFor="">
-                Annual Income
-              </label>
-              <input
-                required
-                ref={register({ required: true })}
-                type="number"
-                name="yearly_income"
-                className="form-control"
-              />
-            </div>
-          </div>
-
-          <div className="form-group">
-            <label className="brand-text" htmlFor="">
-              Marital Status
-            </label>
-            <select
-              ref={register({ required: true })}
-              name="marital_status"
-              className="form-control"
-            >
-              {errors.maritalStatus && (
-                <span className="text-danger">Marital Status is required</span>
-              )}
-              <option value="Unmarried">Unmarried</option>
-              <option value="Married">Married</option>
-            </select>
-          </div>
-        </div>
-        <br />
-
-        <input
-          style={{ backgroundColor: "rgb(142, 139, 230)", color: "white" }}
-          className="form-control"
-          type="submit"
-          value="submit"
-        />
-
-        <br />
-      </form>
     </div>
   );
 };
