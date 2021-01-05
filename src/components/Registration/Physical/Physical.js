@@ -67,7 +67,7 @@ const Physical = () => {
       <div>
         <NavBar></NavBar>
       </div>
-      <div className="row ">
+      <div className="row mt-3">
         <div className="col-md-2"></div>
         <div className="col-md-8 form-container">
           <div>
