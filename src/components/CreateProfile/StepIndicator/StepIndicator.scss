@@ -1,0 +1,55 @@
+.stepIndicator {
+  width: 600px;
+  margin: 0 auto 50px;
+  position: relative;
+
+  .stepIndicator-container {
+    a {
+      text-decoration: none;
+      color: #ffffff;
+    }
+    .circle {
+      width: 60px;
+      height: 60px;
+      border-radius: 60%;
+      background-color: #8e8be6;
+      z-index: 3;
+
+      p {
+        line-height: 50px;
+        text-align: center;
+        font-weight: 600;
+        color: white;
+        z-index: 3;
+      }
+    }
+  }
+
+  .line {
+    width: 500px;
+    height: 70px;
+    border-top: 4px dotted rgb(209, 209, 209);
+    position: absolute;
+    // position: relative;
+    margin-left: 70px;
+    // top: 50%;
+    // left: 0;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .stepIndicator {
+    width: 400px;
+
+    .circle {
+      width: 30px;
+      height: 30px;
+    }
+
+    .line {
+      width: 400px;
+    }
+  }
+}

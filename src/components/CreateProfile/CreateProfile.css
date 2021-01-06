@@ -1,0 +1,11 @@
+.createProfileContainer {
+  /* background: rgb(207, 106, 198); */
+  background: linear-gradient(90deg, #cf6ac6 0%, #8e8be6 70%);
+  float: left;
+  width: 100%;
+}
+
+/* .createProfileContainer.inner-form-container {
+  background-color: white;
+  margin: 100px;
+} */
