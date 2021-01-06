@@ -1,0 +1,11 @@
+table {
+  width: 100%;
+}
+th,
+td {
+  padding: 15px;
+}
+.pricing {
+  width: 100%;
+  letter-spacing: 3px;
+}
