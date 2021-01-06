@@ -22,6 +22,7 @@ import SearchResult from "./components/SearchResult/SearchResult/SearchResult";
 import { useDispatch } from "react-redux";
 import { getProfile } from "./actions";
 import Physical from "./components/Registration/Physical/Physical";
+import CreateProfile from "./components/CreateProfile/CreateProfile";
 
 export const UserContext = createContext();
 
@@ -107,6 +108,9 @@ function App() {
           </Route>
           <Route path="/user/:id">
             <SearchProfile />
+          </Route>
+          <Route path="/createProfile/:formId">
+            <CreateProfile></CreateProfile>
           </Route>
         </Switch>
       </Router>
