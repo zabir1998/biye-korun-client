@@ -6,6 +6,10 @@
   color: #8e8be6;
 }
 
+.container {
+  margin-bottom: 20px;
+
+
 .btn-grad {
   background-image: linear-gradient(
     to right,
@@ -31,4 +35,5 @@
   background-position: right center; /* change the direction of the change here */
   color: #fff;
   text-decoration: none;
+
 }
