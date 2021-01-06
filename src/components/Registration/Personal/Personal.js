@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { useForm } from 'react-hook-form';
-import NavReg from '../NavReg/NavReg';
-import NavBar from '../../../components/Home/NavBar/NavBar';
-import { Link } from 'react-router-dom';
-import './Personal.css';
+import React, { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import NavReg from "../NavReg/NavReg";
+import NavBar from "../../../components/Home/NavBar/NavBar";
+import { Link } from "react-router-dom";
+import "./Personal.css";
 
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 const Personal = () => {
   const [languages, setLanguages] = useState([]);
@@ -22,12 +22,12 @@ const Personal = () => {
   const { register, handleSubmit, errors } = useForm();
 
   useEffect(() => {
-    setToken(sessionStorage.getItem('Token'));
+    setToken(sessionStorage.getItem("Token"));
 
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/country/country-list',
+      "https://biyekorun-staging.techserve4u.com/category/country/country-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -36,9 +36,9 @@ const Personal = () => {
       .then((res) => res.json())
       .then((data) => setCountries(data.data));
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/language/language-list',
+      "https://biyekorun-staging.techserve4u.com/category/language/language-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -48,9 +48,9 @@ const Personal = () => {
       .then((data) => setLanguages(data.data));
 
     fetch(
-      'https://biyekorun-staging.techserve4u.com/category/religion/religion-list',
+      "https://biyekorun-staging.techserve4u.com/category/religion/religion-list",
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -59,8 +59,8 @@ const Personal = () => {
       .then((res) => res.json())
       .then((data) => setReligions(data.data));
 
-    fetch('https://biyekorun-staging.techserve4u.com/category/diet/diet-list', {
-      method: 'GET',
+    fetch("https://biyekorun-staging.techserve4u.com/category/diet/diet-list", {
+      method: "GET",
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -73,7 +73,7 @@ const Personal = () => {
         countryId
       )}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -87,7 +87,7 @@ const Personal = () => {
     fetch(
       `https://biyekorun-staging.techserve4u.com/category/city/city-by-state/${stateId}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -105,7 +105,7 @@ const Personal = () => {
     await fetch(
       `https://biyekorun-staging.techserve4u.com/category/community/community-by-religion/${data.religion_id}`,
       {
-        method: 'GET',
+        method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -131,9 +131,9 @@ const Personal = () => {
         );
 
         fetch(`https://biyekorun-staging.techserve4u.com/user/user-profile`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
             Authorization: `Bearer ${token}`,
           },
 
@@ -157,7 +157,7 @@ const Personal = () => {
             console.log(json);
             if (json.statusCode === 201) {
               toast.success(json.message);
-              window.location.replace('/career');
+              window.location.replace("/career");
             } else if (json.statusCode === 409) {
               toast.error(json.message);
             } else if (json.statusCode === 400) {
