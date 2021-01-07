@@ -27,7 +27,16 @@ const Couples = () => {
     <div className="container mt-4">
       <h2 className="text-center brand-text mb-3">Lakhs Of Happy Couple</h2>
       <p className="text-center brand-text mb-3">Created By BiyeKorun</p>
-      <Carousel responsive={responsive}>
+      <Carousel infinite={true} responsive={responsive}>
+        <div>
+          <CoupleCard></CoupleCard>
+        </div>
+        <div>
+          <CoupleCard></CoupleCard>
+        </div>
+        <div>
+          <CoupleCard></CoupleCard>
+        </div>
         <div>
           <CoupleCard></CoupleCard>
         </div>
