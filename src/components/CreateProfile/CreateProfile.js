@@ -1,12 +1,12 @@
-import React from "react";
-import { useParams } from "react-router-dom";
-import AdvancedProfile from "./AdvancedProfile/AdvancedProfile";
-import BasicProfile from "./BasicProfile/BasicProfile";
-import BioProfile from "./BioProfile/BioProfile";
-import CareerProfile from "./CareerProfile/CareerProfile";
-import StepIndicator from "./StepIndicator/StepIndicator";
-import "./CreateProfile.css";
-import ProfileNavbar from "./ProfileNavbar/ProfileNavbar";
+import React from 'react';
+import { useParams } from 'react-router-dom';
+import AdvancedProfile from './AdvancedProfile/AdvancedProfile';
+import BasicProfile from './BasicProfile/BasicProfile';
+import BioProfile from './BioProfile/BioProfile';
+import CareerProfile from './CareerProfile/CareerProfile';
+import StepIndicator from './StepIndicator/StepIndicator';
+import './CreateProfile.css';
+import ProfileNavbar from './ProfileNavbar/ProfileNavbar';
 
 const CreateProfile = () => {
   const { formId } = useParams();
@@ -14,11 +14,11 @@ const CreateProfile = () => {
   return (
     <>
       <ProfileNavbar></ProfileNavbar>
-      <div className=" createProfileContainer vh-100">
+      <div className=" createProfileContainer">
         <div
           className="shadow inner-form-container py-5"
           style={{
-            backgroundColor: "white",
+            backgroundColor: 'white',
             margin: 100,
             marginLeft: 350,
             marginRight: 350,
@@ -26,13 +26,13 @@ const CreateProfile = () => {
           }}
         >
           <StepIndicator></StepIndicator>
-          {formId === "basicProfile" ? (
+          {formId === 'basicProfile' ? (
             <BasicProfile></BasicProfile>
-          ) : formId === "advancedProfile" ? (
+          ) : formId === 'advancedProfile' ? (
             <AdvancedProfile></AdvancedProfile>
-          ) : formId === "careerProfile" ? (
+          ) : formId === 'careerProfile' ? (
             <CareerProfile></CareerProfile>
-          ) : formId === "bioProfile" ? (
+          ) : formId === 'bioProfile' ? (
             <BioProfile></BioProfile>
           ) : null}
         </div>
