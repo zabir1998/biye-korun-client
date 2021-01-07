@@ -1,16 +1,51 @@
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useHistory } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useHistory } from 'react-router-dom';
 
 const BioProfile = () => {
+  const [token, setToken] = useState(null);
   const { register, handleSubmit, errors } = useForm();
   const history = useHistory();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setToken(sessionStorage.getItem('Token'));
+  }, []);
 
   const onSubmit = (data) => {
-    console.log(data);
-    history.push(`/user/dashboard`);
+    console.log(
+      JSON.stringify({
+        bio: data.bio,
+        phone_number: data.phone_number,
+      })
+    );
+    fetch('https://biyekorun-staging.techserve4u.com/user/update-profile-bio', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        bio: data.bio,
+        phone_number: data.phone_number,
+      }),
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        console.log(json);
+        if (json.statusCode === 201) {
+          toast.success(json.message);
+          history.push(`/user/dashboard`);
+        } else if (json.statusCode === 403) {
+          toast.error(json.message);
+        } else if (json.statusCode === 404) {
+          toast.error(json.message);
+        } else if (json.statusCode === 500) {
+          toast.error(json.message);
+        } else if (json.statusCode === 400) {
+          toast.error(json.error);
+        }
+      });
   };
 
   return (
@@ -41,11 +76,13 @@ const BioProfile = () => {
             <input
               required
               ref={register({ required: true })}
-              type="text"
-              name="phone-number"
+              type="number"
+              minLength="11"
+              maxLength="14"
+              name="phone_number"
               className="form-control"
-              placeholder="Your phone number"
-            ></input>
+              placeholder="Ex: +88012345678910 / 012345678910"
+            />
           </div>
         </div>
         <div className="form-group row text-right">
