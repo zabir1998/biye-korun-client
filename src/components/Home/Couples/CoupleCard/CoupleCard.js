@@ -9,7 +9,11 @@ const CoupleCard = () => {
   return (
     <div className="p-4">
       <Card className="p-4">
-        <Card.Img className="wed-img p-4" variant="top" src={wedding} />
+        <Card.Img
+          className="img-fluid wed-img p-4"
+          variant="top"
+          src={wedding}
+        />
         <Card.Body>
           <Card.Title style={{ color: "#8e8be6" }} className="text-center">
             {" "}
