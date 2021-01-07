@@ -6,10 +6,12 @@ import { Button, Form, FormControl } from "react-bootstrap";
 
 const Subscribe = () => {
   return (
-    <div className="container text-center">
+    <div className="subscribe container text-center">
       <FontAwesomeIcon
         className="sub-icon"
         style={{
+          borderRadius: "50%",
+          borderColor: "#9733ee",
           color: "#9733ee",
           fontSize: "8rem",
         }}
@@ -19,7 +21,13 @@ const Subscribe = () => {
       <div className="row">
         <div className="col-md-4"></div>
         <div className="col-md-4">
-          <Form.Control type="text" placeholder="Your email address" readOnly />
+          <Form.Control
+            type="text"
+            className="shadow"
+            placeholder="Your email address"
+            readOnly
+            style={{ backgroundColor: "white" }}
+          />
         </div>
         <div className="col-md-4"></div>
       </div>

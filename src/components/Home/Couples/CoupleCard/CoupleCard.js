@@ -16,7 +16,6 @@ const CoupleCard = () => {
         />
         <Card.Body>
           <Card.Title style={{ color: "#8e8be6" }} className="text-center">
-            {" "}
             <FontAwesomeIcon
               className=""
               style={{ color: "#8e8be6", fontSize: "1rem" }}
