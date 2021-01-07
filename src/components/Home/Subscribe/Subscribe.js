@@ -13,7 +13,7 @@ const Subscribe = () => {
           borderRadius: "50%",
           borderColor: "#9733ee",
           color: "#9733ee",
-          fontSize: "8rem",
+          fontSize: "4rem",
         }}
         icon={faEnvelope}
       />

@@ -18,7 +18,7 @@ const Icons = () => {
             className="icon"
             style={{
               color: "#cf6ac6",
-              fontSize: "8rem",
+              fontSize: "6rem",
             }}
             icon={faEnvelope}
           />
@@ -30,7 +30,7 @@ const Icons = () => {
             className="icon-font"
             style={{
               color: "#cf6ac6",
-              fontSize: "8rem",
+              fontSize: "6rem",
             }}
             icon={faGlobeEurope}
           />
@@ -42,7 +42,7 @@ const Icons = () => {
             className="icon-font"
             style={{
               color: "#cf6ac6",
-              fontSize: "8rem",
+              fontSize: "6rem",
             }}
             icon={faMobileAlt}
           />
@@ -54,7 +54,7 @@ const Icons = () => {
             className="icon-font"
             style={{
               color: "#cf6ac6",
-              fontSize: "8rem",
+              fontSize: "6rem",
             }}
             icon={faParachuteBox}
           />

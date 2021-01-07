@@ -10,7 +10,7 @@ const Footer = () => {
         <h3 className="brand-text">OUR INFO</h3>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -22,7 +22,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -34,7 +34,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -46,7 +46,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -61,7 +61,7 @@ const Footer = () => {
         <h3 className="brand-text">MY ACCOUNT</h3>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -73,7 +73,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -97,7 +97,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -113,7 +113,7 @@ const Footer = () => {
 
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -125,7 +125,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -137,7 +137,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -149,7 +149,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -165,7 +165,7 @@ const Footer = () => {
 
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -177,7 +177,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -189,7 +189,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
@@ -201,7 +201,7 @@ const Footer = () => {
         </div>
         <div className="d-flex justify-content-start">
           <FontAwesomeIcon
-            className="icon"
+            className="icon mr-2"
             style={{
               marginTop: 5,
               color: "#cf6ac6",
